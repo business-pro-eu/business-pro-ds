@@ -1,0 +1,22 @@
+@import url("../vendor/fontawesome/css/fontawesome.min.css?v=7.2.0");
+@import url("../vendor/fontawesome/css/solid.min.css?v=7.2.0");
+@import url("../vendor/fontawesome/css/brands.min.css?v=7.2.0");
+@import url("./tokens.css?v=20261011-28");
+@import url("./foundation.css?v=20261011-28");
+@import url("./components.css?v=20261011-28");
+@import url("./documents.css?v=20261011-28");
+@import url("./advanced.css?v=20261011-28");
+.bp-disclosure-menu > summary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.bp-disclosure-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.bp-disclosure-menu > summary:focus-visible {
+  outline: 2px solid var(--bp-color-focus, #f28c28);
+  outline-offset: -2px;
+}

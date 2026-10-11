@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ff9c00">
+  <title>Business PRO Design System</title>
+  <script src="assets/js/theme.js?v=20260920-4"></script>
+  <link rel="stylesheet" href="assets/css/business-pro.css?v=20260920-4">
+  <link rel="stylesheet" href="assets/css/gallery.css?v=20260920-4">
+</head>
+<body class="bp-root">
+
+  <header class="bp-app-header">
+    <div class="bp-app-header__inner">
+      <a class="bp-brand bp-brand--image" href="#top" aria-label="Business PRO Design System">
+        <span class="bp-theme-logo" aria-hidden="true">
+          <img class="bp-theme-logo__image" src="assets/brand/logo-lightmode.svg" data-bp-logo-light="assets/brand/logo-lightmode.svg" data-bp-logo-dark="assets/brand/logo-darkmode.svg" alt="">
+        </span>
+      </a>
+      <span class="bp-app-header__title">Design System</span>
+      <nav class="bp-desktop-nav" aria-label="Navigare documentație">
+        <a class="bp-nav-link" href="#fundatie">Fundație</a>
+        <a class="bp-nav-link" href="#componente">Componente</a>
+        <a class="bp-nav-link" href="#patterns">Patterns</a>
+      </nav>
+      <button class="bp-icon-button" type="button" data-theme-toggle aria-label="Activează tema întunecată">
+        <i class="bp-icon fa-solid fa-moon" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="ds-hero">
+      <div class="ds-hero__inner">
+        <h1 class="ds-hero__title">Un singur limbaj vizual pentru toate produsele Business PRO.</h1>
+        <p class="ds-hero__copy">Mobile-first, accesibil și construit pentru migrare graduală. Această galerie este primul loc în care stabilim și verificăm designul înainte de integrarea în aplicații.</p>
+        <div class="bp-cluster ds-hero__meta">
+          <span class="bp-badge bp-badge--success">Mobile-first</span>
+          <span class="bp-badge bp-badge--info">WCAG AA</span>
+          <span class="bp-badge bp-badge--warning">În lucru</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="bp-container">
+      <section class="ds-section" id="fundatie">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Culori și tokenuri</h2>
+        </div>
+        <div class="ds-swatch-grid">
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#ff9c00"></div><div class="ds-swatch__label"><strong>Brand</strong><code>#ff9c00</code></div></article>
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#0f172a"></div><div class="ds-swatch__label"><strong>Ink</strong><code>#0f172a</code></div></article>
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#f8fafc"></div><div class="ds-swatch__label"><strong>Background</strong><code>#f8fafc</code></div></article>
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#16a34a"></div><div class="ds-swatch__label"><strong>Success</strong><code>#16a34a</code></div></article>
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#dc2626"></div><div class="ds-swatch__label"><strong>Danger</strong><code>#dc2626</code></div></article>
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#2563eb"></div><div class="ds-swatch__label"><strong>Info</strong><code>#2563eb</code></div></article>
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#e2e8f0"></div><div class="ds-swatch__label"><strong>Border</strong><code>#e2e8f0</code></div></article>
+          <article class="ds-swatch"><div class="ds-swatch__color" style="--ds-swatch:#64748b"></div><div class="ds-swatch__label"><strong>Muted</strong><code>#64748b</code></div></article>
+        </div>
+      </section>
+
+      <section class="ds-section" id="componente">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Acțiuni și stări</h2>
+        </div>
+        <div class="ds-demo-panel">
+          <div class="ds-demo-panel__surface bp-stack" style="--bp-stack-gap:1.25rem">
+            <div class="bp-cluster">
+              <button class="bp-button bp-button--primary"><i class="bp-icon fa-solid fa-plus" aria-hidden="true"></i>Adaugă lead</button>
+              <button class="bp-button">Acțiune secundară</button>
+              <button class="bp-button bp-button--danger">Șterge</button>
+              <button class="bp-button bp-button--ghost">Anulează</button>
+              <button class="bp-icon-button" aria-label="Mai multe opțiuni"><i class="bp-icon fa-solid fa-ellipsis" aria-hidden="true"></i></button>
+            </div>
+            <div class="bp-cluster">
+              <span class="bp-badge bp-badge--success">Activ</span>
+              <span class="bp-badge bp-badge--warning">În așteptare</span>
+              <span class="bp-badge bp-badge--danger">Eroare</span>
+              <span class="bp-badge bp-badge--info">Vizualizat</span>
+              <span class="bp-badge">Draft</span>
+            </div>
+            <div class="bp-stack">
+              <div class="bp-alert bp-alert--success"><i class="bp-icon fa-solid fa-check" aria-hidden="true"></i><div><strong>Modificările au fost salvate.</strong><br><span class="bp-text-muted">Datele sunt disponibile în toate sesiunile.</span></div></div>
+              <div class="bp-alert bp-alert--warning"><i class="bp-icon fa-solid fa-triangle-exclamation" aria-hidden="true"></i><div><strong>Conexiunea necesită atenție.</strong><br><span class="bp-text-muted">Ultima sincronizare a avut loc acum 2 ore.</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">O coloană pe mobil, extindere naturală pe desktop</h2>
+        </div>
+        <div class="bp-card">
+          <form class="bp-form-grid bp-form-grid--2">
+            <label class="bp-field">
+              <span class="bp-label">Denumire companie</span>
+              <input class="bp-input" type="text" placeholder="Business PRO S.R.L.">
+              <span class="bp-help">Numele juridic complet al companiei.</span>
+            </label>
+            <label class="bp-field">
+              <span class="bp-label">CUI</span>
+              <input class="bp-input" type="text" inputmode="numeric" placeholder="RO12345678">
+            </label>
+            <label class="bp-field">
+              <span class="bp-label">E-mail</span>
+              <input class="bp-input" type="email" value="adresă-incorectă" aria-invalid="true" aria-describedby="email-error">
+              <span class="bp-field-error" id="email-error">Introdu o adresă de e-mail validă.</span>
+            </label>
+            <label class="bp-field">
+              <span class="bp-label">Status</span>
+              <select class="bp-select"><option>Activ</option><option>În așteptare</option><option>Inactiv</option></select>
+            </label>
+            <label class="bp-field bp-form-grid__full">
+              <span class="bp-label">Notițe</span>
+              <textarea class="bp-textarea" placeholder="Adaugă context relevant…"></textarea>
+            </label>
+            <label class="bp-switch bp-form-grid__full">
+              <input type="checkbox" checked>
+              <span class="bp-switch__track" aria-hidden="true"></span>
+              <span><strong>Sincronizare automată</strong><br><span class="bp-text-muted bp-text-small">Trimite modificările către platformă.</span></span>
+            </label>
+            <div class="bp-cluster bp-form-grid__full">
+              <button type="button" class="bp-button bp-button--primary" data-show-toast>Salvează modificările</button>
+              <button type="reset" class="bp-button">Resetează</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="ds-section" id="profit-complete">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Instrumente din topbar și date financiare</h2>
+        </div>
+        <div class="ds-demo-panel">
+          <div class="ds-demo-panel__surface bp-stack">
+            <div class="bp-cluster" style="justify-content:space-between">
+              <span class="bp-brand"><span class="bp-brand__business">Business</span><span class="bp-brand__pro">PRO Profit</span></span>
+              <div class="bp-header-tools">
+                <button class="bp-icon-button" type="button" data-popover-toggle="#profit-search-popover" aria-label="Caută"><i class="bp-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+                <button class="bp-icon-button" type="button" data-popover-toggle="#profit-currency-popover" aria-label="Selectează moneda"><i class="bp-icon fa-solid fa-coins" aria-hidden="true"></i></button>
+                <div class="bp-popover" id="profit-search-popover" hidden>
+                  <label class="bp-search-box"><i class="bp-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i><input type="search" placeholder="Caută partener, tranzacție…"></label>
+                </div>
+                <div class="bp-popover" id="profit-currency-popover" hidden>
+                  <div class="bp-segmented-control" style="--bp-segment-count:3" aria-label="Monedă de afișare">
+                    <button class="bp-segmented-control__item" aria-pressed="true">lei</button>
+                    <button class="bp-segmented-control__item" aria-pressed="false">€</button>
+                    <button class="bp-segmented-control__item" aria-pressed="false">$</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bp-grid bp-grid--3">
+              <article class="bp-card"><p class="bp-money bp-money--income">+ 4.250,00 lei</p></article>
+              <article class="bp-card"><p class="bp-money bp-money--cost">− 890,00 lei</p></article>
+              <article class="bp-card"><span class="bp-tooltip bp-money" tabindex="0">1.250,00 €<span class="bp-tooltip__bubble"><span class="bp-tooltip__line">Sursă: 6.218,75 RON</span><span class="bp-tooltip__line">Curs utilizat: 4,9750</span></span></span></article>
+            </div>
+            <div class="bp-cluster">
+              <span class="bp-tooltip bp-due bp-due--overdue" tabindex="0">−8 zile<span class="bp-tooltip__bubble">Scadent la 14.06.2026</span></span>
+              <span class="bp-due bp-due--urgent">12 zile</span>
+              <span class="bp-due bp-due--soon">46 zile</span>
+              <span class="bp-due bp-due--safe">78 zile</span>
+              <span class="bp-text-muted">142 zile</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Acțiuni compacte și statusuri</h2>
+        </div>
+        <div class="bp-table-shell">
+          <div class="bp-table-scroll">
+            <table class="bp-table">
+              <thead><tr><th>Scadență</th><th>Subscripție</th><th>Partener</th><th>Status</th><th>Venit</th><th>Acțiuni</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><span class="bp-tooltip bp-due bp-due--urgent" tabindex="0">12 zile<span class="bp-tooltip__bubble">04.07.2026</span></span></td>
+                  <td>Administrare website</td><td>Nordic Digital</td><td><span class="bp-badge bp-badge--success">Activ</span></td>
+                  <td><span class="bp-money bp-money--income">1.500 lei</span></td>
+                  <td><div class="bp-action-group"><button class="bp-icon-button" aria-label="Editează"><i class="bp-icon fa-solid fa-pen-to-square" aria-hidden="true"></i></button><button class="bp-icon-button" aria-label="Duplică"><i class="bp-icon fa-solid fa-copy" aria-hidden="true"></i></button><button class="bp-icon-button bp-icon-button--danger" data-open-confirm aria-label="Șterge"><i class="bp-icon fa-solid fa-trash" aria-hidden="true"></i></button></div></td>
+                </tr>
+                <tr>
+                  <td><span class="bp-due bp-due--safe">78 zile</span></td>
+                  <td>Marketing lunar</td><td>Atlas Studio</td><td><span class="bp-badge bp-badge--warning">Pauzat</span></td>
+                  <td><span class="bp-money">800 €</span></td>
+                  <td><div class="bp-action-group"><button class="bp-icon-button" aria-label="Editează"><i class="bp-icon fa-solid fa-pen-to-square" aria-hidden="true"></i></button><button class="bp-icon-button" aria-label="Duplică"><i class="bp-icon fa-solid fa-copy" aria-hidden="true"></i></button><button class="bp-icon-button bp-icon-button--danger" data-open-confirm aria-label="Șterge"><i class="bp-icon fa-solid fa-trash" aria-hidden="true"></i></button></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Tranzacție și subscripție asociată</h2>
+        </div>
+        <div class="bp-card">
+          <form class="bp-form-grid bp-form-grid--2">
+            <label class="bp-field"><span class="bp-label">Descriere</span><input class="bp-input" value="Administrare website"></label>
+            <label class="bp-field"><span class="bp-label">Tip</span><select class="bp-select"><option>Încasare</option><option>Plată</option></select></label>
+            <label class="bp-field"><span class="bp-label">Sumă</span><input class="bp-input" type="number" value="1500"></label>
+            <label class="bp-field"><span class="bp-label">Monedă</span><select class="bp-select"><option>RON</option><option>EUR</option><option>USD</option></select></label>
+            <label class="bp-field"><span class="bp-label">Partener</span><input class="bp-input" list="profit-partners" placeholder="Alege sau scrie un partener"><datalist id="profit-partners"><option>Nordic Digital</option><option>Atlas Studio</option></datalist></label>
+            <label class="bp-field"><span class="bp-label">Creează subscripție?</span><select class="bp-select" data-toggle-form-section="#profit-subscription-section"><option value="no">Nu</option><option value="yes">Da</option></select></label>
+            <section class="bp-form-section bp-form-grid__full" id="profit-subscription-section" hidden>
+              <div class="bp-form-section__header"><div><h3 class="bp-heading-3">Date subscripție</h3></div><span class="bp-badge bp-badge--info">Opțional</span></div>
+              <div class="bp-form-grid bp-form-grid--2">
+                <label class="bp-field"><span class="bp-label">Pachet</span><input class="bp-input" placeholder="Administrare lunară"></label>
+                <label class="bp-field"><span class="bp-label">Categorie</span><input class="bp-input" placeholder="Servicii web"></label>
+                <label class="bp-field"><span class="bp-label">Data început</span><input class="bp-input" type="date"></label>
+                <label class="bp-field"><span class="bp-label">Data finală</span><input class="bp-input" type="date"></label>
+              </div>
+            </section>
+            <div class="bp-cluster bp-form-grid__full"><button class="bp-button bp-button--primary" type="button">Salvează tranzacția</button><button class="bp-button" type="button">Anulează</button></div>
+          </form>
+          <div class="bp-cluster" style="margin-top:var(--bp-space-4)">
+            <button class="bp-button" type="button" data-open-profit-modal>Vezi formularul în modal lat</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Categorii, parteneri și pachete</h2>
+        </div>
+        <div class="bp-card bp-stack">
+          <form class="bp-form-grid bp-form-grid--2">
+            <label class="bp-field"><span class="bp-label">Nume categorie</span><input class="bp-input" placeholder="Servicii web"></label>
+            <label class="bp-field"><span class="bp-label">Tip</span><select class="bp-select"><option>Venit</option><option>Cost</option><option>Ambele</option></select></label>
+            <div class="bp-cluster bp-form-grid__full"><button class="bp-button bp-button--primary" type="button">Adaugă categorie</button></div>
+          </form>
+          <div class="bp-item-list">
+            <h3 class="bp-heading-3">Categorii salvate</h3>
+            <ul class="bp-list-stack bp-item-list__list">
+              <li class="bp-item-list__item"><span class="bp-item-list__name">Servicii web<small>Venit și cost</small></span><span class="bp-item-list__actions bp-cluster"><button class="bp-button bp-button--sm">Folosește</button><button class="bp-button bp-button--sm">Editează</button><button class="bp-button bp-button--danger bp-button--sm">Șterge</button></span></li>
+              <li class="bp-item-list__item"><span class="bp-item-list__name">Marketing<small>Venit</small></span><span class="bp-item-list__actions bp-cluster"><button class="bp-button bp-button--sm">Folosește</button><button class="bp-button bp-button--sm">Editează</button><button class="bp-button bp-button--danger bp-button--sm">Șterge</button></span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Componente pregătite pentru utilizare reală</h2>
+        </div>
+        <div class="bp-grid bp-grid--2">
+          <article class="bp-card bp-stack bp-density-compact">
+            <h3 class="bp-heading-2">Densitate compactă</h3>
+            <label class="bp-field"><span class="bp-label">Căutare rapidă</span><input class="bp-input" placeholder="Partener…"></label>
+            <div class="bp-cluster"><button class="bp-button bp-button--primary">Aplică</button><button class="bp-button">Reset</button></div>
+          </article>
+          <article class="bp-card bp-stack bp-density-comfortable">
+            <h3 class="bp-heading-2">Densitate comfortable</h3>
+            <label class="bp-field"><span class="bp-label">Denumire</span><input class="bp-input" placeholder="Denumire partener"></label>
+            <button class="bp-button bp-button--primary">Continuă</button>
+          </article>
+        </div>
+        <div class="bp-card">
+          <div class="bp-form-grid bp-form-grid--2">
+            <label class="bp-field"><span class="bp-label">Disabled</span><input class="bp-input" value="Nu poate fi modificat" disabled></label>
+            <label class="bp-field"><span class="bp-label">Readonly</span><input class="bp-input" value="Valoare calculată" readonly></label>
+            <label class="bp-field is-success"><span class="bp-label">Success</span><input class="bp-input" value="office@business-pro.eu"><span class="bp-field-success"><i class="bp-icon fa-solid fa-check" aria-hidden="true"></i> Adresă verificată</span></label>
+            <label class="bp-field"><span class="bp-label">Invalid</span><input class="bp-input" value="adresă invalidă" aria-invalid="true"><span class="bp-field-error">Introdu o adresă validă.</span></label>
+            <div class="bp-cluster bp-form-grid__full">
+              <button class="bp-button bp-button--primary" type="button" data-demo-loading>Salvează și arată loading</button>
+              <button class="bp-button" disabled>Acțiune indisponibilă</button>
+              <span class="bp-overflow">
+                <button class="bp-icon-button" type="button" data-overflow-toggle="#demo-overflow" aria-expanded="false" aria-label="Mai multe acțiuni"><i class="bp-icon fa-solid fa-ellipsis" aria-hidden="true"></i></button>
+                <span class="bp-overflow__menu" id="demo-overflow" hidden>
+                  <button class="bp-overflow__item"><i class="bp-icon fa-solid fa-copy" aria-hidden="true"></i> Duplică</button>
+                  <button class="bp-overflow__item"><i class="bp-icon fa-solid fa-pause" aria-hidden="true"></i> Pune pe pauză</button>
+                  <button class="bp-overflow__item bp-overflow__item--danger" data-open-confirm><i class="bp-icon fa-solid fa-trash" aria-hidden="true"></i> Șterge</button>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section" id="profit-mockup">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Ecran complet de tranzacții</h2>
+        </div>
+        <div class="ds-preview-shell">
+          <header class="bp-app-header">
+            <div class="bp-app-header__inner">
+              <a class="bp-brand" href="#"><span class="bp-brand__business">Business</span><span class="bp-brand__pro">PRO</span></a>
+              <span class="bp-app-header__title">Profit</span>
+              <nav class="bp-desktop-nav">
+                <a class="bp-nav-link" href="#">Dashboard</a>
+                <a class="bp-nav-link" href="#">Parteneri</a>
+                <a class="bp-nav-link" href="#" aria-current="page">Tranzacții</a>
+                <a class="bp-nav-link" href="#">Subscripții</a>
+              </nav>
+              <div class="bp-header-tools">
+                <button class="bp-icon-button" aria-label="Caută"><i class="bp-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+                <button class="bp-icon-button" aria-label="Moneda de afișare"><i class="bp-icon fa-solid fa-coins" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </header>
+          <main class="bp-page bp-container">
+            <div class="bp-page-header">
+              <div class="bp-page-header__copy"><h2 class="bp-heading-1">Tranzacții</h2></div>
+              <div class="bp-page-header__actions"><button class="bp-button bp-button--primary bp-button--block" data-open-profit-modal><i class="bp-icon fa-solid fa-plus" aria-hidden="true"></i>Adaugă tranzacție</button></div>
+            </div>
+            <div class="bp-grid bp-grid--4" style="margin-bottom:var(--bp-space-5)">
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">Încasări luna aceasta</span><strong class="bp-kpi__value">24.850</strong><span class="bp-kpi__trend">+12,5%</span></article>
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">Costuri</span><strong class="bp-kpi__value">8.420</strong><span class="bp-text-muted bp-text-small">RON</span></article>
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">Profit realizat</span><strong class="bp-kpi__value">16.430</strong><span class="bp-kpi__trend">+8,2%</span></article>
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">Scadente în 7 zile</span><strong class="bp-kpi__value">6</strong><span class="bp-due bp-due--urgent bp-text-small">Necesită atenție</span></article>
+            </div>
+            <div class="bp-toolbar">
+              <div class="bp-filter-group"><button class="bp-filter" aria-pressed="true">Toate</button><button class="bp-filter" aria-pressed="false">Încasări</button><button class="bp-filter" aria-pressed="false">Plăți</button></div>
+              <div class="bp-toolbar__actions"><button class="bp-button bp-button--sm">Categorie</button><button class="bp-button bp-button--sm">Partener</button><span class="bp-overflow"><button class="bp-icon-button" data-overflow-toggle="#profit-screen-overflow" aria-expanded="false" aria-label="Mai multe filtre"><i class="bp-icon fa-solid fa-ellipsis" aria-hidden="true"></i></button><span class="bp-overflow__menu" id="profit-screen-overflow" hidden><button class="bp-overflow__item">Adaugă categorie</button><button class="bp-overflow__item">Adaugă partener</button><button class="bp-overflow__item">Adaugă pachet</button></span></span></div>
+            </div>
+            <div class="bp-table-shell bp-density-compact" style="margin-top:var(--bp-space-3)">
+              <div class="bp-table-scroll">
+                <table class="bp-table bp-table--compact">
+                  <thead><tr><th>Data</th><th>Descriere</th><th>Categorie</th><th>Partener</th><th class="bp-cell-number">Sumă</th><th>Acțiuni</th></tr></thead>
+                  <tbody>
+                    <tr><td>22.06.2026</td><td><strong>Administrare website</strong></td><td>Servicii web</td><td>Nordic Digital</td><td class="bp-cell-number"><span class="bp-money bp-money--income">+1.500,00 lei</span></td><td><div class="bp-action-group"><button class="bp-icon-button" aria-label="Editează"><i class="bp-icon fa-solid fa-pen-to-square" aria-hidden="true"></i></button><button class="bp-icon-button" aria-label="Duplică"><i class="bp-icon fa-solid fa-copy" aria-hidden="true"></i></button></div></td></tr>
+                    <tr><td>21.06.2026</td><td><strong>Licențe software</strong></td><td>Software</td><td>Cloud Vendor</td><td class="bp-cell-number"><span class="bp-money bp-money--cost">−420,00 €</span></td><td><div class="bp-action-group"><button class="bp-icon-button" aria-label="Editează"><i class="bp-icon fa-solid fa-pen-to-square" aria-hidden="true"></i></button><button class="bp-icon-button" aria-label="Duplică"><i class="bp-icon fa-solid fa-copy" aria-hidden="true"></i></button></div></td></tr>
+                    <tr><td>19.06.2026</td><td><strong>Campanie marketing</strong></td><td>Marketing</td><td>Atlas Studio</td><td class="bp-cell-number"><span class="bp-tooltip bp-money bp-money--income" tabindex="0">+950,00 €<span class="bp-tooltip__bubble">4.726,25 RON la cursul 4,9750</span></span></td><td><div class="bp-action-group"><button class="bp-icon-button" aria-label="Editează"><i class="bp-icon fa-solid fa-pen-to-square" aria-hidden="true"></i></button><button class="bp-icon-button bp-icon-button--danger" data-open-confirm aria-label="Șterge"><i class="bp-icon fa-solid fa-trash" aria-hidden="true"></i></button></div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="bp-pagination"><button class="bp-icon-button" aria-label="Pagina anterioară"><i class="bp-icon fa-solid fa-chevron-left" aria-hidden="true"></i></button><span class="bp-pagination__label">Pagina 1 din 8</span><button class="bp-icon-button" aria-label="Pagina următoare"><i class="bp-icon fa-solid fa-chevron-right" aria-hidden="true"></i></button></div>
+            </div>
+          </main>
+          <nav class="bp-mobile-nav" style="--bp-mobile-nav-count:4"><a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-chart-pie" aria-hidden="true"></i>Dashboard</a><a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-handshake" aria-hidden="true"></i>Parteneri</a><a class="bp-mobile-nav__item" href="#" aria-current="page"><i class="bp-icon fa-solid fa-money-bill-transfer" aria-hidden="true"></i>Tranzacții</a><a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-ellipsis" aria-hidden="true"></i>Mai multe</a></nav>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Login</h2>
+        </div>
+        <div class="bp-login-page" style="min-height:32rem;border-radius:var(--bp-radius-xl)">
+          <section class="bp-login-card">
+            <div class="bp-login-card__brand"><span class="bp-brand"><span class="bp-brand__business">Business</span><span class="bp-brand__pro">PRO</span></span></div>
+            <form class="bp-form-grid">
+              <label class="bp-field"><span class="bp-label">Utilizator</span><input class="bp-input" autocomplete="username"></label>
+              <label class="bp-field"><span class="bp-label">Parolă</span><input class="bp-input" type="password" autocomplete="current-password"></label>
+              <button class="bp-button bp-button--primary bp-button--block" type="button">Intră în platformă</button>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <section class="ds-section" id="patterns">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Listă de date</h2>
+        </div>
+        <div class="bp-stack">
+          <div class="bp-toolbar">
+            <div class="bp-filter-group" aria-label="Filtre listă">
+              <button class="bp-filter" aria-pressed="true">Toate <strong>128</strong></button>
+              <button class="bp-filter" aria-pressed="false">Active <strong>96</strong></button>
+              <button class="bp-filter" aria-pressed="false">Noi <strong>12</strong></button>
+            </div>
+            <div class="bp-toolbar__actions">
+              <button class="bp-button bp-button--sm"><i class="bp-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i>Caută</button>
+              <button class="bp-button bp-button--primary bp-button--sm" data-open-modal><i class="bp-icon fa-solid fa-plus" aria-hidden="true"></i>Adaugă</button>
+            </div>
+          </div>
+
+          <div class="bp-table-shell bp-table-shell--responsive">
+            <div class="bp-data-cards">
+              <article class="bp-data-card">
+                <div class="bp-data-card__header"><div><h3 class="bp-heading-3">NORDIC DIGITAL S.R.L.</h3></div><span class="bp-badge bp-badge--success">Activ</span></div>
+                <dl class="bp-data-card__meta"><dt>Contact</dt><dd>office@nordic.ro</dd><dt>Telefon</dt><dd>0722 000 111</dd><dt>Județ</dt><dd>Cluj</dd></dl>
+                <div class="bp-data-card__footer"><span class="bp-text-muted bp-text-small">Adăugat astăzi</span><button class="bp-button bp-button--sm">Detalii</button></div>
+              </article>
+              <article class="bp-data-card">
+                <div class="bp-data-card__header"><div><h3 class="bp-heading-3">ATLAS STUDIO S.R.L.</h3></div><span class="bp-badge bp-badge--warning">Nou</span></div>
+                <dl class="bp-data-card__meta"><dt>Contact</dt><dd>hello@atlas.ro</dd><dt>Telefon</dt><dd>0744 222 333</dd><dt>Județ</dt><dd>Brașov</dd></dl>
+                <div class="bp-data-card__footer"><span class="bp-text-muted bp-text-small">Adăugat ieri</span><button class="bp-button bp-button--sm">Detalii</button></div>
+              </article>
+            </div>
+            <div class="bp-table-scroll">
+              <table class="bp-table">
+                <thead><tr><th>Companie</th><th>CUI</th><th>Contact</th><th>Județ</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td><strong>NORDIC DIGITAL S.R.L.</strong></td><td>48291037</td><td>office@nordic.ro</td><td>Cluj</td><td><span class="bp-badge bp-badge--success">Activ</span></td><td><button class="bp-button bp-button--sm">Detalii</button></td></tr>
+                  <tr><td><strong>ATLAS STUDIO S.R.L.</strong></td><td>39120456</td><td>hello@atlas.ro</td><td>Brașov</td><td><span class="bp-badge bp-badge--warning">Nou</span></td><td><button class="bp-button bp-button--sm">Detalii</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bp-pagination">
+              <button class="bp-icon-button" aria-label="Pagina anterioară"><i class="bp-icon fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+              <span class="bp-pagination__label">Pagina 1 din 12</span>
+              <button class="bp-icon-button" aria-label="Pagina următoare"><i class="bp-icon fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Shell de aplicație</h2>
+        </div>
+        <div class="ds-preview-shell">
+          <header class="bp-app-header">
+            <div class="bp-app-header__inner">
+              <a class="bp-brand" href="#"><span class="bp-brand__business">Business</span><span class="bp-brand__pro">PRO</span></a>
+              <span class="bp-app-header__title">Leads</span>
+              <nav class="bp-desktop-nav">
+                <a class="bp-nav-link" href="#" aria-current="page">Dashboard</a>
+                <a class="bp-nav-link" href="#">Parteneri</a>
+                <a class="bp-nav-link" href="#">Setări</a>
+              </nav>
+              <button class="bp-icon-button" aria-label="Mai multe opțiuni"><i class="bp-icon fa-solid fa-ellipsis" aria-hidden="true"></i></button>
+            </div>
+          </header>
+          <div class="bp-page bp-container">
+            <div class="bp-page-header">
+              <div class="bp-page-header__copy"><h2 class="bp-heading-1">Bună dimineața</h2></div>
+              <div class="bp-page-header__actions"><button class="bp-button bp-button--primary bp-button--block"><i class="bp-icon fa-solid fa-plus" aria-hidden="true"></i>Adaugă lead</button></div>
+            </div>
+            <div class="bp-grid bp-grid--4">
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">Lead-uri active</span><strong class="bp-kpi__value">1.284</strong><span class="bp-kpi__trend">↗ 12% luna aceasta</span></article>
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">Email trimis</span><strong class="bp-kpi__value">346</strong><span class="bp-text-muted bp-text-small">28 astăzi</span></article>
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">Rată răspuns</span><strong class="bp-kpi__value">18,4%</strong><span class="bp-kpi__trend">↗ 2,1%</span></article>
+              <article class="bp-card bp-kpi"><span class="bp-kpi__label">În așteptare</span><strong class="bp-kpi__value">42</strong><span class="bp-text-muted bp-text-small">Necesită acțiune</span></article>
+            </div>
+          </div>
+          <nav class="bp-mobile-nav bp-mobile-nav--6" aria-label="Navigare mobilă demo cu șase destinații">
+            <a class="bp-mobile-nav__item" href="#" aria-current="page"><i class="bp-icon fa-solid fa-table-cells-large" aria-hidden="true"></i><span class="bp-mobile-nav__label">Acasă</span></a>
+            <a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-users" aria-hidden="true"></i><span class="bp-mobile-nav__label">Lead-uri</span></a>
+            <a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-user-group" aria-hidden="true"></i><span class="bp-mobile-nav__label">Echipă</span></a>
+            <a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-address-book" aria-hidden="true"></i><span class="bp-mobile-nav__label">Contacte</span></a>
+            <a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-paper-plane" aria-hidden="true"></i><span class="bp-mobile-nav__label">Outreach</span></a>
+            <a class="bp-mobile-nav__item" href="#"><i class="bp-icon fa-solid fa-ellipsis" aria-hidden="true"></i><span class="bp-mobile-nav__label">Mai multe</span></a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Empty și loading</h2>
+        </div>
+        <div class="bp-grid bp-grid--2">
+          <div class="bp-empty">
+            <div class="bp-empty__icon"><i class="bp-icon fa-solid fa-inbox" aria-hidden="true"></i></div>
+            <h3 class="bp-heading-2">Nu există lead-uri</h3>
+            <button class="bp-button bp-button--primary"><i class="bp-icon fa-solid fa-plus" aria-hidden="true"></i>Adaugă lead</button>
+          </div>
+          <div class="bp-card bp-stack">
+            <div class="bp-skeleton" style="width:42%;height:1rem">Loading</div>
+            <div class="bp-skeleton" style="width:76%;height:2rem">Loading</div>
+            <div class="bp-skeleton" style="width:100%;height:7rem">Loading</div>
+            <div class="bp-cluster"><div class="bp-skeleton" style="width:7rem;height:2.75rem">Loading</div><div class="bp-skeleton" style="width:7rem;height:2.75rem">Loading</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section">
+        <div class="ds-section__header">
+          <h2 class="bp-heading-1">Tipare consolidate din platforme (20260807)</h2>
+          <p class="bp-text-muted">Componente migrate din Contracts/Fleet/Leads ca API-uri DS reutilizabile.</p>
+        </div>
+        <div class="bp-grid bp-grid--2">
+          <div class="bp-card bp-stack">
+            <h3 class="bp-heading-3">Entity row</h3>
+            <div class="bp-entity-row">
+              <div class="bp-entity-row__avatar">BP</div>
+              <div class="bp-entity-row__info">
+                <div class="bp-entity-row__name">Business PRO SRL</div>
+                <div class="bp-entity-row__meta">CUI RO12345678 · Serie BP-2026</div>
+              </div>
+              <div class="bp-entity-row__actions"><button class="bp-icon-button bp-icon-button--sm" type="button" aria-label="Editează"><i class="bp-icon fa-solid fa-pen" aria-hidden="true"></i></button></div>
+            </div>
+            <div class="bp-entity-row bp-entity-row--compact">
+              <div class="bp-entity-row__avatar bp-entity-row__avatar--warning"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></div>
+              <div class="bp-entity-row__info">
+                <div class="bp-entity-row__name">Documents</div>
+                <div class="bp-entity-row__meta">Rând compact cu variantă de avatar</div>
+              </div>
+              <div class="bp-entity-row__value">1.240</div>
+            </div>
+            <h3 class="bp-heading-3 bp-mt-3">Mini KPI + chips</h3>
+            <div class="bp-compact-stat-grid bp-compact-stat-grid--3 bp-mt-3 bp-mb-3">
+              <div class="bp-compact-stat bp-compact-stat--card"><span class="bp-compact-stat__label">Valoare</span><b class="bp-compact-stat__value">4.500 lei</b></div>
+              <div class="bp-compact-stat bp-compact-stat--card"><span class="bp-compact-stat__label">Versiune</span><b class="bp-compact-stat__value">v3</b></div>
+              <div class="bp-compact-stat bp-compact-stat--card"><span class="bp-compact-stat__label">Documente</span><b class="bp-compact-stat__value">2</b></div>
+            </div>
+            <div class="bp-chip-group">
+              <button class="bp-chip bp-chip--active" type="button" aria-pressed="true">Toate</button>
+              <button class="bp-chip" type="button" aria-pressed="false">Semnate</button>
+              <button class="bp-chip" type="button" aria-pressed="false">Expirate</button>
+            </div>
+            <h3 class="bp-heading-3 bp-mt-3">Bannere comutabile</h3>
+            <div class="bp-banner bp-banner--warning is-visible"><i class="bp-icon fa-solid fa-triangle-exclamation bp-status-warning" aria-hidden="true"></i> Modificările nesalvate se pierd la navigare.</div>
+            <div class="bp-banner bp-banner--success is-visible"><i class="bp-icon fa-solid fa-circle-check bp-status-success" aria-hidden="true"></i> <div class="bp-grow"><b>Contract salvat</b><br><small>BP-0042 · azi 14:30</small></div></div>
+          </div>
+          <div class="bp-card bp-stack">
+            <h3 class="bp-heading-3">Step timeline</h3>
+            <div class="bp-step-timeline">
+              <div class="bp-step-timeline__step is-done"><div class="bp-step-timeline__dot"></div><div class="bp-step-timeline__label">Trimis</div><div class="bp-step-timeline__date">01.08</div></div>
+              <div class="bp-step-timeline__step is-done"><div class="bp-step-timeline__dot"></div><div class="bp-step-timeline__label">Reminder 1</div><div class="bp-step-timeline__date">04.08</div></div>
+              <div class="bp-step-timeline__step is-current"><div class="bp-step-timeline__dot"></div><div class="bp-step-timeline__label">Reminder 2</div><div class="bp-step-timeline__date">07.08</div></div>
+              <div class="bp-step-timeline__step"><div class="bp-step-timeline__dot"></div><div class="bp-step-timeline__label">Expiră</div><div class="bp-step-timeline__date">15.08</div></div>
+            </div>
+            <h3 class="bp-heading-3 bp-mt-3">Linii + total</h3>
+            <div class="bp-line-item"><div><b>Mentenanță lunară</b><br><small>SLA standard</small></div><span class="bp-line-item__price">1.500 lei</span></div>
+            <div class="bp-line-item"><div><b>Dezvoltare</b></div><span class="bp-line-item__price">3.000 lei</span></div>
+            <div class="bp-line-total"><span>Total</span><span>4.500 lei</span></div>
+            <div class="bp-total-bar">
+              <div class="bp-total-bar__item"><span class="bp-total-bar__label">Subtotal</span><span class="bp-total-bar__value">4.500 lei</span></div>
+              <div class="bp-total-bar__item"><span class="bp-total-bar__label">Total</span><span class="bp-total-bar__value bp-total-bar__value--grand">5.355 lei</span></div>
+            </div>
+            <h3 class="bp-heading-3 bp-mt-3">Progres prin token runtime</h3>
+            <div class="bp-progress"><div class="bp-progress__bar" style="--bp-progress-value:65%"></div></div>
+            <div class="bp-progress bp-progress--warning bp-mt-2"><div class="bp-progress__bar" style="--bp-progress-value:40%"></div></div>
+            <h3 class="bp-heading-3 bp-mt-3">Variante noi de controale</h3>
+            <div class="bp-cluster">
+              <button class="bp-button bp-button--secondary" type="button">Secondary</button>
+              <button class="bp-button bp-button--sm bp-button--xs" type="button">XS</button>
+              <span class="bp-badge bp-badge--neutral">Neutru</span>
+              <span class="bp-badge bp-badge--success bp-badge--sm">sm</span>
+            </div>
+            <p class="bp-help bp-mt-2">Modaluri: <code class="bp-code-inline">bp-modal--xs/--sm/--lg/--xl/--preview/--tall</code>, corp <code class="bp-code-inline">--scroll/--visible/--canvas</code>. Documente A4: <code class="bp-code-inline">bp-document--a4</code> + <code class="bp-code-inline">bp-document-sheet</code>.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="bp-modal-backdrop" data-demo-modal hidden>
+    <section class="bp-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+      <header class="bp-modal__header">
+        <div><h2 class="bp-heading-2" id="demo-modal-title">Adaugă companie</h2></div>
+        <button class="bp-icon-button" type="button" data-close-modal aria-label="Închide"><i class="bp-icon fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </header>
+      <div class="bp-modal__body">
+        <form class="bp-form-grid">
+          <label class="bp-field"><span class="bp-label">Denumire companie</span><input class="bp-input" placeholder="Exemplu S.R.L."></label>
+          <label class="bp-field"><span class="bp-label">CUI</span><input class="bp-input" inputmode="numeric" placeholder="RO12345678"></label>
+          <label class="bp-field"><span class="bp-label">E-mail</span><input class="bp-input" type="email" placeholder="office@companie.ro"></label>
+        </form>
+      </div>
+      <footer class="bp-modal__footer">
+        <button class="bp-button" type="button" data-close-modal>Anulează</button>
+        <button class="bp-button bp-button--primary" type="button" data-close-modal data-show-toast>Salvează</button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="bp-modal-backdrop" data-confirm-modal hidden>
+    <section class="bp-modal bp-confirm" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">
+      <div class="bp-modal__body">
+        <div class="bp-confirm__icon"><i class="bp-icon fa-solid fa-trash" aria-hidden="true"></i></div>
+        <div class="bp-stack">
+          <h2 class="bp-heading-2" id="confirm-title">Ștergi subscripția?</h2>
+        </div>
+      </div>
+      <footer class="bp-modal__footer">
+        <button class="bp-button" type="button" data-close-confirm>Anulează</button>
+        <button class="bp-button bp-button--danger" type="button" data-close-confirm>Șterge definitiv</button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="bp-modal-backdrop" data-profit-modal hidden>
+    <section class="bp-modal bp-modal--wide" role="dialog" aria-modal="true" aria-labelledby="profit-modal-title">
+      <header class="bp-modal__header">
+        <div><h2 class="bp-heading-2" id="profit-modal-title">Tranzacție nouă</h2></div>
+        <button class="bp-icon-button" type="button" data-close-profit-modal aria-label="Închide"><i class="bp-icon fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </header>
+      <div class="bp-modal__body">
+        <form class="bp-form-grid bp-form-grid--2">
+          <label class="bp-field"><span class="bp-label">Descriere</span><input class="bp-input" placeholder="Descriere tranzacție"></label>
+          <label class="bp-field"><span class="bp-label">Tip</span><select class="bp-select"><option>Încasare</option><option>Plată</option></select></label>
+          <label class="bp-field"><span class="bp-label">Sumă</span><input class="bp-input" type="number" step="0.01"></label>
+          <label class="bp-field"><span class="bp-label">Monedă</span><select class="bp-select"><option>RON</option><option>EUR</option><option>USD</option></select></label>
+          <label class="bp-field"><span class="bp-label">Data tranzacției</span><input class="bp-input" type="date"></label>
+          <label class="bp-field"><span class="bp-label">Categorie</span><input class="bp-input" placeholder="Categorie"></label>
+          <label class="bp-field"><span class="bp-label">Partener</span><input class="bp-input" placeholder="Partener"></label>
+          <label class="bp-field"><span class="bp-label">Pachet</span><input class="bp-input" placeholder="Pachet opțional"></label>
+          <label class="bp-field bp-form-grid__full"><span class="bp-label">Notă</span><textarea class="bp-textarea" placeholder="Detalii opționale"></textarea></label>
+        </form>
+      </div>
+      <footer class="bp-modal__footer">
+        <button class="bp-button" type="button" data-close-profit-modal>Anulează</button>
+        <button class="bp-button bp-button--primary" type="button" data-close-profit-modal data-show-toast>Salvează tranzacția</button>
+      </footer>
+    </section>
+  </div>
+
+  <script src="assets/js/business-pro.js?v=20260920-4"></script>
+  <script src="assets/js/gallery.js?v=20260920-4"></script>
+</body>
+</html>

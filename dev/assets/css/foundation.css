@@ -1,0 +1,291 @@
+.bp-root,
+  .bp-root *,
+  .bp-root *::before,
+  .bp-root *::after {
+    box-sizing: border-box;
+  }
+
+  .bp-root {
+    margin: 0;
+    min-height: 100%;
+    font-family: var(--bp-font-sans);
+    font-size: var(--bp-font-size-md);
+    line-height: var(--bp-line-height-normal);
+    color: var(--bp-color-text);
+    background: var(--bp-color-bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .bp-root :where(h1, h2, h3, p, ul, ol, figure) {
+    margin-block: 0;
+  }
+
+  .bp-root :where(button, input, select, textarea) {
+    font: inherit;
+  }
+
+  .bp-root :where(button, a) {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .bp-root :where(summary) {
+    cursor: pointer;
+  }
+
+  .bp-root a,
+  .bp-root a:hover {
+    text-decoration: none;
+  }
+
+  /* The document scrollbar belongs to the application canvas. Its track uses
+     the canvas color, without reserving an empty gutter when no scroll is needed. */
+  html {
+    min-height: 100%;
+    background: var(--bp-color-bg);
+    scrollbar-color: color-mix(in srgb, var(--bp-color-text-muted) 34%, transparent) var(--bp-color-bg);
+    scrollbar-width: thin;
+  }
+
+  html::-webkit-scrollbar {
+    width: 0.625rem;
+    height: 0.625rem;
+    background: var(--bp-color-bg);
+  }
+
+  html::-webkit-scrollbar-track,
+  html::-webkit-scrollbar-corner {
+    background: var(--bp-color-bg);
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--bp-color-text-muted) 34%, transparent);
+    background-clip: content-box;
+    border: 0.1875rem solid var(--bp-color-bg);
+    border-radius: var(--bp-radius-full);
+  }
+
+  .bp-root {
+    scrollbar-color: color-mix(in srgb, var(--bp-color-text-muted) 34%, transparent) var(--bp-color-bg);
+    scrollbar-width: thin;
+  }
+
+  .bp-root * {
+    scrollbar-color: color-mix(in srgb, var(--bp-color-text-muted) 34%, transparent) transparent;
+    scrollbar-width: thin;
+  }
+
+  .bp-root::-webkit-scrollbar {
+    width: 0.625rem;
+    height: 0.625rem;
+    background: var(--bp-color-bg);
+  }
+
+  .bp-root *::-webkit-scrollbar {
+    width: 0.625rem;
+    height: 0.625rem;
+    background: transparent;
+  }
+
+  .bp-root::-webkit-scrollbar-track,
+  .bp-root::-webkit-scrollbar-corner,
+  .bp-root *::-webkit-scrollbar-track,
+  .bp-root *::-webkit-scrollbar-corner {
+    background: var(--bp-color-bg);
+  }
+
+  .bp-root *::-webkit-scrollbar-track,
+  .bp-root *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  .bp-root::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--bp-color-text-muted) 34%, transparent);
+    background-clip: content-box;
+    border: 0.1875rem solid var(--bp-color-bg);
+    border-radius: var(--bp-radius-full);
+  }
+
+  .bp-root *::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--bp-color-text-muted) 34%, transparent);
+    background-clip: content-box;
+    border: 0.1875rem solid transparent;
+    border-radius: var(--bp-radius-full);
+  }
+
+  .bp-root img,
+  .bp-root svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  .bp-root [hidden],
+  .bp-hidden {
+    display: none !important;
+  }
+
+  .bp-app-layout {
+    min-height: calc(100dvh - var(--bp-header-height));
+    overflow-x: hidden;
+  }
+
+  .bp-view {
+    animation: bp-view-in var(--bp-transition-normal);
+  }
+
+  @keyframes bp-view-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.25rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bp-container {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    padding-inline: var(--bp-page-gutter);
+  }
+
+  .bp-page {
+    padding-block: var(--bp-space-6) calc(var(--bp-bottom-nav-height) + var(--bp-space-6) + env(safe-area-inset-bottom));
+  }
+
+  .bp-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bp-stack-gap, var(--bp-space-4));
+  }
+
+  .bp-stack--sm {
+    --bp-stack-gap: var(--bp-space-2);
+  }
+
+  .bp-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--bp-cluster-gap, var(--bp-space-2));
+  }
+
+  .bp-cluster--between {
+    justify-content: space-between;
+  }
+
+  .bp-cluster--start {
+    align-items: flex-start;
+  }
+
+  .bp-cluster--centered {
+    justify-content: center;
+  }
+
+  .bp-grid,
+  .bp-document__parties {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: var(--bp-grid-gap, var(--bp-space-4));
+  }
+
+  .bp-reading-width {
+    max-width: var(--bp-reading-max);
+  }
+
+  .bp-min-w-0 {
+    min-width: 0;
+  }
+
+  .bp-subdued {
+    opacity: 0.55;
+  }
+
+  .bp-ml-auto {
+    margin-left: auto;
+  }
+
+  .bp-heading-1 {
+    margin: 0;
+    color: var(--bp-color-text-strong);
+    font-size: var(--bp-font-size-2xl);
+    line-height: var(--bp-line-height-tight);
+    letter-spacing: -0.025em;
+  }
+
+  .bp-heading-2 {
+    color: var(--bp-color-text-strong);
+    font-size: var(--bp-font-size-xl);
+    line-height: var(--bp-line-height-tight);
+  }
+
+  .bp-heading-3 {
+    margin: 0;
+    color: var(--bp-color-text-strong);
+    font-size: var(--bp-font-size-md);
+    line-height: 1.35;
+  }
+
+  .bp-text-muted {
+    color: var(--bp-color-text-muted);
+  }
+
+  .bp-text-strong {
+    color: var(--bp-color-text-strong);
+    font-weight: 700;
+  }
+
+  .bp-text-small {
+    font-size: var(--bp-font-size-sm);
+  }
+
+  .bp-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @media (min-width: 48rem) {
+    .bp-page {
+      padding-block: var(--bp-space-8);
+    }
+
+    .bp-grid--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bp-grid--3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .bp-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bp-grid--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-root *,
+    .bp-root *::before,
+    .bp-root *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }

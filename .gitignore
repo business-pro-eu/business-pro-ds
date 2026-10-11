@@ -1,0 +1,13 @@
+.DS_Store
+graphify-out/
+.venv/
+__pycache__/
+*.pyc
+*.log
+.env
+.env.*
+config.php
+config.local.php
+node_modules/
+.idea/
+.vscode/

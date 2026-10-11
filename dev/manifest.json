@@ -1,0 +1,124 @@
+{
+  "name": "Business PRO Design System",
+  "environment": "dev",
+  "version": "20261011-28",
+  "generatedAt": "2026-10-11T07:46:37.469Z",
+  "entrypoints": {
+    "css": "assets/css/business-pro.bundle.css?v=20261011-28",
+    "cssModules": "assets/css/business-pro.css?v=20261011-28",
+    "js": "assets/js/business-pro.js?v=20261011-28",
+    "theme": "assets/js/theme.js?v=20261011-28"
+  },
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 46865,
+      "sha256": "a067255076a36938973b4514ba180ed6cfbf298b44c3882ad8e62f0887982427"
+    },
+    {
+      "path": "assets/css/business-pro.bundle.css",
+      "bytes": 374801,
+      "sha256": "59c959d005080ae4f74d719fa30fcbf7e2d572b09f3859e54f053c89e736ee5f"
+    },
+    {
+      "path": "assets/css/business-pro.css",
+      "bytes": 723,
+      "sha256": "f486883181c070637e40da683134c20d3f86ecc2ecc6d363431e95d36286005d"
+    },
+    {
+      "path": "assets/css/business-pro-brands.css",
+      "bytes": 57,
+      "sha256": "b9cc228029bb6df68022e42ebd3bcd8ed6e3de5aecdac95a11453bd1ef8cddaa"
+    },
+    {
+      "path": "assets/css/tokens.css",
+      "bytes": 31563,
+      "sha256": "6dfe70f09704d1c8a67c8a82528b941768f3c12e0e91e0e57c6867a4e7628f5b"
+    },
+    {
+      "path": "assets/css/foundation.css",
+      "bytes": 6300,
+      "sha256": "3d3155246de5ab3e6b926766296d0daf7a0852bf2a1a42711adf9732c492d6d2"
+    },
+    {
+      "path": "assets/css/components.css",
+      "bytes": 171476,
+      "sha256": "114f1ff998c5136927a76f154f83538b33642510a018a4e6c330ea0f52117cad"
+    },
+    {
+      "path": "assets/css/documents.css",
+      "bytes": 16084,
+      "sha256": "77a346e718e0ff0908092362af0ff2de1b7b66fe4abf74d8ebe26d1d5419b741"
+    },
+    {
+      "path": "assets/css/advanced.css",
+      "bytes": 148884,
+      "sha256": "bae3b0a0c99aa89548feb8459dd9bfc863c27ef9a51f08cb3463874a9a074d9a"
+    },
+    {
+      "path": "assets/css/gallery.css",
+      "bytes": 3498,
+      "sha256": "4c04ad641e6bed47ac7a5df62bd51b5cba461dc9a8ba237619181c1541808cd7"
+    },
+    {
+      "path": "assets/js/theme.js",
+      "bytes": 2324,
+      "sha256": "38f077e3e85809251c775b09a6403c920c04d3a4b16acbd0a09fd55138ea1c04"
+    },
+    {
+      "path": "assets/js/business-pro.js",
+      "bytes": 56399,
+      "sha256": "672ce69ac49fb8d18a008dc0efc1102cf24922ca9e5aacf99317321b9e9decaf"
+    },
+    {
+      "path": "assets/js/gallery.js",
+      "bytes": 6368,
+      "sha256": "b625d6371e9c9edabe1d0ca43e9ed8cd53c440d02931f426430fe50df6b26b32"
+    },
+    {
+      "path": "assets/brand/logo-lightmode.svg",
+      "bytes": 6554,
+      "sha256": "1b13267f4013f0b51c31caa1ff8e2ffc55f7eb2db70b20d95f199f3ed4e7a2c9"
+    },
+    {
+      "path": "assets/brand/logo-darkmode.svg",
+      "bytes": 6632,
+      "sha256": "bc3eafa1cd60b638749543ee839a7d88572d991db2738fc4164b51724faa88ce"
+    },
+    {
+      "path": "assets/brand/logo-lightmode-mobile.svg",
+      "bytes": 3916,
+      "sha256": "c7508fc89ea5d01cad8b5e23a8a5088db1c8b944cff1c9218a87e7beffdb81a8"
+    },
+    {
+      "path": "assets/brand/logo-darkmode-mobile.svg",
+      "bytes": 3949,
+      "sha256": "88f280bb30d6da503ac21cf44ab1ebfd776fc0b1c5959612d3a13b8cd4ad5859"
+    },
+    {
+      "path": "assets/vendor/fontawesome/css/fontawesome.min.css",
+      "bytes": 57644,
+      "sha256": "b164a2d2905748e1d48512f1e985606b4282c9438bbc0ee2958e56f658695d2b"
+    },
+    {
+      "path": "assets/vendor/fontawesome/css/solid.min.css",
+      "bytes": 619,
+      "sha256": "abb7189386e7601b342822b2a72812cf972daeb3442b796d7a785ea6f860f7e6"
+    },
+    {
+      "path": "assets/vendor/fontawesome/css/brands.min.css",
+      "bytes": 16024,
+      "sha256": "9e2091a3026c87116c2ee1948fbad3bffbf1b1f733c2f89d351d3dc7aab082f9"
+    },
+    {
+      "path": "assets/vendor/fontawesome/webfonts/fa-solid-900.woff2",
+      "bytes": 114740,
+      "sha256": "ff58a6b0a01dbce082458f6e5a58719df4e80e0c2b50f744bb5871e21eca6878"
+    },
+    {
+      "path": "assets/vendor/fontawesome/webfonts/fa-brands-400.woff2",
+      "bytes": 110088,
+      "sha256": "70c632ba73c7ad942141bb2f56994b8eddf0a284c01aab9f21e0cd10021530c4"
+    }
+  ]
+}
