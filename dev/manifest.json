@@ -1,13 +1,13 @@
 {
   "name": "Business PRO Design System",
   "environment": "dev",
-  "version": "20261012-4",
-  "generatedAt": "2026-10-12T15:04:15.718Z",
+  "version": "20261012-5",
+  "generatedAt": "2026-10-12T15:16:20.144Z",
   "entrypoints": {
-    "css": "assets/css/business-pro.bundle.css?v=20261012-4",
-    "cssModules": "assets/css/business-pro.css?v=20261012-4",
-    "js": "assets/js/business-pro.js?v=20261012-4",
-    "theme": "assets/js/theme.js?v=20261012-4"
+    "css": "assets/css/business-pro.bundle.css?v=20261012-5",
+    "cssModules": "assets/css/business-pro.css?v=20261012-5",
+    "js": "assets/js/business-pro.js?v=20261012-5",
+    "theme": "assets/js/theme.js?v=20261012-5"
   },
   "files": [
     {
@@ -17,13 +17,13 @@
     },
     {
       "path": "assets/css/business-pro.bundle.css",
-      "bytes": 376477,
-      "sha256": "65e5fb972c25144c5aea5b58deaa7ec94da3cd053827a3d94a1aa2123283ff1a"
+      "bytes": 376599,
+      "sha256": "84b0c6a534daee2a89be4ab4ffb35d8c4cea246a5c6731625c389829630db56e"
     },
     {
       "path": "assets/css/business-pro.css",
       "bytes": 718,
-      "sha256": "d119a6d9a230077ddc3de0da7bb814d7ce7d7140731f7ab46778e9cbf171265e"
+      "sha256": "99995ed2310169c6d165954fd011794ba3d8fde1842be9f115b759382177d7fd"
     },
     {
       "path": "assets/css/business-pro-brands.css",
@@ -32,8 +32,8 @@
     },
     {
       "path": "assets/css/tokens.css",
-      "bytes": 31563,
-      "sha256": "6dfe70f09704d1c8a67c8a82528b941768f3c12e0e91e0e57c6867a4e7628f5b"
+      "bytes": 31688,
+      "sha256": "27a0465a4a636ea02d92b2a9941c1921e464499710a1030ecea1e9ced89a1b6a"
     },
     {
       "path": "assets/css/foundation.css",
@@ -52,8 +52,8 @@
     },
     {
       "path": "assets/css/advanced.css",
-      "bytes": 149929,
-      "sha256": "52d26a12dc71d03d269e7f885b8f1791d97fef02bd8728f9ca801550ae95ce33"
+      "bytes": 149926,
+      "sha256": "c79daa743bf0d9be68a27c43ad75b5f4e30f2163aadc357be3c24b81153bbbf6"
     },
     {
       "path": "assets/css/gallery.css",

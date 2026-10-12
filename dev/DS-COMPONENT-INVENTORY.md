@@ -2,7 +2,7 @@
 
 Inventar generat din `ds/dev/assets/css/*.css`. Acesta este documentul de lucru pentru maparea 1:1 cu kitul Figma `iOS and iPadOS 27 (Community)`.
 
-Clase unice totale: **789** (adăugate 2026-10-12: `bp-login-card--md/--lg`, `bp-page--narrow/--wide`, `bp-card--roomy`, `bp-table--fit` (DS 20261012-2), `bp-fieldset--plain`, `bp-form-actions`, `bp-form-actions__push`, `bp-rule-list`, `bp-feedback-slot` (DS 20261012-3), `bp-eyebrow` (DS 20261012-4); custom property nouă `--bp-segment-width` pe `bp-import-run__segment`).
+Clase unice totale: **789** (adăugate 2026-10-12: `bp-login-card--md/--lg`, `bp-page--narrow/--wide`, `bp-card--roomy`, `bp-table--fit` (DS 20261012-2), `bp-fieldset--plain`, `bp-form-actions`, `bp-form-actions__push`, `bp-rule-list`, `bp-feedback-slot` (DS 20261012-3), `bp-eyebrow` (DS 20261012-4); token nou `--bp-shadow-page-edge` (DS 20261012-5); custom property nouă `--bp-segment-width` pe `bp-import-run__segment`).
 
 ## Rezumat pe fișiere
 

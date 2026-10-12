@@ -1463,7 +1463,7 @@ span.flatpickr-weekday { font-size: var(--bp-font-size-xs); font-weight: 700; }
 /* Rendered PDF pages (one <canvas> per page, drawn by PDF.js) shown inline in a modal body —
    no iframe/browser chrome, just the page images, stacked and centered. */
 .bp-document-preview-pages { display: flex; flex-direction: column; align-items: center; gap: var(--bp-space-4); }
-.bp-document-preview-pages canvas { max-width: 100%; height: auto; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+.bp-document-preview-pages canvas { max-width: 100%; height: auto; box-shadow: var(--bp-shadow-page-edge); }
 
 /* Document template section editor: one card per section (title + rich-text toolbar + editable
    content), used in the contract-template builder instead of a raw HTML textarea. */
