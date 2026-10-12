@@ -2,7 +2,7 @@
 
 Inventar generat din `ds/dev/assets/css/*.css`. Acesta este documentul de lucru pentru maparea 1:1 cu kitul Figma `iOS and iPadOS 27 (Community)`.
 
-Clase unice totale: **777**.
+Clase unice totale: **782** (adăugate 2026-10-12: `bp-login-card--md/--lg`, `bp-page--narrow/--wide`, `bp-card--roomy`; custom property nouă `--bp-segment-width` pe `bp-import-run__segment`).
 
 ## Rezumat pe fișiere
 
@@ -179,6 +179,7 @@ Clase unice totale: **777**.
 ### Cards / lists
 
 - `bp-card`
+- `bp-card--roomy`
 - `bp-card--flush`
 - `bp-card--glass`
 - `bp-card--interactive`
@@ -476,6 +477,8 @@ Clase unice totale: **777**.
 - `bp-min-w-0`
 - `bp-mini-badge`
 - `bp-page`
+- `bp-page--narrow`
+- `bp-page--wide`
 - `bp-page-footer`
 - `bp-app-footer`
 - `bp-app-footer__inner`
@@ -628,6 +631,8 @@ Clase unice totale: **777**.
 - `bp-link-list__label`
 - `bp-link-muted`
 - `bp-login-card`
+- `bp-login-card--lg`
+- `bp-login-card--md`
 - `bp-login-card--glass`
 - `bp-login-card__brand`
 - `bp-login-card__theme`

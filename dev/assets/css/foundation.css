@@ -156,6 +156,18 @@
     padding-block: var(--bp-space-6) calc(var(--bp-bottom-nav-height) + var(--bp-space-6) + env(safe-area-inset-bottom));
   }
 
+  /* Centered page column for a standalone page (a message, a short form, a review list). */
+  .bp-page.bp-page--narrow {
+    max-width: 44rem;
+    margin: var(--bp-space-16) auto;
+  }
+
+  .bp-page.bp-page--wide {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: var(--bp-space-5);
+  }
+
   .bp-stack {
     display: flex;
     flex-direction: column;

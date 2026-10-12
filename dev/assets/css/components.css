@@ -1202,6 +1202,10 @@
     padding: var(--bp-card-padding);
   }
 
+  .bp-card--roomy {
+    --bp-card-padding: var(--bp-space-5);
+  }
+
   .bp-dashboard-section,
   .bp-record-card {
     gap: var(--bp-space-4);
@@ -4338,6 +4342,14 @@
     border: 1px solid var(--bp-color-border);
     border-radius: var(--bp-radius-xl);
     box-shadow: none;
+  }
+
+  .bp-login-card--md {
+    width: min(36rem, 100%);
+  }
+
+  .bp-login-card--lg {
+    width: min(44rem, 100%);
   }
 
   .bp-login-card--glass {

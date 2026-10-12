@@ -1,13 +1,13 @@
 {
   "name": "Business PRO Design System",
   "environment": "dev",
-  "version": "20261011-28",
-  "generatedAt": "2026-10-11T07:46:37.469Z",
+  "version": "20261012-1",
+  "generatedAt": "2026-10-12T13:27:19.084Z",
   "entrypoints": {
-    "css": "assets/css/business-pro.bundle.css?v=20261011-28",
-    "cssModules": "assets/css/business-pro.css?v=20261011-28",
-    "js": "assets/js/business-pro.js?v=20261011-28",
-    "theme": "assets/js/theme.js?v=20261011-28"
+    "css": "assets/css/business-pro.bundle.css?v=20261012-1",
+    "cssModules": "assets/css/business-pro.css?v=20261012-1",
+    "js": "assets/js/business-pro.js?v=20261012-1",
+    "theme": "assets/js/theme.js?v=20261012-1"
   },
   "files": [
     {
@@ -17,8 +17,8 @@
     },
     {
       "path": "assets/css/business-pro.bundle.css",
-      "bytes": 374801,
-      "sha256": "59c959d005080ae4f74d719fa30fcbf7e2d572b09f3859e54f053c89e736ee5f"
+      "bytes": 375314,
+      "sha256": "952ef7191b6552a5f5767bbe33f54928221f78a2d961b49092448307150075e8"
     },
     {
       "path": "assets/css/business-pro.css",
@@ -37,13 +37,13 @@
     },
     {
       "path": "assets/css/foundation.css",
-      "bytes": 6300,
-      "sha256": "3d3155246de5ab3e6b926766296d0daf7a0852bf2a1a42711adf9732c492d6d2"
+      "bytes": 6597,
+      "sha256": "3acec02c0b77cf8b13a60e382b54fc0c385099e1a93d6b27e7a4bab567a3c65d"
     },
     {
       "path": "assets/css/components.css",
-      "bytes": 171476,
-      "sha256": "114f1ff998c5136927a76f154f83538b33642510a018a4e6c330ea0f52117cad"
+      "bytes": 171657,
+      "sha256": "526dcb4cf1bce68397e69e5cf5bac2ccf437a2464e5f7c175020bd1b8e59cbdc"
     },
     {
       "path": "assets/css/documents.css",
@@ -52,8 +52,8 @@
     },
     {
       "path": "assets/css/advanced.css",
-      "bytes": 148884,
-      "sha256": "bae3b0a0c99aa89548feb8459dd9bfc863c27ef9a51f08cb3463874a9a074d9a"
+      "bytes": 148920,
+      "sha256": "abb459de3a4c53a95638d71655cec4416f9a0a78cbc379605e44b05436c186b2"
     },
     {
       "path": "assets/css/gallery.css",

@@ -393,7 +393,7 @@ select.bp-native-select[hidden],
 .bp-import-run__source { display: grid; gap: var(--bp-space-3); }
 .bp-import-run__breakdown-title,
 .bp-import-run__source-title { margin: 0; font-size: var(--bp-font-size-md); font-weight: 700; }
-.bp-import-run__segment { min-width: 0; border-right: 2px solid var(--bp-color-surface); }
+.bp-import-run__segment { width: var(--bp-segment-width, 0%); min-width: 0; border-right: 2px solid var(--bp-color-surface); }
 .bp-import-run__segment:last-child { border-right: 0; }
 .bp-import-run__legend { display: flex; flex-wrap: wrap; gap: var(--bp-space-3) var(--bp-space-6); color: var(--bp-color-text-muted); }
 .bp-import-run__legend-item { display: inline-flex; align-items: center; gap: var(--bp-space-2); }
