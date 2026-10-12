@@ -61,11 +61,7 @@ const skippedDirs = new Set(['node_modules', '.git', 'vendor', 'tests', 'mockups
 
 // Datorie cunoscută, pe regulă și fișier: numărul maxim de încălcări tolerate. Poate doar să scadă (o încălcare nouă pică,
 // iar una rezolvată cere coborârea alocației). Se șterge intrarea când ajunge la zero.
-const knownDebt = {
-  'css|php/sales-hub/public/assets/auth.css': 1,
-  'class|php/fleet/public/app.php': 2,
-  'class|php/domain-tools/public/app.php': 1,
-};
+const knownDebt = {};
 const markerClasses = new Set(['bp-contracts', 'bp-theme-dark']);
 
 const failures = [];
