@@ -23,31 +23,68 @@ const path = require('path');
 
 const dsRoot = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(dsRoot, '../..');
-const platforms = ['bookings', 'leads', 'profit', 'fleet', 'domain-tools', 'contracts'];
+// Layout since 2026-10-11: every PHP platform is its own repository under php/ (the CRM is php/crm, formerly "leads").
+const platforms = ['php/bookings', 'php/crm', 'php/profit', 'php/fleet', 'php/domain-tools', 'php/contracts', 'php/pusculita', 'php/sales-hub'];
 
 // Excepții documentate (căi relative la rădăcina repo-ului).
 const styleBlockExceptions = new Set([
-  'fleet/public/offline.html',        // pagină offline autonomă: DS-ul remote nu e disponibil
-  'fleet/public/index.php',           // <style id="bp-brand-theme">: doar token-uri --bp-* per tenant
-  'fleet/public/app.php',             // idem
-  'contracts/src/XlsxExporter.php',   // XML de spreadsheet, nu CSS web
+  // Pagini offline autonome: DS-ul remote nu e disponibil când sunt afișate.
+  'php/bookings/public/offline.html',
+  'php/profit/public/offline.html',
+  'php/domain-tools/public/offline.html',
+  'php/contracts/public/offline.html',
+  'php/fleet/public/offline.html',        // idem
+  'php/fleet/public/index.php',           // <style id="bp-brand-theme">: doar token-uri --bp-* per tenant
+  'php/fleet/public/app.php',             // idem
+  'php/contracts/src/XlsxExporter.php',   // XML de spreadsheet, nu CSS web
+  'php/fleet/src/DocumentEngine.php',     // HTML pentru PDF (dompdf): nu poate încărca DS-ul
+  // Excepții de guvernanță documentate în fișier (footer comun, logo): vezi comentariile din pagini.
+  'php/pusculita/public/index.php',
+  'php/pusculita/public/app.php',
+  'php/pusculita/public/view.php',
 ]);
 const inlineStyleExceptions = [
   /src\/Mailer\.php$/,                // email HTML: clienții de mail cer CSS inline
   /src\/ExtensionStopNotifier\.php$/, // email HTML
+  /php\/crm\/src\/(EmailTemplate|EmailHtml|Unsubscribe)\.php$/, // corpuri de e-mail: CSS inline obligatoriu
 ];
 const runtimeStyleExceptions = [
-  /leads\/public\/assets\/app\.js$/,      // poziționare popup/tooltip din getBoundingClientRect
-  /bookings\/public\/assets\/app\.js$/,   // autosize textarea din scrollHeight
+  /php\/crm\/public\/assets\/app\.js$/,      // poziționare popup/tooltip din getBoundingClientRect
+  /php\/bookings\/public\/assets\/app\.js$/,   // autosize textarea din scrollHeight
+  /php\/(fleet|domain-tools)\/public\/assets\/app\.js$/, // poziționare popup din getBoundingClientRect
+  /php\/pusculita\/public\/assets\/app\.js$/,           // poziționare popup + blocarea derulării fundalului
 ];
+
+// Nu sunt suprafețe servite de platformă: teste, mockup-uri, rapoarte generate, documentație și extensia de browser (rulează în
+// paginile altor site-uri și își livrează propriul CSS în pachet).
+const skippedDirs = new Set(['node_modules', '.git', 'vendor', 'tests', 'mockups', 'graphify-out', 'docs', 'extension', 'imports', 'database']);
+
+// Datorie cunoscută, pe regulă și fișier: numărul maxim de încălcări tolerate. Poate doar să scadă (o încălcare nouă pică,
+// iar una rezolvată cere coborârea alocației). Se șterge intrarea când ajunge la zero.
+const knownDebt = {
+  'css|php/sales-hub/public/assets/auth.css': 1,
+  'inline|php/pusculita/public/view.php': 6,
+  'inline|php/pusculita/src/bootstrap.php': 1,
+  'inline|php/pusculita/public/assets/transactions-list.js': 1,
+  'runtime|php/pusculita/public/view.php': 5,
+  'class|php/fleet/public/app.php': 2,
+  'class|php/domain-tools/public/app.php': 1,
+};
 const markerClasses = new Set(['bp-contracts', 'bp-theme-dark']);
 
 const failures = [];
-function fail(message) { failures.push(message); }
+const debtCount = new Map();
+const debtMessages = new Map();
+function fail(message, key = null) {
+  if (key === null) { failures.push(message); return; }
+  debtCount.set(key, (debtCount.get(key) || 0) + 1);
+  if (!debtMessages.has(key)) debtMessages.set(key, []);
+  debtMessages.get(key).push(message);
+}
 
 function walk(dir, files = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === 'node_modules' || entry.name === '.git' || entry.name === 'vendor') continue;
+    if (skippedDirs.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(full, files);
     else files.push(full);
@@ -67,7 +104,7 @@ const corpus = new Map(webFiles.map((f) => [f, read(f)]));
 
 // 1. Fișiere CSS în platforme.
 for (const f of files.filter((f) => f.endsWith('.css'))) {
-  fail(`CSS de platformă interzis: ${rel(f)}`);
+  fail(`CSS de platformă interzis: ${rel(f)}`, `css|${rel(f)}`);
 }
 
 // 2. Blocuri <style>.
@@ -84,7 +121,7 @@ for (const [f, s] of corpus) {
     const value = m.group ? m.group(1) : m[1];
     const declarations = value.split(';').map((d) => d.trim()).filter(Boolean);
     if (declarations.every((d) => /^--bp-[a-z0-9-]+\s*:/.test(d))) continue;
-    fail(`style= interzis în ${rel(f)}: "${value.slice(0, 80)}"`);
+    fail(`style= interzis în ${rel(f)}: "${value.slice(0, 80)}"`, `inline|${rel(f)}`);
   }
 }
 
@@ -94,7 +131,7 @@ for (const [f, s] of corpus) {
   for (const m of s.matchAll(/\.style\.([a-zA-Z]+)\s*=|\.cssText\s*=|\.style\.setProperty\(\s*['"`]([^'"`]+)/g)) {
     const prop = m[1] || m[2] || 'cssText';
     if (/^--bp-/.test(prop)) continue;
-    fail(`JS setează prezentare în ${rel(f)}: ${m[0].trim().slice(0, 60)}`);
+    fail(`JS setează prezentare în ${rel(f)}: ${m[0].trim().slice(0, 60)}`, `runtime|${rel(f)}`);
   }
 }
 
@@ -122,7 +159,18 @@ for (const [c, where] of undefinedUse) {
     }
     return total > inAttr;
   });
-  if (!isHook) fail(`Clasă bp-* fără definiție în DS: ${c} (${rel(where[0])})`);
+  if (!isHook) fail(`Clasă bp-* fără definiție în DS: ${c} (${rel(where[0])})`, `class|${rel(where[0])}`);
+}
+
+for (const key of new Set([...debtCount.keys(), ...Object.keys(knownDebt)])) {
+  const found = debtCount.get(key) || 0;
+  const allowed = knownDebt[key] || 0;
+  if (found > allowed) {
+    fail(`${key}: ${found} încălcări, ${allowed} tolerate:`);
+    debtMessages.get(key).forEach((m) => fail(`  ${m}`));
+  } else if (found < allowed) {
+    fail(`${key}: doar ${found} încălcări rămase, ${allowed} tolerate: coboară alocația din knownDebt`);
+  }
 }
 
 if (failures.length) {
@@ -130,4 +178,5 @@ if (failures.length) {
   failures.forEach((m) => console.error(`- ${m}`));
   process.exit(1);
 }
-console.log(`Consumer audit passed (${platforms.join(', ')}).`);
+const toleratedTotal = Object.values(knownDebt).reduce((a, b) => a + b, 0);
+console.log(`Consumer audit passed (${platforms.join(', ')}); datorie cunoscută tolerată: ${toleratedTotal} încălcări în ${Object.keys(knownDebt).length} fișiere.`);

@@ -21,7 +21,7 @@ node tools/audit-consumers.js
 ```
 
 `generate-css-bundle.js` produce și `business-pro.bundle.min.css` (entrypoint-ul
-recomandat pentru platforme). `audit-consumers.js` verifică platformele:
+recomandat pentru platforme). `audit-consumers.js` verifică platformele din `php/*` (fiecare e un repo separat; auditul cere ca ele să fie clonate lângă `ds`, sub `~/dev/business-pro/php/`). Datoria cunoscută stă în `knownDebt` și poate doar să scadă. Verifică platformele:
 fără CSS propriu, fără `<style>`/`style=`/`.style.*` în afara excepțiilor
 documentate și fără clase `bp-*` inexistente în bundle. `check-contrast.js`
 raportează perechile de token-uri sub pragul WCAG AA.
