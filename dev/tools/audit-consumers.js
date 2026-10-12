@@ -142,8 +142,11 @@ for (const [f, s] of corpus) {
   }
 }
 for (const [c, where] of undefinedUse) {
-  // Hook de comportament: clasa apare și în afara atributelor class= (selectori JS).
-  const isHook = [...corpus.values()].some((s) => {
+  // Hook de comportament: clasa apare și în afara atributelor class= (selectori JS), în ACEEAȘI platformă. O clasă folosită în două
+  // platforme nu se acoperă reciproc: fiecare trebuie să o definească sau să o folosească ca hook.
+  const platformOf = (file) => platforms.find((p) => rel(file).startsWith(`${p}/`));
+  const usedIn = new Set(where.map(platformOf));
+  const isHook = [...corpus].filter(([f]) => usedIn.has(platformOf(f))).map(([, s]) => s).some((s) => {
     const total = (s.match(new RegExp(c.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g')) || []).length;
     let inAttr = 0;
     for (const m of s.matchAll(/class(?:Name)?=["`']([^"`']*)["`']/g)) {
