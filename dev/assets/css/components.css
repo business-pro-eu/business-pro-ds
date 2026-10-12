@@ -3089,6 +3089,11 @@
     min-width: 66rem;
   }
 
+  /* A table that must fit its container (a small summary in a dialog) instead of the default 46rem minimum. */
+  .bp-table--fit {
+    min-width: 0;
+  }
+
   .bp-table__row--interactive {
     cursor: pointer;
   }
