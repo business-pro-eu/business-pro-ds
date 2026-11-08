@@ -1338,6 +1338,10 @@ select.bp-native-select[hidden],
   height: var(--bp-control-height-sm);
   min-height: var(--bp-control-height-sm);
 }
+/* Small icon buttons keep their size inside action groups on desktop with a mouse (touch keeps the 36px target). */
+@media (min-width: 48rem) and (pointer: fine) {
+  :where(.bp-app-header, .bp-action-group) .bp-icon-button--sm { width: 1.75rem; min-width: 1.75rem; height: 1.75rem; min-height: 1.75rem; }
+}
 /* Pe ecrane mobile (< 48rem), acțiunile din antet devin compacte rotunde (icon-only) */
 @media (max-width: 47.999rem) {
   .bp-app-header .bp-action-group > :is(.bp-button, .bp-filter-dropdown > .bp-button) {
