@@ -2154,3 +2154,10 @@ button.bp-day-cal__cell.bp-day-kind--edge:hover, button.bp-day-cal__cell.bp-day-
 /* An inline pagination without its back (or forward) arrow, e.g. on the first or last page: the label gets the room the arrow would have left, so it does not sit against the rounded end. */
 .bp-pagination--inline > .bp-pagination__label:first-child { padding-left: var(--bp-space-4); }
 .bp-pagination--inline > .bp-pagination__label:last-child { padding-right: var(--bp-space-4); }
+
+/* Info icon in a field label: the help text opens on hover / focus as a tip under the label, as wide as the field. */
+.bp-field:has(> .bp-label .bp-info-tip) { position: relative; }
+.bp-info-tip { display: inline-flex; margin-left: var(--bp-space-1); color: var(--bp-color-text-muted); font-size: var(--bp-font-size-xs); cursor: help; outline: 0; vertical-align: middle; }
+.bp-info-tip:is(:hover, :focus-visible) { color: var(--bp-color-brand-600); }
+.bp-info-tip::after { position: absolute; z-index: var(--bp-z-overlay); top: calc(var(--bp-control-height-sm) - var(--bp-space-2)); right: 0; left: 0; display: none; padding: var(--bp-space-2); content: attr(data-tooltip); color: var(--bp-color-tooltip-text); background: var(--bp-tip-bg, var(--bp-color-tooltip-bg)); border-radius: var(--bp-radius-md); font-size: var(--bp-font-size-xs); font-weight: 500; line-height: 1.35; pointer-events: none; white-space: normal; text-align: left; }
+.bp-info-tip:is(:hover, :focus-visible)::after { display: block; }
