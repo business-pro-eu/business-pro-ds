@@ -1,11 +1,11 @@
 @import url("../vendor/fontawesome/css/fontawesome.min.css?v=7.2.0");
 @import url("../vendor/fontawesome/css/solid.min.css?v=7.2.0");
 @import url("../vendor/fontawesome/css/brands.min.css?v=7.2.0");
-@import url("./tokens.css?v=20261108-2");
-@import url("./foundation.css?v=20261108-2");
-@import url("./components.css?v=20261108-2");
-@import url("./documents.css?v=20261108-2");
-@import url("./advanced.css?v=20261108-2");
+@import url("./tokens.css?v=20261108-3");
+@import url("./foundation.css?v=20261108-3");
+@import url("./components.css?v=20261108-3");
+@import url("./documents.css?v=20261108-3");
+@import url("./advanced.css?v=20261108-3");
 .bp-disclosure-menu > summary {
   cursor: pointer;
   list-style: none;

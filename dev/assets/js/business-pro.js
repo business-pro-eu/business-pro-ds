@@ -757,7 +757,7 @@
     document.querySelectorAll('.bp-nav-grid').forEach((grid) => {
       if (grid.dataset.bpNavWatched === '1') return;
       grid.dataset.bpNavWatched = '1';
-      new MutationObserver(() => syncNavLauncher()).observe(grid, { attributes: true, attributeFilter: ['aria-current'], subtree: true });
+      new MutationObserver(() => syncNavLauncher()).observe(grid, { childList: true, attributes: true, attributeFilter: ['aria-current'], subtree: true });
     });
     syncNavLauncher();
   }
