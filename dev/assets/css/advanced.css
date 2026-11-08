@@ -516,7 +516,8 @@ select.bp-native-select[hidden],
    keeps the same size whatever the number of pages and the mobile bottom bar is not needed (body.bp-root--no-bottom-nav).
    Items or sections hidden by permission use the hidden attribute. */
 .bp-root--no-bottom-nav { --bp-bottom-nav-height: 0rem; }
-.bp-nav-launcher { display: flex; min-width: 0; margin-inline: var(--bp-space-3) auto; align-items: center; gap: var(--bp-space-3); }
+.bp-nav-launcher { display: flex; min-width: 0; order: 99; margin-inline: var(--bp-space-3) 0; align-items: center; gap: var(--bp-space-3); } /* last item of the header, next to its right edge */
+.bp-app-header__inner > .bp-header-tools { margin-left: auto; }
 .bp-overflow__menu.bp-nav-grid { display: grid; width: min(46rem, calc(100vw - (2 * var(--bp-page-gutter)))); max-height: calc(100dvh - var(--bp-header-height) - var(--bp-space-6)); padding: var(--bp-space-3); gap: var(--bp-space-4); overflow-y: auto; overscroll-behavior: contain; }
 .bp-overflow__menu.bp-nav-grid[hidden], .bp-nav-grid :is(.bp-nav-grid__section, .bp-nav-grid__item)[hidden] { display: none; }
 .bp-nav-grid__section { display: grid; gap: var(--bp-space-2); }
@@ -525,7 +526,7 @@ select.bp-native-select[hidden],
 .bp-nav-grid__item { display: flex; min-height: 2.75rem; padding: var(--bp-space-2) var(--bp-space-3); align-items: center; gap: var(--bp-space-2); color: var(--bp-color-text-strong); background: var(--bp-color-bg); border-radius: var(--bp-radius-md); font-size: var(--bp-font-size-sm); font-weight: 650; text-decoration: none !important; white-space: nowrap; }
 .bp-nav-grid__item:is(:hover, :focus-visible), .bp-nav-grid__item[aria-current="page"] { color: var(--bp-color-navigation-active-text); background: var(--bp-color-navigation-active-bg); }
 @media (max-width: 47.999rem) {
-  .bp-nav-launcher { margin-inline: var(--bp-space-2) auto; }
+  .bp-nav-launcher { margin-inline: var(--bp-space-2) 0; }
   .bp-nav-launcher__label { display: none; }
   .bp-nav-grid__items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

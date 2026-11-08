@@ -1105,6 +1105,10 @@
       trigger.before(wrap);
       wrap.append(trigger, menu);
       menu.append(...sources);
+      // The "Filtre" button looks like a selected filter while at least one filter inside the panel is active.
+      const syncActive = () => trigger.classList.toggle('is-active', sources.some((source) => source.querySelector('.bp-filter-trigger.is-active, .bp-filter-trigger[aria-pressed="true"]')));
+      syncActive();
+      sources.forEach((source) => new MutationObserver(syncActive).observe(source, { subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'aria-pressed'] }));
       trigger.removeAttribute('data-bp-mobile-filter-open');
       trigger.dataset.bpMenuToggle = `#${menu.id}`;
       trigger.setAttribute('aria-controls', menu.id);
