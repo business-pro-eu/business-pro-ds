@@ -297,6 +297,25 @@
       maxWidth: `${Math.round(maxMenuWidth)}px`,
       overflowY: isFilterMenu ? 'hidden' : 'auto',
     });
+
+    // The navigation and filter panels span the content area (the header card, respectively the toolbar card), 32px under the trigger on desktop.
+    if (menu.matches('.bp-nav-grid, .bp-filter-panel')) {
+      const host = menu.matches('.bp-nav-grid') ? trigger.closest('.bp-app-header__inner') : trigger.closest('.bp-data-toolbar');
+      if (host) {
+        const hostRect = host.getBoundingClientRect();
+        const panelTop = Math.round(triggerRect.bottom + (viewportWidth >= 768 ? 32 : 8));
+        menu.classList.remove('is-opening-up');
+        Object.assign(menu.style, {
+          left: `${Math.round(hostRect.left)}px`,
+          right: 'auto',
+          width: `${Math.round(hostRect.width)}px`,
+          maxWidth: `${Math.round(hostRect.width)}px`,
+          top: `${panelTop}px`,
+          bottom: 'auto',
+          maxHeight: `${Math.max(96, Math.round(viewportHeight - panelTop - gutter))}px`,
+        });
+      }
+    }
   }
 
   function positionOpenDropdowns() {
