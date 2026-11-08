@@ -1102,7 +1102,10 @@
       menu.setAttribute('data-bp-floating-menu', '');
       menu.setAttribute('aria-label', trigger.dataset.bpMobileFilterTitle || 'Filtre');
       menu.hidden = true;
-      trigger.before(wrap);
+      // In a toolbar the "Filtre" button is always the first control, whatever its place in the markup.
+      const host = trigger.parentElement;
+      if (host?.closest?.('.bp-data-toolbar')) host.prepend(wrap);
+      else trigger.before(wrap);
       wrap.append(trigger, menu);
       menu.append(...sources);
       // The "Filtre" button looks like a selected filter while at least one filter inside the panel is active.
