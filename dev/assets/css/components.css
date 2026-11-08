@@ -128,8 +128,7 @@
   .bp-app-header:has(.bp-menu-toggle-state.is-open),
   .bp-app-header:has(.bp-nav-dropdown.is-open),
   .bp-app-header:has(.bp-overflow__menu:not([hidden])),
-  .bp-app-header:has(.bp-popover:not([hidden])),
-  .bp-app-header.is-search-open {
+  .bp-app-header:has(.bp-popover:not([hidden])) {
     z-index: calc(var(--bp-z-overlay) + 3);
   }
 

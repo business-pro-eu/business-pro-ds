@@ -797,3 +797,16 @@ Folosite de profilul site-ului din Domain Tools (`#monitorizare/<domeniu>`). Lin
 | `bp-document-viewer-wrap` | `bp-document-viewer-wrap__toggle`, `is-fullscreen` | învelișul zonei `bp-document-viewer`: butonul din dreapta jos deschide documentul pe tot ecranul (`is-fullscreen`) și îl închide |
 | `bp-search-dock` | `bp-search-dock--property`, `bp-search-dock__segment`, `bp-search-dock__segment--action`, `bp-search-dock__copy`, `bp-search-dock__label`, `bp-search-dock__value`, `bp-search-dock__value--muted`, `bp-search-dock__submit`, `bp-search-dock__popover`, `bp-search-dock__popover--start`, `bp-search-dock__popover--end` | bară de căutare segmentată tip dock pentru rezervări (Unde / Check-in / Check-out / Cine + buton Caută) |
 | `bp-quantity-stepper` | `bp-quantity-stepper__row`, `bp-quantity-stepper__info`, `bp-quantity-stepper__title`, `bp-quantity-stepper__sub`, `bp-quantity-stepper__controls`, `bp-quantity-stepper__btn`, `bp-quantity-stepper__count` | rânduri cu butoane `−` / `+` pentru selectarea numărului de adulți, copii și bebeluși în popover-ul de cantități |
+
+## Adăugate 2026-11-08 (meniul «Meniu» din header)
+Un singur buton în header deschide un panou cu toate paginile, grupate pe secțiuni. Antetul rămâne la fel oricâte pagini există, iar bara de jos de pe mobil nu mai e necesară. Se folosește împreună cu `.bp-overflow` (deschidere, închidere, poziționare) și cu atributul `data-bp-nav-current`, care afișează în header pagina cu `aria-current="page"`.
+
+- `bp-nav-launcher`
+- `bp-nav-launcher__current`
+- `bp-nav-launcher__label`
+- `bp-nav-grid`
+- `bp-nav-grid__section`
+- `bp-nav-grid__title`
+- `bp-nav-grid__items`
+- `bp-nav-grid__item`
+- `bp-root--no-bottom-nav`

@@ -733,6 +733,35 @@
     root.querySelectorAll?.('.bp-mobile-nav').forEach(enhanceMobileNav);
   }
 
+  // Navigation launcher: shows in the header the page marked aria-current="page" inside the .bp-nav-grid panel.
+  function syncNavLauncher(root = document) {
+    root.querySelectorAll?.('[data-bp-nav-current]').forEach((target) => {
+      const grid = document.querySelector(target.dataset.bpNavCurrent);
+      const active = grid?.querySelector('[aria-current="page"]');
+      if (!active) return;
+      const icon = active.querySelector('.bp-icon');
+      const label = [...active.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE).map((n) => n.textContent.trim()).filter(Boolean).join(' ');
+      target.replaceChildren();
+      if (icon) {
+        const clone = icon.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        target.append(clone);
+      }
+      const text = document.createElement('span');
+      text.textContent = label;
+      target.append(text);
+    });
+  }
+
+  function watchNavLaunchers() {
+    document.querySelectorAll('.bp-nav-grid').forEach((grid) => {
+      if (grid.dataset.bpNavWatched === '1') return;
+      grid.dataset.bpNavWatched = '1';
+      new MutationObserver(() => syncNavLauncher()).observe(grid, { attributes: true, attributeFilter: ['aria-current'], subtree: true });
+    });
+    syncNavLauncher();
+  }
+
   const tableCardInteractiveSelector = 'a, button, input, select, textarea, [tabindex], [role="button"], .bp-interactive-text';
   const responsiveTableObservers = new WeakMap();
   const emptyCardValueTokens = new Set(['', '-', '–', '—', 'n/a', 'na', 'null', 'undefined']);
@@ -952,6 +981,7 @@
   enhanceSelects();
   enhanceComboboxes();
   enhanceMobileNavs();
+  watchNavLaunchers();
   enhanceResponsiveTables();
   enhanceFilterDropdowns();
   pruneEmptyRecordCardFields();
@@ -1257,7 +1287,7 @@
       return;
     }
 
-    const floatingItem = event.target.closest('[data-bp-floating-menu] .bp-overflow__item');
+    const floatingItem = event.target.closest('[data-bp-floating-menu] .bp-overflow__item, [data-bp-floating-menu] .bp-nav-grid__item');
     if (floatingItem) {
       closeFloatingMenus();
       return;
@@ -1426,6 +1456,7 @@
     enhanceResponsiveTable,
     enhanceResponsiveTables,
     enhanceMobileNavs,
+    watchNavLaunchers,
     enhanceFilterDropdowns,
     pruneEmptyRecordCardFields,
     toast: showToast
