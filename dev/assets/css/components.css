@@ -547,7 +547,7 @@
   }
 
   .bp-mobile-filter-trigger {
-    display: none;
+    display: inline-flex;
   }
 
   .bp-filter-trigger {
@@ -614,15 +614,93 @@
     font-size: var(--bp-font-size-xs);
   }
 
+  /* Filter panel ("Filtre"): the filters stay out of the toolbar and open in a dialog on every width (bottom sheet on phones). */
+  [data-bp-mobile-filter-source]:not(.bp-mobile-filter-source--mounted) {
+    display: none !important;
+  }
+
+  .bp-modal__body.bp-filter-sheet__body {
+    display: grid;
+    overflow-y: auto;
+    gap: var(--bp-space-4);
+  }
+
+  /* Equal columns (auto-fill keeps an odd last item in its column instead of stretching it). */
+  .bp-filter-sheet__body [data-bp-mobile-filter-source] {
+    display: grid !important;
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
+    align-items: stretch;
+    gap: var(--bp-space-2);
+  }
+
+  .bp-filter-sheet__body .bp-filter-dropdown,
+  .bp-filter-sheet__body .bp-overflow {
+    min-width: 0;
+  }
+
+  .bp-filter-sheet__body .bp-filter-dropdown > button,
+  .bp-filter-sheet__body .bp-overflow > button {
+    width: 100%;
+  }
+
+  /* Active filters shown as chips next to the "Filtre" button; the number of filters never grows the toolbar. */
+  .bp-filter-trigger__count {
+    min-width: 1.25rem;
+    padding: 0 var(--bp-space-1);
+    color: var(--bp-color-navigation-active-text);
+    background: var(--bp-color-navigation-active-bg);
+    border-radius: var(--bp-radius-full);
+    font-size: var(--bp-font-size-xs);
+    font-weight: 750;
+    text-align: center;
+  }
+
+  .bp-filter-chips {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--bp-space-2);
+  }
+
+  .bp-filter-chip {
+    display: inline-flex;
+    max-width: 100%;
+    min-height: var(--bp-control-height-sm);
+    align-items: center;
+    color: var(--bp-color-navigation-active-text);
+    background: var(--bp-color-navigation-active-bg);
+    border-radius: var(--bp-radius-full);
+    font-size: var(--bp-font-size-xs);
+    font-weight: 650;
+  }
+
+  .bp-filter-chip > button {
+    display: inline-flex;
+    min-height: inherit;
+    align-items: center;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .bp-filter-chip__label {
+    padding-inline: var(--bp-space-3) var(--bp-space-1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .bp-filter-chip__remove {
+    padding-inline: var(--bp-space-2) var(--bp-space-3);
+  }
+
   @media (max-width: 47.999rem) {
-    .bp-mobile-filter-trigger {
-      display: inline-flex;
-    }
-
-    [data-bp-mobile-filter-source]:not(.bp-mobile-filter-source--mounted) {
-      display: none !important;
-    }
-
     .bp-modal-backdrop.bp-filter-sheet-backdrop {
       padding: 0;
       align-items: flex-end;
@@ -633,32 +711,6 @@
       max-height: min(85dvh, 44rem);
       border-radius: var(--bp-sheet-radius) var(--bp-sheet-radius) 0 0;
       overflow: hidden;
-    }
-
-    .bp-modal__body.bp-filter-sheet__body {
-      display: grid;
-      overflow-y: auto;
-      gap: var(--bp-space-4);
-    }
-
-    /* Equal columns (auto-fill keeps an odd last item in its column instead of stretching it). */
-    .bp-filter-sheet__body [data-bp-mobile-filter-source] {
-      display: grid !important;
-      width: 100%;
-      min-width: 0;
-      grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
-      align-items: stretch;
-      gap: var(--bp-space-2);
-    }
-
-    .bp-filter-sheet__body .bp-filter-dropdown,
-    .bp-filter-sheet__body .bp-overflow {
-      min-width: 0;
-    }
-
-    .bp-filter-sheet__body .bp-filter-dropdown > button,
-    .bp-filter-sheet__body .bp-overflow > button {
-      width: 100%;
     }
   }
 
@@ -2600,7 +2652,8 @@
   .bp-data-toolbar .bp-pagination-controls {
     display: flex;
     min-width: min(100%, 16rem); /* below this the search + pager wrap to their own row instead of squeezing the search */
-    flex-wrap: nowrap;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
   }

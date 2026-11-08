@@ -970,6 +970,7 @@
           enhanceMobileNavs(node);
           enhanceResponsiveTables(node);
           enhanceFilterDropdowns(node);
+          enhanceFilterChips(node);
           pruneEmptyRecordCardFields(node);
           syncThemeLogos();
         }
@@ -1086,7 +1087,7 @@
     backdrop.className = 'bp-modal-backdrop bp-filter-sheet-backdrop';
     backdrop.hidden = true;
     const sheet = document.createElement('section');
-    sheet.className = 'bp-modal bp-filter-sheet';
+    sheet.className = 'bp-modal bp-modal--wide bp-filter-sheet';
     sheet.setAttribute('role', 'dialog');
     sheet.setAttribute('aria-modal', 'true');
     sheet.setAttribute('aria-labelledby', 'bpMobileFilterTitle');
@@ -1139,6 +1140,87 @@
     });
     if (!mobileFilterSources.length) return;
     openDialog(sheet, trigger);
+  }
+
+  // Filter panel: the "Filtre" trigger shows the number of active filters and one chip per active filter.
+  // A filter is active when its .bp-filter-trigger button has .is-active (or aria-pressed="true").
+  let filterChipSeq = 0;
+  const filterChipText = (button) => (button.getAttribute('aria-label') || button.textContent || '').replace(/\s+/g, ' ').trim();
+  const filterSourceOf = (trigger) => {
+    const selector = String(trigger.dataset.bpMobileFilterOpen || '').split(',')[0]?.trim();
+    return selector ? document.querySelector(selector) : null;
+  };
+
+  function syncFilterChips(trigger) {
+    const source = filterSourceOf(trigger);
+    if (!source) return;
+    let chips = trigger.nextElementSibling;
+    if (!chips?.matches?.('.bp-filter-chips')) {
+      chips = document.createElement('div');
+      chips.className = 'bp-filter-chips';
+      chips.setAttribute('aria-label', 'Filtre active');
+      trigger.after(chips);
+    }
+    const active = [...source.querySelectorAll('.bp-filter-trigger.is-active, .bp-filter-trigger[aria-pressed="true"]')];
+    let count = trigger.querySelector('.bp-filter-trigger__count');
+    if (active.length && !count) {
+      count = document.createElement('span');
+      count.className = 'bp-filter-trigger__count';
+      trigger.append(count);
+    }
+    if (count) {
+      count.textContent = String(active.length);
+      count.hidden = !active.length;
+    }
+    chips.replaceChildren(...active.map((button) => {
+      if (!button.id) button.id = `bp-filter-${++filterChipSeq}`;
+      const chip = document.createElement('span');
+      chip.className = 'bp-filter-chip';
+      chip.dataset.bpFilterChipFor = button.id;
+      const open = document.createElement('button');
+      open.type = 'button';
+      open.className = 'bp-filter-chip__label';
+      open.dataset.bpFilterChipOpen = '';
+      open.textContent = filterChipText(button);
+      chip.append(open);
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'bp-filter-chip__remove';
+      remove.dataset.bpFilterChipRemove = '';
+      remove.setAttribute('aria-label', `Elimină ${filterChipText(button)}`);
+      remove.appendChild(bpIcon('fa-solid', 'fa-xmark'));
+      chip.append(remove);
+      return chip;
+    }));
+  }
+
+  // The "all" option of a filter menu is its first entry; a chip can only be removed when that entry is recognisable.
+  function resetFilterFromChip(chip) {
+    const button = document.getElementById(chip.dataset.bpFilterChipFor || '');
+    const menu = document.getElementById(button?.getAttribute('aria-controls') || '');
+    const first = menu?.querySelector('button, a');
+    const label = (first?.querySelector('.bp-overflow__item-label') || first)?.textContent || '';
+    if (first && /^(all|toate|toți|toti|oricare|any)\b/i.test(label.trim())) first.click();
+  }
+
+  const watchedFilterSources = new WeakSet();
+  function enhanceFilterChips(root = document) {
+    const triggers = [
+      ...(root.matches?.('[data-bp-mobile-filter-open]') ? [root] : []),
+      ...(root.querySelectorAll?.('[data-bp-mobile-filter-open]') || []),
+    ];
+    triggers.forEach((trigger) => {
+      const source = filterSourceOf(trigger);
+      if (!source) return;
+      syncFilterChips(trigger);
+      if (watchedFilterSources.has(source)) return;
+      watchedFilterSources.add(source);
+      let frame = 0;
+      new MutationObserver(() => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => syncFilterChips(trigger));
+      }).observe(source, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class', 'aria-label', 'aria-pressed'] });
+    });
   }
 
   function closeFloatingMenus(except = null) {
@@ -1195,6 +1277,16 @@
   document.addEventListener('click', (event) => {
     document.querySelectorAll('select.bp-select').forEach(syncSelectControl);
 
+    const chipRemove = event.target.closest('[data-bp-filter-chip-remove]');
+    if (chipRemove) {
+      resetFilterFromChip(chipRemove.closest('.bp-filter-chip'));
+      return;
+    }
+    const chipOpen = event.target.closest('[data-bp-filter-chip-open]');
+    if (chipOpen) {
+      openMobileFilterSheet(chipOpen.closest('.bp-filter-chips').previousElementSibling);
+      return;
+    }
     const mobileFilterOpen = event.target.closest('[data-bp-mobile-filter-open]');
     if (mobileFilterOpen) {
       event.preventDefault();
@@ -1409,6 +1501,8 @@
     return { element: toast, dismiss };
   }
 
+  enhanceFilterChips();
+
   // API global simplu pentru aplicațiile care încarcă DS-ul ca script clasic.
   window.BPToast = showToast;
 
@@ -1427,6 +1521,7 @@
     enhanceResponsiveTables,
     enhanceMobileNavs,
     enhanceFilterDropdowns,
+    enhanceFilterChips,
     pruneEmptyRecordCardFields,
     toast: showToast
   };

@@ -809,3 +809,12 @@ Un singur buton în header deschide un panou cu toate paginile, grupate pe secț
 - `bp-nav-grid__items`
 - `bp-nav-grid__item`
 - `bp-root--no-bottom-nav`
+
+## Adăugate 2026-11-08 (panoul «Filtre» și chips-urile filtrelor active)
+Filtrele din bara de instrumente se deschid într-un panou (dialog pe desktop, bottom sheet pe telefon) prin butonul `bp-mobile-filter-trigger`, pe orice lățime. Lângă buton apar chips doar pentru filtrele active (`.bp-filter-trigger.is-active`), iar butonul arată numărul lor. Chip-ul se poate elimina doar dacă prima opțiune a meniului filtrului e „All/Toate”.
+
+- `bp-filter-trigger__count`
+- `bp-filter-chips`
+- `bp-filter-chip`
+- `bp-filter-chip__label`
+- `bp-filter-chip__remove`
