@@ -139,6 +139,27 @@
     syncThemeToggles();
   }
 
+  // Search inside a navigation panel (.bp-nav-grid with an input[data-bp-nav-search]): filters its items by text, ignoring case and diacritics.
+  document.addEventListener('input', (event) => {
+    const input = event.target instanceof Element ? event.target.closest('[data-bp-nav-search]') : null;
+    if (!input) return;
+    const menu = input.closest('.bp-nav-grid');
+    if (!menu) return;
+    const fold = (text) => String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    const query = fold(input.value);
+    let shown = 0;
+    menu.querySelectorAll('.bp-nav-grid__item').forEach((item) => {
+      const match = !query || fold(item.textContent).includes(query);
+      item.hidden = !match;
+      if (match) shown += 1;
+    });
+    menu.querySelectorAll('.bp-nav-grid__section').forEach((section) => {
+      section.hidden = !section.querySelector('.bp-nav-grid__item:not([hidden])');
+    });
+    const empty = menu.querySelector('[data-bp-nav-empty]');
+    if (empty) empty.hidden = shown > 0;
+  });
+
   window.addEventListener('bp:themechange', syncThemeToggles);
 
   function closeSelectControls(except = null) {
@@ -309,6 +330,7 @@
           // One section: its title is redundant. On desktop the panel is only as wide as its busiest section needs (never wider than the content area) and sits against the right edge.
           const sections = Array.from(menu.querySelectorAll('.bp-nav-grid__section')).filter((section) => !section.hidden);
           menu.classList.toggle('bp-nav-grid--single', sections.length <= 1);
+          if (viewportWidth >= 768) requestAnimationFrame(() => menu.querySelector('[data-bp-nav-search]')?.focus({ preventScroll: true }));
           if (viewportWidth >= 768) {
             const perSection = sections.map((section) => Array.from(section.querySelectorAll('.bp-nav-grid__item')).filter((item) => !item.hidden).length);
             const columns = Math.max(1, ...perSection);

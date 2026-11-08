@@ -803,6 +803,7 @@ Un singur buton în header deschide un panou cu toate paginile, grupate pe secț
 - `bp-nav-launcher__label`
 - `bp-nav-grid`
 - `bp-nav-grid--single`: set by the script when only one section is visible; hides its title
+- `bp-nav-grid__search`: search field at the top of a navigation panel; its input carries `data-bp-nav-search` and filters the items
 - `bp-floating-notify`, `bp-floating-notify__count`: floating notification button fixed at the bottom-right (rings and pulses while there is something unread)
 - `bp-nav-grid__section`
 - `bp-nav-grid__title`
