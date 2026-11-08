@@ -32,7 +32,14 @@
     }
   }
 
+  // A platform with a single look keeps it: <html data-bp-theme-lock="dark|light"> ignores the system and the saved choice.
+  const lockedTheme = () => (root.dataset.bpThemeLock === 'dark' || root.dataset.bpThemeLock === 'light' ? root.dataset.bpThemeLock : null);
+
   function syncTheme(notify = true) {
+    if (lockedTheme()) {
+      applyTheme(lockedTheme(), 'locked', notify);
+      return;
+    }
     const saved = storedTheme();
     applyTheme(saved || systemTheme(), saved ? 'manual' : 'system', notify);
   }
@@ -53,6 +60,7 @@
   }
 
   function setTheme(theme) {
+    if (lockedTheme()) return;
     const nextTheme = theme === 'dark' ? 'dark' : 'light';
     try {
       localStorage.setItem(preferenceStorageKey, nextTheme);
@@ -65,6 +73,7 @@
   }
 
   function useSystemTheme() {
+    if (lockedTheme()) return;
     try {
       localStorage.setItem(preferenceStorageKey, 'system');
       localStorage.removeItem(storageKey);
@@ -76,7 +85,7 @@
   }
 
   systemPreference?.addEventListener?.('change', () => {
-    if (!storedTheme()) applyTheme(systemTheme(), 'system');
+    if (!lockedTheme() && !storedTheme()) applyTheme(systemTheme(), 'system');
   });
 
   window.addEventListener('storage', (event) => {
