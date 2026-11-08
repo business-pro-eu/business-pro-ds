@@ -147,7 +147,7 @@
 
   .bp-container {
     width: 100%;
-    max-width: var(--bp-content-max, none);
+    max-width: var(--bp-content-outer, none);
     margin-inline: auto;
     padding-inline: var(--bp-page-gutter);
   }

@@ -175,6 +175,7 @@
     --bp-header-height: 3.5rem;
     --bp-bottom-nav-height: 4.25rem;
     --bp-page-gutter: clamp(1rem, 4vw, 2rem);
+    --bp-content-outer: calc(var(--bp-content-max) + 2 * var(--bp-page-gutter)); /* container width incl. gutters, so the content area is exactly --bp-content-max */
     --bp-transition-fast: 140ms ease;
     --bp-transition-normal: 220ms ease;
     --bp-z-header: 50;
