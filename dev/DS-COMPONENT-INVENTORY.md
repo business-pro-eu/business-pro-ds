@@ -804,6 +804,7 @@ Un singur buton în header deschide un panou cu toate paginile, grupate pe secț
 - `bp-nav-grid`
 - `bp-nav-grid--single`: set by the script when only one section is visible; hides its title
 - `bp-info-tip`: info icon in a field label; its `data-tooltip` opens under the label on hover or focus
+- `data-bp-client-events` (attribute on `<html>`): `business-pro.js` sends JavaScript errors, failed resources and slow loads (> 4 s) to that URL as JSON batches (max. 20 per page load; path and message only). Used by the shared diagnostics module; no attribute, no telemetry
 - `bp-nav-grid__search`: search field at the top of a navigation panel; its input carries `data-bp-nav-search` and filters the items
 - `bp-floating-notify`, `bp-floating-notify__count`: floating notification button fixed at the bottom-right (rings and pulses while there is something unread)
 - `bp-nav-grid__section`

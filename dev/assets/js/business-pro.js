@@ -1586,5 +1586,49 @@
   window.setInterval(() => { if (!document.hidden) syncInputActionButtons(); }, 800);
   syncInputActionButtons();
 
+  // Telemetrie de diagnostic: erori JavaScript și încărcări lente, trimise către endpointul din <html data-bp-client-events="…">.
+  // Fără atributul respectiv nu se face nimic. Max. 20 de evenimente pe încărcare de pagină; fără date personale (doar calea și mesajul).
+  (function () {
+    const endpoint = document.documentElement.getAttribute('data-bp-client-events');
+    if (!endpoint) { return; }
+    const queue = [];
+    let sent = 0;
+    let timer = null;
+    const flush = () => {
+      timer = null;
+      if (!queue.length) { return; }
+      const batch = queue.splice(0, 20);
+      sent += batch.length;
+      const body = JSON.stringify({ events: batch });
+      try {
+        if (navigator.sendBeacon && navigator.sendBeacon(endpoint, new Blob([body], { type: 'application/json' }))) { return; }
+      } catch (e) { /* încearcă fetch */ }
+      try { fetch(endpoint, { method: 'POST', body, headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', keepalive: true }).catch(() => {}); } catch (e) { /* telemetria nu strică pagina */ }
+    };
+    const push = (type, message, value) => {
+      if (sent + queue.length >= 20) { return; }
+      queue.push({ type, page: location.pathname, message: String(message || '').slice(0, 200), value });
+      if (!timer) { timer = window.setTimeout(flush, 2000); }
+    };
+    window.addEventListener('error', (e) => {
+      const t = e.target;
+      if (t && t !== window && t.tagName) {
+        if (['IMG', 'SCRIPT', 'LINK'].includes(t.tagName)) { push('resource_error', String(t.src || t.href || '').split('?')[0]); }
+        return;
+      }
+      const file = String(e.filename || '');
+      if (!file || /^(chrome|moz|safari)-extension:/.test(file)) { return; }   // extensii de browser, nu codul nostru
+      push('js_error', (e.message || 'error') + ' @' + file.split('/').pop().split('?')[0] + ':' + (e.lineno || 0));
+    }, true);
+    window.addEventListener('unhandledrejection', (e) => { push('unhandled_rejection', e.reason && e.reason.message ? e.reason.message : e.reason); });
+    window.addEventListener('load', () => {
+      window.setTimeout(() => {
+        const nav = performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+        if (nav && nav.loadEventEnd > 4000) { push('slow_load', location.pathname, Math.round(nav.loadEventEnd)); }
+      }, 0);
+    });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') { flush(); } });
+  })();
+
   window.dispatchEvent(new CustomEvent('bp:ready', { detail: { version: document.documentElement.dataset.bpVersion || '' } }));
 })();
