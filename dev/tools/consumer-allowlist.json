@@ -8,6 +8,10 @@
     {
       "pattern": "^php/fleet/src/DocumentEngine\\.php$",
       "reason": "HTML pentru PDF (dompdf): nu poate încărca DS-ul."
+    },
+    {
+      "pattern": "^php/bookings/public/[a-z-]+\\.php$",
+      "reason": "<style id=\"bp-brand-theme\">: doar token-uri --bp-* ale brandului EscapeIn (albastru, verde, bleumarin), calculate la rulare ca în Fleet."
     }
   ],
   "inlineStyle": [
