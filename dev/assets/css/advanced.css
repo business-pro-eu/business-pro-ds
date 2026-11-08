@@ -2121,8 +2121,15 @@ button.bp-day-cal__cell.bp-day-kind--edge:hover, button.bp-day-cal__cell.bp-day-
   .bp-filter-panel .bp-filter-dropdown > button, .bp-filter-panel .bp-overflow > button { min-width: 0; justify-content: flex-start; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding-inline: var(--bp-space-3); }
 }
 
-/* A card that lists parent e-mail addresses: the label column may take at most 30%, so a long label wraps and the address keeps one line. */
-.bp-record-card__details:has(.bp-parent-row) { grid-template-columns: minmax(5rem, 30%) minmax(0, 1fr); }
 
 /* Icon buttons in an action group (cards, tables, file rows) are 28px; the ones in the app header keep the 36px control height. */
 .bp-action-group:not(.bp-app-header .bp-action-group) .bp-icon-button { width: 1.75rem; min-width: 1.75rem; height: 1.75rem; min-height: 1.75rem; }
+
+/* Parents of a child on a card: its own block under the details (label column sized by the label, addresses on one line). */
+.bp-record-card__parents { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--bp-space-2) var(--bp-space-3); align-items: start; font-size: var(--bp-font-size-sm); }
+.bp-record-card__parents-label { color: var(--bp-table-card-label); font-weight: 750; }
+.bp-record-card__parents-list { min-width: 0; }
+.bp-record-card:has(> .bp-record-card__parents) { grid-template-rows: auto auto auto 1fr; }
+.bp-record-card:has(> .bp-record-card__parents) > .bp-record-card__details { grid-template-columns: minmax(0, 1fr) auto; } /* values take what they need, the labels the rest */
+/* Icon buttons next to the page-header buttons (e.g. the danger-zone menu beside "Acțiuni") match their 36px height. */
+.bp-page-header__actions .bp-icon-button { width: var(--bp-control-height-sm); min-width: var(--bp-control-height-sm); height: var(--bp-control-height-sm); min-height: var(--bp-control-height-sm); }

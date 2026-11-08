@@ -341,6 +341,7 @@ Clase unice totale: **544** (după eliminarea claselor nefolosite, DS 20261030-1
 - `bp-wordmark__accent`
 - `bp-page-header`
 - `bp-page-header--inline`
+- `bp-record-card__parents`, `bp-record-card__parents-label`, `bp-record-card__parents-list`: parents block of a record card (label + e-mail rows)
 - `bp-page-header--flush`: removes the 16px side inset of an inline page header (title row sitting directly on the page)
 - `bp-page-header--center`
 - `bp-page-header--centered`
