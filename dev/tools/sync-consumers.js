@@ -16,7 +16,7 @@ const platforms = ['php/crm', 'php/profit', 'php/fleet', 'php/domain-tools', 'ph
 const skipped = new Set(['node_modules', '.git', 'vendor', 'tests', 'mockups', 'graphify-out', 'docs', 'imports', 'database']);
 const dry = process.argv.includes('--dry-run');
 const version = fs.readFileSync(path.join(dsRoot, 'VERSION'), 'utf8').trim();
-const rx = /(business-pro(?:\.bundle)?(?:\.min)?\.(?:css|js)\?v=)(\d{8}-\d+)/g;
+const rx = /((?:business-pro(?:\.bundle)?(?:\.min)?\.(?:css|js)|theme\.js)\?v=)(\d{8}-\d+)/g;
 // Pușculița: versiunea DS de rezervă din `max((string)bppusculita_cfg('ds_version', ''), 'YYYYMMDD-N')`
 const rxFallback = /(bppusculita_cfg\('ds_version', ''\), ')(\d{8}-\d+)/g;
 // Bookings: versiunea DS fixată în variabila PHP `$dsVersion = '...'` (sau `max(cfg, '...')`).
