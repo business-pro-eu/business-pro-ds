@@ -2150,3 +2150,7 @@ button.bp-day-cal__cell.bp-day-kind--edge:hover, button.bp-day-cal__cell.bp-day-
 
 /* Search field at the top of a navigation panel (filters the items, see [data-bp-nav-search]). */
 .bp-nav-grid__search { margin: 0; }
+
+/* An inline pagination without its back (or forward) arrow, e.g. on the first or last page: the label gets the room the arrow would have left, so it does not sit against the rounded end. */
+.bp-pagination--inline > .bp-pagination__label:first-child { padding-left: var(--bp-space-4); }
+.bp-pagination--inline > .bp-pagination__label:last-child { padding-right: var(--bp-space-4); }
