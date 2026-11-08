@@ -37,6 +37,21 @@
     applyTheme(saved || systemTheme(), saved ? 'manual' : 'system', notify);
   }
 
+  // Saved on the signed-in user: the page names the endpoint (and CSRF token) on <html>:
+  // data-bp-theme-endpoint, data-bp-theme-csrf, data-bp-theme-csrf-header (default X-CSRF-Token).
+  // The server's choice for the user (data-bp-theme-user = light | dark | system) wins over this browser's.
+  function persistPreference(pref) {
+    const endpoint = root.dataset.bpThemeEndpoint;
+    if (!endpoint || !window.fetch) return;
+    const headers = { 'Content-Type': 'application/json' };
+    if (root.dataset.bpThemeCsrf) headers[root.dataset.bpThemeCsrfHeader || 'X-CSRF-Token'] = root.dataset.bpThemeCsrf;
+    try {
+      fetch(endpoint, { method: 'POST', headers, credentials: 'same-origin', keepalive: true, body: JSON.stringify({ theme: pref }) }).catch(() => {});
+    } catch (error) {
+      // The choice still applies in this browser.
+    }
+  }
+
   function setTheme(theme) {
     const nextTheme = theme === 'dark' ? 'dark' : 'light';
     try {
@@ -46,6 +61,7 @@
       // Tema rămâne activă în sesiunea curentă chiar dacă stocarea nu este disponibilă.
     }
     applyTheme(nextTheme, 'manual');
+    persistPreference(nextTheme);
   }
 
   function useSystemTheme() {
@@ -56,6 +72,7 @@
       // Sincronizarea cu sistemul funcționează în continuare în sesiunea curentă.
     }
     applyTheme(systemTheme(), 'system');
+    persistPreference('system');
   }
 
   systemPreference?.addEventListener?.('change', () => {
@@ -74,5 +91,18 @@
     sync: syncTheme,
   };
 
+  // The user's saved choice comes first (it follows them across devices); without one, this browser's choice is kept
+  // and, when it is a manual one, saved on the user once.
+  const userPref = root.dataset.bpThemeUser;
+  if (userPref === 'dark' || userPref === 'light' || userPref === 'system') {
+    try {
+      localStorage.setItem(preferenceStorageKey, userPref);
+      if (userPref === 'system') localStorage.removeItem(storageKey); else localStorage.setItem(storageKey, userPref);
+    } catch (error) {
+      // Applied for this page anyway.
+    }
+  } else if (root.dataset.bpThemeEndpoint && storedTheme()) {
+    persistPreference(storedTheme());
+  }
   syncTheme(false);
 })();
