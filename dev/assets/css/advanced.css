@@ -2128,8 +2128,10 @@ button.bp-day-cal__cell.bp-day-kind--edge:hover, button.bp-day-cal__cell.bp-day-
 /* Parents of a child on a card: its own block under the details (label column sized by the label, addresses on one line). */
 .bp-record-card__parents { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--bp-space-2) var(--bp-space-3); align-items: start; font-size: var(--bp-font-size-sm); }
 .bp-record-card__parents-label { color: var(--bp-table-card-label); font-weight: 750; }
-.bp-record-card__parents-list { min-width: 0; }
-.bp-record-card:has(> .bp-record-card__parents) { grid-template-rows: auto auto auto 1fr; }
+.bp-record-card__parents-list { min-width: 0; text-align: right; } /* addresses and the "no parent" note are right-aligned like the values above */
+.bp-record-card:has(> .bp-record-card__parents) { grid-template-rows: auto auto 1fr auto auto; } /* the parents block sits right above the balance, so it lines up across the cards of a row */
+.bp-record-card:has(> .bp-record-card__parents) > .bp-record-card__parents { grid-row: 4; align-self: end; }
+.bp-record-card:has(> .bp-record-card__parents) > .bp-balance-card { grid-row: 5; }
 .bp-record-card:has(> .bp-record-card__parents) > .bp-record-card__details { grid-template-columns: minmax(0, 1fr) auto; } /* values take what they need, the labels the rest */
 /* Icon buttons next to the page-header buttons (e.g. the danger-zone menu beside "Acțiuni") match their 36px height. */
 .bp-page-header__actions .bp-icon-button { width: var(--bp-control-height-sm); min-width: var(--bp-control-height-sm); height: var(--bp-control-height-sm); min-height: var(--bp-control-height-sm); }
