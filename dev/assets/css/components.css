@@ -2931,9 +2931,12 @@
   }
 
   .bp-record-card__title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* up to two lines, like .bp-list-card__title: names and log lines keep their meaning in narrow cards */
+    line-clamp: 2;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow-wrap: break-word;
   }
 
   .bp-record-card__subtitle {
