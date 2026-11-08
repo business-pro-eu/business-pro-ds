@@ -2,13 +2,13 @@
   "ok": true,
   "name": "Business PRO Design System",
   "environment": "dev",
-  "version": "20261108-14",
-  "generatedAt": "2026-11-08T12:18:08.625Z",
+  "version": "20261108-15",
+  "generatedAt": "2026-11-08T12:23:08.481Z",
   "fileCount": 22,
   "entrypoints": {
-    "css": "assets/css/business-pro.bundle.css?v=20261108-14",
-    "cssModules": "assets/css/business-pro.css?v=20261108-14",
-    "js": "assets/js/business-pro.js?v=20261108-14",
-    "theme": "assets/js/theme.js?v=20261108-14"
+    "css": "assets/css/business-pro.bundle.css?v=20261108-15",
+    "cssModules": "assets/css/business-pro.css?v=20261108-15",
+    "js": "assets/js/business-pro.js?v=20261108-15",
+    "theme": "assets/js/theme.js?v=20261108-15"
   }
 }
