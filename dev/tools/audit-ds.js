@@ -93,7 +93,7 @@ function hasHardcodedEffect(rawSource) {
 // voie să refere aplicații/platforme sau să folosească stări "goale".
 const APP_WORD = /(^|[^a-z])(lead|leads|crm|campaign|invoice|driver|vehicle|beneficiar|booking|brevo|smtp|onrc|apple|guest|reservation|checkin)(?![a-z])/i;
 const BARE_STATE = /\.(open|active|done|current|visible|selected|dragging|drag-over)(?![a-zA-Z0-9_-])/;
-const VENDOR_SELECTOR = /flatpickr|\.ql-|tagify/;
+const VENDOR_SELECTOR = /flatpickr|\.ql-|tagify|maplibregl/;
 function checkNamingGovernance(file, source) {
   const stripped = source.replace(/\/\*[\s\S]*?\*\//g, '');
   for (const match of stripped.matchAll(/([^{};]+)\{/g)) {

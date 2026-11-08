@@ -811,3 +811,35 @@ Un singur buton în header deschide un panou cu toate paginile, grupate pe secț
 Bara de instrumente păstrează un singur buton «Filtre» (`bp-mobile-filter-trigger`, mereu în stânga), iar filtrele se deschid într-un dropdown ca cel al meniului, pe orice lățime. Filtrele active se văd doar în dropdown. DS-ul mută filtrele în panou la încărcare; ele își păstrează id-urile.
 
 - `bp-filter-panel`
+- `bp-header-metric--icon`
+
+## Adăugate 2026-11-08 (mutate din foaia de stil a platformei Bookings)
+Galeria foto a camerelor, simbolul de rating, harta interactivă, tooltip-ul instant, datepicker-ul și modalele care nu depășesc ecranul. Ajustările specifice Bookings sunt modificatori de root opționali, puși pe `<body>`.
+
+- `bp-room-gallery`
+- `bp-room-gallery__image`
+- `bp-room-gallery__counter`
+- `bp-room-gallery__btn`
+- `bp-room-gallery__text`
+- `bp-daisy-symbol`
+- `bp-page-header--split`
+- `bp-m-0`
+- `bp-block`
+- `bp-fill-row`
+- `bp-input--narrow`
+- `bp-input-group__text`
+- `bp-row-divided`
+- `bp-interactive-map`
+- `bp-map-popup`
+- `bp-map-popup__title`
+- `bp-map-popup__address`
+- `bp-custom-tooltip`
+- `bp-custom-tooltip--bottom`
+- `bp-datepicker-popup`
+- `bp-modal__form`
+- `bp-record-card__full-row`
+- `bp-record-card__full-row--spacer`
+- `bp-root--halo-badges`
+- `bp-root--aligned-cards`
+- `bp-root--contained-modals`
+

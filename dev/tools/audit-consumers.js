@@ -170,6 +170,9 @@ for (const [f, s] of corpus) {
   for (const m of s.matchAll(/business-pro(?:\.bundle)?(?:\.min)?\.(?:css|js)\?v=(\d{8}-\d+)/g)) {
     if (m[1] !== dsVersion) fail(`Versiune DS ${m[1]} în ${rel(f)}; versiunea curentă este ${dsVersion}`, `version|${rel(f)}`);
   }
+  for (const m of s.matchAll(/\$dsVersion\s*=[^;\n]*?'(\d{8}-\d+)'/g)) {
+    if (m[1] !== dsVersion) fail(`Versiune DS ${m[1]} în variabila $dsVersion din ${rel(f)}; versiunea curentă este ${dsVersion}`, `version|${rel(f)}`);
+  }
 }
 
 // 8. Clase fără prefix bp- care nu există în DS.

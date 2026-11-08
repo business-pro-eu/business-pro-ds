@@ -12,13 +12,15 @@ const path = require('path');
 
 const dsRoot = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(dsRoot, '../..');
-const platforms = ['php/crm', 'php/profit', 'php/fleet', 'php/domain-tools', 'php/pusculita', 'php/idp'];
+const platforms = ['php/crm', 'php/profit', 'php/fleet', 'php/domain-tools', 'php/pusculita', 'php/idp', 'php/bookings'];
 const skipped = new Set(['node_modules', '.git', 'vendor', 'tests', 'mockups', 'graphify-out', 'docs', 'imports', 'database']);
 const dry = process.argv.includes('--dry-run');
 const version = fs.readFileSync(path.join(dsRoot, 'VERSION'), 'utf8').trim();
 const rx = /(business-pro(?:\.bundle)?(?:\.min)?\.(?:css|js)\?v=)(\d{8}-\d+)/g;
 // Pușculița: versiunea DS de rezervă din `max((string)bppusculita_cfg('ds_version', ''), 'YYYYMMDD-N')`
 const rxFallback = /(bppusculita_cfg\('ds_version', ''\), ')(\d{8}-\d+)/g;
+// Bookings: versiunea DS fixată în variabila PHP `$dsVersion = '...'` (sau `max(cfg, '...')`).
+const rxVar = /(\$dsVersion\s*=[^;\n]*?')(\d{8}-\d+)(')/g;
 
 let changed = 0;
 function walk(dir) {
@@ -29,7 +31,7 @@ function walk(dir) {
     if (!/\.(php|html|js)$/.test(entry.name) || /\.min\./.test(entry.name)) continue;
     const text = fs.readFileSync(full, 'utf8');
     const bump = (m, head, v) => (v === version ? m : head + version);
-    const next = text.replace(rx, bump).replace(rxFallback, bump);
+    const next = text.replace(rx, bump).replace(rxFallback, bump).replace(rxVar, (m, head, v, tail) => (v === version ? m : head + version + tail));
     if (next !== text) {
       changed++;
       console.log(`${dry ? 'would update' : 'updated'} ${path.relative(repoRoot, full)}`);

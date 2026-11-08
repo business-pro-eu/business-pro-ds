@@ -59,12 +59,21 @@
       "reason": "Nicio proprietate directă: poziționarea se face prin custom properties --bp-* (sunt permise oriunde)."
     }
   ],
-  "styleLinks": [],
+  "styleLinks": [
+    {
+      "pattern": "/assets/lib/maplibre/maplibre-gl\\.css",
+      "reason": "Foaia de stil a bibliotecii terte MapLibre GL (nu poate fi inclusa in DS fara a o modifica); personalizarea ei sta in .bp-interactive-map din DS."
+    }
+  ],
   "unknownClasses": [],
   "thirdParty": [
     {
       "pattern": "^php/profit/src/lib/dompdf/",
       "reason": "Dompdf (copiat din fleet): bibliotecă terță pentru PDF, nu este cod de aplicație."
+    },
+    {
+      "pattern": "^php/bookings/public/assets/lib/maplibre/",
+      "reason": "MapLibre GL (JS si CSS): biblioteca terta pentru harta rezervarilor, copiata ca atare; aspectul ei se adapta din DS prin .bp-interactive-map."
     }
   ]
 }
