@@ -799,10 +799,9 @@ Folosite de profilul site-ului din Domain Tools (`#monitorizare/<domeniu>`). Lin
 | `bp-quantity-stepper` | `bp-quantity-stepper__row`, `bp-quantity-stepper__info`, `bp-quantity-stepper__title`, `bp-quantity-stepper__sub`, `bp-quantity-stepper__controls`, `bp-quantity-stepper__btn`, `bp-quantity-stepper__count` | rânduri cu butoane `−` / `+` pentru selectarea numărului de adulți, copii și bebeluși în popover-ul de cantități |
 
 ## Adăugate 2026-11-08 (meniul «Meniu» din header)
-Un singur buton în header deschide un panou cu toate paginile, grupate pe secțiuni. Antetul rămâne la fel oricâte pagini există, iar bara de jos de pe mobil nu mai e necesară. Se folosește împreună cu `.bp-overflow` (deschidere, închidere, poziționare) și cu atributul `data-bp-nav-current`, care afișează în header pagina cu `aria-current="page"`.
+Un singur buton în header deschide un panou cu toate paginile, grupate pe secțiuni. Antetul rămâne la fel oricâte pagini există, iar bara de jos de pe mobil nu mai e necesară. Se folosește împreună cu `.bp-overflow` (deschidere, închidere, poziționare). Elementele sau secțiunile ascunse prin permisiuni folosesc atributul `hidden`.
 
 - `bp-nav-launcher`
-- `bp-nav-launcher__current`
 - `bp-nav-launcher__label`
 - `bp-nav-grid`
 - `bp-nav-grid__section`
