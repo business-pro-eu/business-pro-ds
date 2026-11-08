@@ -304,12 +304,38 @@
       if (host) {
         const hostRect = host.getBoundingClientRect();
         const panelTop = Math.round(triggerRect.bottom + 16);
+        let panelWidth = hostRect.width;
+        if (menu.matches('.bp-nav-grid')) {
+          // One section: its title is redundant. On desktop the panel is only as wide as its busiest section needs (never wider than the content area) and sits against the right edge.
+          const sections = Array.from(menu.querySelectorAll('.bp-nav-grid__section')).filter((section) => !section.hidden);
+          menu.classList.toggle('bp-nav-grid--single', sections.length <= 1);
+          if (viewportWidth >= 768) {
+            const perSection = sections.map((section) => Array.from(section.querySelectorAll('.bp-nav-grid__item')).filter((item) => !item.hidden).length);
+            const columns = Math.max(1, ...perSection);
+            const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+            const itemsEl = menu.querySelector('.bp-nav-grid__items');
+            const gap = parseFloat(itemsEl ? getComputedStyle(itemsEl).columnGap : '8') || 8;
+            const menuStyle = getComputedStyle(menu);
+            const chrome = parseFloat(menuStyle.paddingLeft) + parseFloat(menuStyle.paddingRight) + parseFloat(menuStyle.borderLeftWidth) + parseFloat(menuStyle.borderRightWidth);
+            panelWidth = Math.min(hostRect.width, Math.ceil(chrome + columns * 11 * rem + (columns - 1) * gap) + 1);
+          }
+        }
+        if (menu.matches('.bp-filter-panel') && viewportWidth >= 768) {
+          // Only as wide as its filters need (never wider than the toolbar), against the left edge.
+          const sources = Array.from(menu.querySelectorAll('[data-bp-mobile-filter-source]'));
+          const columns = Math.max(1, ...sources.map((source) => Array.from(source.children).filter((child) => !child.hidden).length));
+          const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+          const gap = parseFloat(sources[0] ? getComputedStyle(sources[0]).columnGap : '8') || 8;
+          const menuStyle = getComputedStyle(menu);
+          const chrome = parseFloat(menuStyle.paddingLeft) + parseFloat(menuStyle.paddingRight) + parseFloat(menuStyle.borderLeftWidth) + parseFloat(menuStyle.borderRightWidth);
+          panelWidth = Math.min(hostRect.width, Math.ceil(chrome + columns * 12 * rem + (columns - 1) * gap) + 1);
+        }
         menu.classList.remove('is-opening-up');
         Object.assign(menu.style, {
-          left: `${Math.round(hostRect.left)}px`,
+          left: `${Math.round(menu.matches('.bp-nav-grid') ? hostRect.right - panelWidth : hostRect.left)}px`,
           right: 'auto',
-          width: `${Math.round(hostRect.width)}px`,
-          maxWidth: `${Math.round(hostRect.width)}px`,
+          width: `${Math.round(panelWidth)}px`,
+          maxWidth: `${Math.round(panelWidth)}px`,
           top: `${panelTop}px`,
           bottom: 'auto',
           maxHeight: `${Math.max(96, Math.round(viewportHeight - panelTop - gutter))}px`,

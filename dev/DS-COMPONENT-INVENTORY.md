@@ -803,6 +803,7 @@ Un singur buton în header deschide un panou cu toate paginile, grupate pe secț
 - `bp-nav-launcher`
 - `bp-nav-launcher__label`
 - `bp-nav-grid`
+- `bp-nav-grid--single`: set by the script when only one section is visible; hides its title
 - `bp-nav-grid__section`
 - `bp-nav-grid__title`
 - `bp-nav-grid__items`
