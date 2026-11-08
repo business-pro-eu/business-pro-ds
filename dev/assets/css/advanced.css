@@ -648,6 +648,7 @@ select.bp-native-select[hidden],
 .bp-setting-tile--compact .bp-contact-list { gap: var(--bp-space-1); }
 .bp-setting-tile--compact .bp-contact-list__link.bp-field-value { min-height: 1.5rem; }
 .bp-setting-tile__control { max-width: 100%; flex-shrink: 0; }
+.bp-setting-tile:not(.bp-setting-tile--vertical, .bp-setting-tile--editor) > .bp-setting-row__info { flex: 1 1 12rem; min-width: min(100%, 12rem); } /* narrow tiles: the control drops below the label and description instead of squeezing the text */
 .bp-setting-tile__control.bp-input-action { flex: 1 1 18rem; }
 .bp-setting-tile__control--inline { display: flex; flex: 1 1 24rem; flex-wrap: nowrap; align-items: center; gap: var(--bp-space-2); }
 .bp-setting-tile__control--inline > .bp-input { width: auto; min-width: 0; flex: 1 1 auto; }
@@ -676,7 +677,7 @@ select.bp-native-select[hidden],
   min-height: var(--bp-input-height);
   border-radius: var(--bp-input-radius);
 }
-.bp-email-test-controls { display: grid; width: 100%; grid-template-columns: minmax(14rem, 1.35fr) minmax(11rem, 1fr) minmax(13rem, 1fr) minmax(10rem, .75fr); column-gap: var(--bp-space-4); row-gap: var(--bp-space-4); align-items: center; }
+.bp-email-test-controls { display: grid; width: 100%; min-width: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); column-gap: var(--bp-space-4); row-gap: var(--bp-space-4); align-items: center; }
 .bp-email-test-controls > .bp-input,
 .bp-email-test-controls > .bp-select-control,
 .bp-email-test-controls > .bp-select-control.bp-select-control--content { display: block; width: 100%; min-width: 0; max-width: 100%; }
@@ -1103,7 +1104,7 @@ select.bp-native-select[hidden],
 
 /* Tables: fixed layout with named column widths, and a stronger rule where a new group of rows begins. */
 .bp-table--fixed { width: 100%; }
-.bp-table--fixed th { overflow: hidden; overflow-wrap: normal; text-overflow: ellipsis; white-space: nowrap; } /* header labels never break inside a word (FOUN-DED); size the column with bp-col--* instead */
+.bp-table--fixed th { overflow: hidden; overflow-wrap: normal; text-overflow: ellipsis; white-space: normal; } /* header labels wrap only between words, never inside one (FOUN-DED); size the column with bp-col--* instead */
 @media (min-width: 48rem) {
   .bp-table tbody > tr.is-group-start > td { border-top: 2px solid var(--bp-color-border-strong); }
 }

@@ -2789,6 +2789,7 @@
   .bp-table th {
     color: var(--bp-table-header-text);
     background: var(--bp-table-header-bg);
+    white-space: nowrap; /* header labels stay on one line ("Date / Time"); long ones are truncated in fixed tables */
     font-size: var(--bp-font-size-xs);
     font-weight: 750;
     letter-spacing: 0.04em;
