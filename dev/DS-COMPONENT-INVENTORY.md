@@ -524,9 +524,6 @@ Clase unice totale: **544** (după eliminarea claselor nefolosite, DS 20261030-1
 - `bp-filter-group`
 - `bp-filter-group--centered`
 - `bp-filter-group--prominent`
-- `bp-filter-sheet`
-- `bp-filter-sheet-backdrop`
-- `bp-filter-sheet__body`
 - `bp-search-box`
 - `bp-search-box--toolbar`
 - `bp-search-box__clear`
@@ -810,11 +807,7 @@ Un singur buton în header deschide un panou cu toate paginile, grupate pe secț
 - `bp-nav-grid__item`
 - `bp-root--no-bottom-nav`
 
-## Adăugate 2026-11-08 (panoul «Filtre» și chips-urile filtrelor active)
-Filtrele din bara de instrumente se deschid într-un panou (dialog pe desktop, bottom sheet pe telefon) prin butonul `bp-mobile-filter-trigger`, pe orice lățime. Lângă buton apar chips doar pentru filtrele active (`.bp-filter-trigger.is-active`), iar butonul arată numărul lor. Chip-ul se poate elimina doar dacă prima opțiune a meniului filtrului e „All/Toate”.
+## Adăugate 2026-11-08 (dropdown-ul «Filtre»)
+Bara de instrumente păstrează un singur buton «Filtre» (`bp-mobile-filter-trigger`, mereu în stânga), iar filtrele se deschid într-un dropdown ca cel al meniului, pe orice lățime. Filtrele active se văd doar în dropdown. DS-ul mută filtrele în panou la încărcare; ele își păstrează id-urile.
 
-- `bp-filter-trigger__count`
-- `bp-filter-chips`
-- `bp-filter-chip`
-- `bp-filter-chip__label`
-- `bp-filter-chip__remove`
+- `bp-filter-panel`

@@ -1,29 +1,29 @@
 {
   "name": "Business PRO Design System",
   "environment": "dev",
-  "version": "20261108-8",
-  "generatedAt": "2026-11-08T12:04:46.183Z",
+  "version": "20261108-13",
+  "generatedAt": "2026-11-08T12:14:29.364Z",
   "entrypoints": {
-    "css": "assets/css/business-pro.bundle.css?v=20261108-8",
-    "cssModules": "assets/css/business-pro.css?v=20261108-8",
-    "js": "assets/js/business-pro.js?v=20261108-8",
-    "theme": "assets/js/theme.js?v=20261108-8"
+    "css": "assets/css/business-pro.bundle.css?v=20261108-13",
+    "cssModules": "assets/css/business-pro.css?v=20261108-13",
+    "js": "assets/js/business-pro.js?v=20261108-13",
+    "theme": "assets/js/theme.js?v=20261108-13"
   },
   "files": [
     {
       "path": "index.html",
-      "bytes": 41021,
-      "sha256": "88f0ff93ef888e9b3e0b20db92de71b21abb8c533ecd9f745ffa41a6052532b4"
+      "bytes": 41026,
+      "sha256": "bcb37f00235b716927ef537e4fd1c721fced4354cc933814b415bb61a2e982e1"
     },
     {
       "path": "assets/css/business-pro.bundle.css",
-      "bytes": 327534,
-      "sha256": "44e453b2f66436117ae26e4e7a7dabc5e611ba3a5fb2f48cc69908f10350f145"
+      "bytes": 325711,
+      "sha256": "99ed10ab50a839931e650b94ca59a5c617de3f92705d06e83381f72fb46199bd"
     },
     {
       "path": "assets/css/business-pro.css",
-      "bytes": 718,
-      "sha256": "c69377a52d01aa7fe699481de9ba568c4a5356454b2553db8ba1068866b32ace"
+      "bytes": 723,
+      "sha256": "d36d0fbc9d89650916ef2cd27c738fae8d041caff1a4f0dc4120097d640f9d30"
     },
     {
       "path": "assets/css/business-pro-brands.css",
@@ -42,8 +42,8 @@
     },
     {
       "path": "assets/css/components.css",
-      "bytes": 128012,
-      "sha256": "e3950862eae35e7a67788eda1b6b0e345697e102ec155f21fb5694e672c850ed"
+      "bytes": 126396,
+      "sha256": "bacb267cbb08a5b49cce067d39368ff38d63ff651031d0fe1fe29deaea7ce8af"
     },
     {
       "path": "assets/css/documents.css",
@@ -52,8 +52,8 @@
     },
     {
       "path": "assets/css/advanced.css",
-      "bytes": 164658,
-      "sha256": "09e68bf2fbdcc35118874040339348b9c3a634ccb37e922f32c7826f0eeb3a6a"
+      "bytes": 164450,
+      "sha256": "d0bc660723f1765d1272bdf9eaafe1e7c2057b6171151ebcabe7f4a3580ae4e6"
     },
     {
       "path": "assets/css/gallery.css",
@@ -92,8 +92,8 @@
     },
     {
       "path": "assets/js/business-pro.js",
-      "bytes": 73603,
-      "sha256": "3423437eeabe3a65457bf65b2fdc6b183bf65701e83bf5f40659ae8a4942d710"
+      "bytes": 68627,
+      "sha256": "682080c9081711a189b4826824c180d14f725c1b760cad2c54201a67c96cc1ec"
     },
     {
       "path": "assets/js/gallery.js",

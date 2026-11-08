@@ -10,8 +10,6 @@
 
   let activeDialog = null;
   let activeTrigger = null;
-  let mobileFilterSheet = null;
-  let mobileFilterSources = [];
   const themeStorageKey = 'bp-theme';
 
   function bpIcon(...names) {
@@ -178,7 +176,8 @@
   function closeAllDropdowns(except = null) {
     closeSelectControls(except?.closest?.('.bp-select-control') || null);
     closeComboboxes(except?.closest?.('.bp-combobox') || null);
-    closeFloatingMenus(except?.matches?.('[data-bp-floating-menu]') ? except : null);
+    // A filter dropdown opened inside the filter panel must not close the panel it belongs to.
+    closeFloatingMenus(except?.matches?.('[data-bp-floating-menu]') ? except : (except ? visibleDropdownTrigger(except)?.closest?.('.bp-filter-panel') || null : null));
     closeLegacyDropdowns(except);
   }
 
@@ -206,7 +205,7 @@
   function portalMenu(menu, trigger = null) {
     if (menu._bpHome) return;
     let target = null;
-    if (menu.closest?.('.bp-filter-sheet__body')) {
+    if (menu.parentElement?.closest?.('.bp-filter-panel')) {
       target = document.body;
     } else if (
       menu.closest?.('.bp-table-shell--responsive') && !menu.getClientRects().length
@@ -378,7 +377,7 @@
   function enhanceFilterMenu(menu) {
     if (!menu?.matches?.('.bp-filter-dropdown__menu, [data-bp-floating-menu], .bp-overflow__menu')) return;
     // Long grouped menus (compact) are plain action menus: no filter search, and no 416px cap.
-    if (menu.matches('.bp-overflow__menu--compact')) return;
+    if (menu.matches('.bp-overflow__menu--compact, .bp-filter-panel, .bp-nav-grid')) return;
     menu.classList.add('bp-filter-menu');
     ensureFilterMenuSearch(menu);
     syncFilterMenuSearchVisibility(menu);
@@ -970,7 +969,7 @@
           enhanceMobileNavs(node);
           enhanceResponsiveTables(node);
           enhanceFilterDropdowns(node);
-          enhanceFilterChips(node);
+          enhanceFilterPanels(node);
           pruneEmptyRecordCardFields(node);
           syncThemeLogos();
         }
@@ -1081,145 +1080,36 @@
     });
   }
 
-  function ensureMobileFilterSheet() {
-    if (mobileFilterSheet?.isConnected) return mobileFilterSheet;
-    const backdrop = document.createElement('div');
-    backdrop.className = 'bp-modal-backdrop bp-filter-sheet-backdrop';
-    backdrop.hidden = true;
-    const sheet = document.createElement('section');
-    sheet.className = 'bp-modal bp-modal--wide bp-filter-sheet';
-    sheet.setAttribute('role', 'dialog');
-    sheet.setAttribute('aria-modal', 'true');
-    sheet.setAttribute('aria-labelledby', 'bpMobileFilterTitle');
-
-    const header = document.createElement('header');
-    header.className = 'bp-modal__header';
-
-    const title = textElement('h2', 'bp-heading-3', 'Filtre');
-    title.id = 'bpMobileFilterTitle';
-
-    const closeButton = document.createElement('button');
-    closeButton.className = 'bp-icon-button';
-    closeButton.type = 'button';
-    closeButton.dataset.bpDialogClose = '';
-    closeButton.setAttribute('aria-label', 'Închide filtrele');
-    closeButton.title = 'Închide';
-    closeButton.appendChild(bpIcon('fa-solid', 'fa-xmark'));
-
-    header.append(title, closeButton);
-    sheet.append(header, textElement('div', 'bp-modal__body bp-filter-sheet__body'));
-    backdrop.appendChild(sheet);
-    backdrop._bpBeforeClose = () => {
-      unportalAllMenus();
-      mobileFilterSources.forEach(({ source, placeholder }) => {
-        source.classList.remove('bp-mobile-filter-source--mounted');
-        placeholder.replaceWith(source);
-      });
-      mobileFilterSources = [];
-      backdrop.querySelector('.bp-filter-sheet__body')?.replaceChildren();
-    };
-    document.body.appendChild(backdrop);
-    mobileFilterSheet = backdrop;
-    return backdrop;
-  }
-
-  function openMobileFilterSheet(trigger) {
-    const sheet = ensureMobileFilterSheet();
-    if (!sheet.hidden) closeDialog(sheet);
-    const body = sheet.querySelector('.bp-filter-sheet__body');
-    const title = sheet.querySelector('#bpMobileFilterTitle');
-    if (!body || !title) return;
-    title.textContent = trigger.dataset.bpMobileFilterTitle || 'Filtre';
-    const selectors = String(trigger.dataset.bpMobileFilterOpen || '').split(',').map(value => value.trim()).filter(Boolean);
-    mobileFilterSources = selectors.map(selector => document.querySelector(selector)).filter(Boolean).map(source => {
-      const placeholder = document.createComment(`bp-filter-source:${source.id || 'anonymous'}`);
-      source.before(placeholder);
-      source.classList.add('bp-mobile-filter-source--mounted');
-      body.appendChild(source);
-      return { source, placeholder };
-    });
-    if (!mobileFilterSources.length) return;
-    openDialog(sheet, trigger);
-  }
-
-  // Filter panel: the "Filtre" trigger shows the number of active filters and one chip per active filter.
-  // A filter is active when its .bp-filter-trigger button has .is-active (or aria-pressed="true").
-  let filterChipSeq = 0;
-  const filterChipText = (button) => (button.getAttribute('aria-label') || button.textContent || '').replace(/\s+/g, ' ').trim();
-  const filterSourceOf = (trigger) => {
-    const selector = String(trigger.dataset.bpMobileFilterOpen || '').split(',')[0]?.trim();
-    return selector ? document.querySelector(selector) : null;
-  };
-
-  function syncFilterChips(trigger) {
-    const source = filterSourceOf(trigger);
-    if (!source) return;
-    let chips = trigger.nextElementSibling;
-    if (!chips?.matches?.('.bp-filter-chips')) {
-      chips = document.createElement('div');
-      chips.className = 'bp-filter-chips';
-      chips.setAttribute('aria-label', 'Filtre active');
-      trigger.after(chips);
-    }
-    const active = [...source.querySelectorAll('.bp-filter-trigger.is-active, .bp-filter-trigger[aria-pressed="true"]')];
-    let count = trigger.querySelector('.bp-filter-trigger__count');
-    if (active.length && !count) {
-      count = document.createElement('span');
-      count.className = 'bp-filter-trigger__count';
-      trigger.append(count);
-    }
-    if (count) {
-      count.textContent = String(active.length);
-      count.hidden = !active.length;
-    }
-    chips.replaceChildren(...active.map((button) => {
-      if (!button.id) button.id = `bp-filter-${++filterChipSeq}`;
-      const chip = document.createElement('span');
-      chip.className = 'bp-filter-chip';
-      chip.dataset.bpFilterChipFor = button.id;
-      const open = document.createElement('button');
-      open.type = 'button';
-      open.className = 'bp-filter-chip__label';
-      open.dataset.bpFilterChipOpen = '';
-      open.textContent = filterChipText(button);
-      chip.append(open);
-      const remove = document.createElement('button');
-      remove.type = 'button';
-      remove.className = 'bp-filter-chip__remove';
-      remove.dataset.bpFilterChipRemove = '';
-      remove.setAttribute('aria-label', `Elimină ${filterChipText(button)}`);
-      remove.appendChild(bpIcon('fa-solid', 'fa-xmark'));
-      chip.append(remove);
-      return chip;
-    }));
-  }
-
-  // The "all" option of a filter menu is its first entry; a chip can only be removed when that entry is recognisable.
-  function resetFilterFromChip(chip) {
-    const button = document.getElementById(chip.dataset.bpFilterChipFor || '');
-    const menu = document.getElementById(button?.getAttribute('aria-controls') || '');
-    const first = menu?.querySelector('button, a');
-    const label = (first?.querySelector('.bp-overflow__item-label') || first)?.textContent || '';
-    if (first && /^(all|toate|toți|toti|oricare|any)\b/i.test(label.trim())) first.click();
-  }
-
-  const watchedFilterSources = new WeakSet();
-  function enhanceFilterChips(root = document) {
+  // Filter panel: the "Filtre" button opens a dropdown (the same floating menu as the navigation) that holds the
+  // toolbar's filters. The filters keep their ids, so the application code keeps working unchanged.
+  let filterPanelSeq = 0;
+  function enhanceFilterPanels(root = document) {
     const triggers = [
       ...(root.matches?.('[data-bp-mobile-filter-open]') ? [root] : []),
       ...(root.querySelectorAll?.('[data-bp-mobile-filter-open]') || []),
     ];
     triggers.forEach((trigger) => {
-      const source = filterSourceOf(trigger);
-      if (!source) return;
-      syncFilterChips(trigger);
-      if (watchedFilterSources.has(source)) return;
-      watchedFilterSources.add(source);
-      let frame = 0;
-      new MutationObserver(() => {
-        cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(() => syncFilterChips(trigger));
-      }).observe(source, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class', 'aria-label', 'aria-pressed'] });
+      const sources = String(trigger.dataset.bpMobileFilterOpen || '').split(',')
+        .map((selector) => selector.trim()).filter(Boolean)
+        .map((selector) => document.querySelector(selector)).filter(Boolean);
+      if (!sources.length) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'bp-overflow';
+      wrap.setAttribute('data-bp-floating-root', '');
+      const menu = document.createElement('div');
+      menu.className = 'bp-overflow__menu bp-overflow__menu--start bp-filter-panel';
+      menu.id = `bp-filter-panel-${++filterPanelSeq}`;
+      menu.setAttribute('data-bp-floating-menu', '');
+      menu.setAttribute('aria-label', trigger.dataset.bpMobileFilterTitle || 'Filtre');
+      menu.hidden = true;
+      trigger.before(wrap);
+      wrap.append(trigger, menu);
+      menu.append(...sources);
+      trigger.removeAttribute('data-bp-mobile-filter-open');
+      trigger.dataset.bpMenuToggle = `#${menu.id}`;
+      trigger.setAttribute('aria-controls', menu.id);
+      trigger.setAttribute('aria-haspopup', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
     });
   }
 
@@ -1277,23 +1167,6 @@
   document.addEventListener('click', (event) => {
     document.querySelectorAll('select.bp-select').forEach(syncSelectControl);
 
-    const chipRemove = event.target.closest('[data-bp-filter-chip-remove]');
-    if (chipRemove) {
-      resetFilterFromChip(chipRemove.closest('.bp-filter-chip'));
-      return;
-    }
-    const chipOpen = event.target.closest('[data-bp-filter-chip-open]');
-    if (chipOpen) {
-      openMobileFilterSheet(chipOpen.closest('.bp-filter-chips').previousElementSibling);
-      return;
-    }
-    const mobileFilterOpen = event.target.closest('[data-bp-mobile-filter-open]');
-    if (mobileFilterOpen) {
-      event.preventDefault();
-      openMobileFilterSheet(mobileFilterOpen);
-      return;
-    }
-
     const tableCardTarget = event.target.closest('.bp-menu-portal') ? null : event.target.closest('[data-bp-cards-for] [data-bp-proxy-cell]');
     if (tableCardTarget) {
       const cards = tableCardTarget.closest('[data-bp-cards-for]');
@@ -1350,14 +1223,16 @@
     }
 
     const floatingItem = event.target.closest('[data-bp-floating-menu] .bp-overflow__item, [data-bp-floating-menu] .bp-nav-grid__item');
-    if (floatingItem) {
+    // Options of the filters inside the filter panel keep the panel open, so several filters can be set in a row.
+    if (floatingItem && !floatingItem.closest('.bp-filter-panel')) {
       closeFloatingMenus();
       return;
     }
 
     if (!event.target.closest('.bp-combobox')) closeComboboxes();
     if (!eventTargetInsideSelect(event)) closeSelectControls();
-    if (!event.target.closest('[data-bp-floating-root]')) closeFloatingMenus();
+    const inFilterPortal = event.target.closest('.bp-menu-portal')?._bpHome?.parent?.closest?.('.bp-filter-panel');
+    if (!event.target.closest('[data-bp-floating-root]') && !inFilterPortal) closeFloatingMenus();
     if (!event.target.closest('.bp-filter-dropdown, .nav-dropdown, .bp-menu-portal')) closeLegacyDropdowns();
   });
 
@@ -1372,7 +1247,6 @@
     positionOpenDropdowns();
   });
   window.matchMedia?.('(min-width: 48rem)').addEventListener?.('change', event => {
-    if (event.matches && mobileFilterSheet && !mobileFilterSheet.hidden) closeDialog(mobileFilterSheet);
   });
   window.visualViewport?.addEventListener('resize', () => {
     closeSelectControls();
@@ -1501,7 +1375,7 @@
     return { element: toast, dismiss };
   }
 
-  enhanceFilterChips();
+  enhanceFilterPanels();
 
   // API global simplu pentru aplicațiile care încarcă DS-ul ca script clasic.
   window.BPToast = showToast;
@@ -1521,7 +1395,7 @@
     enhanceResponsiveTables,
     enhanceMobileNavs,
     enhanceFilterDropdowns,
-    enhanceFilterChips,
+    enhanceFilterPanels,
     pruneEmptyRecordCardFields,
     toast: showToast
   };

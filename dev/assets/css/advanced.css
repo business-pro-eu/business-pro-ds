@@ -1427,8 +1427,6 @@ select.bp-native-select[hidden],
 .bp-pagination--inline { border-radius: var(--bp-radius-full); }
 .bp-pagination--inline > :first-child { border-top-left-radius: var(--bp-radius-full); border-bottom-left-radius: var(--bp-radius-full); }
 .bp-pagination--inline > :last-child { border-top-right-radius: var(--bp-radius-full); border-bottom-right-radius: var(--bp-radius-full); }
-.bp-modal.bp-filter-sheet, .bp-modal__body.bp-filter-sheet__body { overflow: visible; }
-.bp-filter-sheet__body .bp-filter-dropdown__menu { bottom: 100%; left: 0; right: 0; margin-bottom: var(--bp-space-2); }
 .bp-overflow__group-label { padding: var(--bp-space-2) var(--bp-space-3) var(--bp-space-1); font-size: var(--bp-font-size-sm); color: var(--bp-color-text-muted); font-weight: 600; }
 .bp-overflow__item-separator { margin: var(--bp-space-1) 0; border: 0; border-top: 1px solid var(--bp-menu-border); }
 .bp-overflow__item--danger-soft { color: var(--bp-color-danger-600); }
