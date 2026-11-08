@@ -130,8 +130,10 @@
       window.BPTheme.set(theme);
     } else {
       document.documentElement.dataset.bpTheme = theme;
+      document.documentElement.dataset.bpThemeSource = 'manual';
       try {
         localStorage.setItem(themeStorageKey, theme);
+        localStorage.setItem('bp-theme-preference', theme);
       } catch (error) {
         // The selected theme still applies for the current page.
       }
@@ -284,9 +286,8 @@
     const below = Math.max(0, viewportHeight - triggerRect.bottom - gap - gutter);
     const above = Math.max(0, triggerRect.top - gap - gutter);
     const openUp = rect.height > below && above > below;
-    // Ten menu rows (10 × 40px), plus the menu/list padding, fit without a scrollbar.
-    const filterMenuMaxHeight = 416;
-    const maxHeight = Math.max(96, Math.min(openUp ? above : below, viewportHeight - gutter * 2, isFilterMenu ? filterMenuMaxHeight : viewportHeight - gutter * 2));
+    // The list itself shows at most ten rows (CSS: --bp-menu-visible-rows); the menu only has to fit the viewport.
+    const maxHeight = Math.max(96, Math.min(openUp ? above : below, viewportHeight - gutter * 2));
 
     Object.assign(menu.style, {
       left: `${Math.round(leftInViewport - parentRect.left)}px`,
@@ -320,17 +321,21 @@
     return [...new Set(items)];
   }
 
+  // More options than this and the menu gets a search box; up to ten rows show at once (scrollbar beyond that).
+  const FILTER_MENU_SEARCH_MIN = 20;
+
   function ensureFilterMenuSearch(menu) {
     if (!menu) return;
-    if (menu.matches?.('.bp-overflow__menu--actions') || menu.dataset.bpNoSearch === '1') {
+    // Filter menus are lookup lists, not action menus: they keep their search even though the legacy markup also tags them as --actions.
+    if ((menu.matches?.('.bp-overflow__menu--actions') && !menu.matches('.bp-filter-dropdown__menu')) || menu.dataset.bpNoSearch === '1') {
       menu.querySelector('.bp-dropdown-search, .bp-filter-dropdown__search')?.remove();
       menu.dataset.bpFilterSearchEnhanced = '0';
       return;
     }
-    if (menu.dataset.bpFilterSearchEnhanced === '1') return;
+    if (menu.dataset.bpFilterSearchEnhanced === '1' && menu.querySelector('.bp-dropdown-search, .bp-filter-dropdown__search')) return;
     const existingSearch = menu.querySelector('.bp-dropdown-search input, .bp-filter-dropdown__search input');
     const items = filterMenuItems(menu);
-    if (existingSearch || items.length <= 6) {
+    if (existingSearch || items.length <= FILTER_MENU_SEARCH_MIN) {
       menu.dataset.bpFilterSearchEnhanced = existingSearch ? '1' : '0';
       return;
     }
@@ -353,13 +358,20 @@
     const searchWrap = menu.querySelector('.bp-dropdown-search, .bp-filter-dropdown__search');
     const scrollArea = menu.querySelector('.bp-dropdown-list, .bp-filter-dropdown__list') || menu;
     if (!searchWrap || !scrollArea) {
-      menu.classList.remove('bp-filter-menu--search-visible', 'bp-filter-menu--scrollable');
+      // No search box (short list): the list can still scroll, and the scroll class keeps the gap next to the scrollbar.
+      menu.classList.remove('bp-filter-menu--search-visible');
+      menu.classList.toggle('bp-filter-menu--scrollable', !!scrollArea && scrollArea.scrollHeight > scrollArea.clientHeight);
       return;
     }
 
+    // By count: a long list (more than FILTER_MENU_SEARCH_MIN options) is slow to scan by scrolling.
     menu.classList.remove('bp-filter-menu--search-visible', 'bp-filter-menu--scrollable');
-    const needsScroll = scrollArea.scrollHeight > 416;
-    menu.classList.toggle('bp-filter-menu--search-visible', needsScroll);
+    const visibleHeight = scrollArea.clientHeight;
+    const needsScroll = scrollArea.scrollHeight > visibleHeight;
+    // Once the user typed a query the list shrinks by design; the box must stay so the query can be edited or cleared.
+    const typed = !!searchWrap.querySelector('input')?.value;
+    const needsSearch = typed || filterMenuItems(menu).length > FILTER_MENU_SEARCH_MIN;
+    menu.classList.toggle('bp-filter-menu--search-visible', needsSearch);
     menu.classList.toggle('bp-filter-menu--scrollable', needsScroll);
   }
 
@@ -400,35 +412,53 @@
     }
   }
 
-  function comboboxValues(input) {
+  // Optiunile din datalist: { value, label }. `label` (atributul label al <option>) e un text auxiliar de cautare, de ex. CUI-ul unui partener.
+  function comboboxItems(input) {
     const listId = input?.dataset.bpComboboxList || '';
     const list = listId ? document.getElementById(listId) : null;
     if (!list) return [];
+    const seen = new Set();
     return [...list.options]
-      .map((option) => String(option.value || option.textContent || '').trim())
-      .filter((value, index, values) => value && values.indexOf(value) === index);
+      .map((option) => ({ value: String(option.value || option.textContent || '').trim(), label: String(option.label && option.label !== option.value ? option.label : '').trim() }))
+      .filter((item) => item.value && !seen.has(item.value) && seen.add(item.value));
   }
 
   function renderCombobox(input) {
     const control = input?.closest('.bp-combobox');
     const menu = control?.querySelector('.bp-combobox__menu');
     if (!menu) return;
-    const query = String(input.value || '').trim().toLocaleLowerCase();
-    const values = comboboxValues(input).filter((value) => !query || value.toLocaleLowerCase().includes(query));
-    if (!values.length) {
-      menu.replaceChildren(textElement('span', 'bp-combobox__empty', 'Nu exista optiuni. Poti introduce o valoare noua.'));
-      return;
-    }
-    menu.replaceChildren(...values.map((value) => {
+    const raw = String(input.value || '').trim();
+    const query = raw.toLocaleLowerCase();
+    const digits = raw.replace(/\D/g, '');
+    const items = comboboxItems(input).filter((item) => !query
+      || item.value.toLocaleLowerCase().includes(query)
+      || item.label.toLocaleLowerCase().includes(query)
+      || (digits.length >= 3 && item.label.replace(/\D/g, '').includes(digits)));
+    const nodes = items.map((item) => {
       const option = document.createElement('button');
       option.type = 'button';
       option.className = 'bp-combobox__option';
-      option.dataset.value = value;
+      option.dataset.value = item.value;
       option.setAttribute('role', 'option');
-      option.setAttribute('aria-selected', String(value === input.value));
-      option.textContent = value;
+      option.setAttribute('aria-selected', String(item.value === input.value));
+      option.textContent = item.label ? `${item.value} \u00b7 ${item.label}` : item.value;
       return option;
-    }));
+    });
+    if (!nodes.length) {
+      nodes.push(textElement('span', 'bp-combobox__empty', 'Nu exista optiuni. Poti introduce o valoare noua.'));
+    }
+    // data-bp-combobox-create="Text": optiune de adaugare; la click se emite `bp-combobox-create` pe camp, cu valoarea scrisa.
+    const createLabel = input.dataset.bpComboboxCreate;
+    if (createLabel) {
+      const create = document.createElement('button');
+      create.type = 'button';
+      create.className = 'bp-combobox__option';
+      create.dataset.action = 'create';
+      create.setAttribute('role', 'option');
+      create.textContent = createLabel;
+      nodes.push(create);
+    }
+    menu.replaceChildren(...nodes);
   }
 
   function enhanceCombobox(input) {
@@ -495,6 +525,11 @@
     menu.addEventListener('click', (event) => {
       const option = event.target.closest('.bp-combobox__option');
       if (!option) return;
+      if (option.dataset.action === 'create') {
+        close();
+        input.dispatchEvent(new CustomEvent('bp-combobox-create', { bubbles: true, detail: { query: String(input.value || '').trim() } }));
+        return;
+      }
       input.value = option.dataset.value;
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -790,6 +825,8 @@
     const headerIndex = headerField
       ? headers.findIndex((header) => normalizeRecordCardField(header.textContent || '') === headerField)
       : configuredHeaderIndex;
+    const chipIndexes = String(table.dataset.bpCardsChipColumns || '').split(',')
+      .map((value) => value.trim()).filter(Boolean).map(Number).filter((value) => Number.isInteger(value) && value >= 0);
     let actionIndex = Number(table.dataset.bpCardsActionColumn ?? -1);
     if (actionIndex < 0) {
       actionIndex = headers.findIndex((header) => /acțiuni|actiuni/i.test(header.textContent || ''));
@@ -828,7 +865,7 @@
       const details = document.createElement('dl');
       details.className = 'bp-record-card__details';
       cells.forEach((cell, cellIndex) => {
-        if (cellIndex === titleIndex || cellIndex === subtitleIndex || cellIndex === headerIndex || cellIndex === actionIndex) return;
+        if (cellIndex === titleIndex || cellIndex === subtitleIndex || cellIndex === headerIndex || cellIndex === actionIndex || chipIndexes.includes(cellIndex)) return;
         const label = String(headers[cellIndex]?.textContent || '').trim();
         if (!label) return;
         const fieldKey = normalizeRecordCardField(label);
@@ -844,6 +881,37 @@
         details.append(dt, dd);
       });
       if (details.children.length) article.appendChild(details);
+
+      // Short badge columns share one row of equal slots under a titled separator; an empty value keeps its slot with a dash.
+      const chipCells = chipIndexes.filter((index) => cells[index]);
+      if (chipCells.length) {
+        const section = document.createElement('section');
+        section.className = 'bp-record-card__chips-section';
+        const chipsTitle = String(table.dataset.bpCardsChipsTitle || '').trim();
+        if (chipsTitle) section.appendChild(textElement('p', 'bp-record-card__chips-title', chipsTitle));
+        const chips = document.createElement('div');
+        chips.className = 'bp-record-card__chips';
+        chipCells.forEach((index) => {
+          const chip = document.createElement('span');
+          chip.className = 'bp-record-card__chip';
+          const label = String(headers[index]?.textContent || '').trim();
+          const fieldKey = normalizeRecordCardField(label);
+          if (fieldKey) chip.dataset.bpCardField = fieldKey;
+          const value = document.createElement('span');
+          value.className = 'bp-record-card__chip-value';
+          if (isEmptyCardValue(cells[index])) {
+            chip.classList.add('is-empty');
+            value.textContent = '—';
+          } else {
+            value.appendChild(cloneTableCardCell(cells[index], index));
+          }
+          chip.appendChild(value);
+          if (label) chip.appendChild(textElement('span', 'bp-record-card__chip-label', label));
+          chips.appendChild(chip);
+        });
+        section.appendChild(chips);
+        article.appendChild(section);
+      }
 
       if (actionIndex >= 0 && (cells[actionIndex]?.textContent?.trim() || cells[actionIndex]?.querySelector(tableCardInteractiveSelector))) {
         const footer = document.createElement('footer');
@@ -955,6 +1023,61 @@
     activeDialog = null;
     activeTrigger?.focus?.();
     activeTrigger = null;
+  }
+
+  // Confirmare în stilul DS, în locul lui window.confirm: BPDesignSystem.confirm({ message, title?, confirmLabel, cancelLabel, danger }) -> Promise<boolean>.
+  // Fără titlu: doar mesajul și cele două butoane (fără antet și fără butonul de închidere).
+  function confirmDialog({ title = '', message = '', confirmLabel = 'Confirmă', cancelLabel = 'Anulează', danger = false } = {}) {
+    return new Promise((resolve) => {
+      const backdrop = document.createElement('div');
+      backdrop.className = 'bp-modal-backdrop';
+      backdrop.hidden = true;
+      const dialog = document.createElement('section');
+      dialog.className = 'bp-modal bp-modal--compact';
+      dialog.setAttribute('role', 'alertdialog');
+      dialog.setAttribute('aria-modal', 'true');
+      if (title) dialog.setAttribute('aria-labelledby', 'bpConfirmTitle');
+      dialog.setAttribute('aria-describedby', 'bpConfirmMessage');
+      const make = (tag, className, attrs = {}) => {
+        const el = document.createElement(tag);
+        if (className) el.className = className;
+        Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+        return el;
+      };
+      if (title) {
+        const header = make('header', 'bp-modal__header');
+        const titleWrap = make('div');
+        const heading = make('h2', 'bp-heading-2', { id: 'bpConfirmTitle' });
+        heading.textContent = title;
+        titleWrap.appendChild(heading);
+        const closeButton = make('button', 'bp-icon-button', { type: 'button', 'data-bp-dialog-close': '', 'aria-label': 'Închide' });
+        closeButton.appendChild(make('i', 'bp-icon fa-solid fa-xmark', { 'aria-hidden': 'true' }));
+        header.append(titleWrap, closeButton);
+        dialog.appendChild(header);
+      }
+      const body = make('div', 'bp-modal__body');
+      const text = make('p', '', { id: 'bpConfirmMessage' });
+      text.textContent = message;
+      body.appendChild(text);
+      const footer = make('footer', 'bp-modal__footer');
+      const cancelButton = make('button', 'bp-button', { type: 'button' });
+      cancelButton.textContent = cancelLabel;
+      const okButton = make('button', 'bp-button', { type: 'button' });
+      okButton.textContent = confirmLabel;
+      footer.append(cancelButton, okButton);
+      dialog.append(body, footer);
+      if (danger) okButton.classList.add('bp-button--danger');
+      backdrop.appendChild(dialog);
+      document.body.appendChild(backdrop);
+      let settled = false;
+      const finish = (value) => { if (!settled) { settled = true; resolve(value); } };
+      // Orice închidere (Anulează, X, Escape) rezolvă cu false; „Confirmă" rezolvă înainte să închidă.
+      backdrop._bpBeforeClose = () => { finish(false); setTimeout(() => backdrop.remove(), 0); };
+      cancelButton.addEventListener('click', () => closeDialog(backdrop));
+      okButton.addEventListener('click', () => { finish(true); closeDialog(backdrop); });
+      openDialog(backdrop);
+      requestAnimationFrame(() => okButton.focus());
+    });
   }
 
   function ensureMobileFilterSheet() {
@@ -1292,6 +1415,7 @@
   window.BPDesignSystem = {
     openDialog,
     closeDialog,
+    confirm: confirmDialog,
     closeFloatingMenus,
     closeAllDropdowns,
     positionOpenDropdowns,
@@ -1306,5 +1430,118 @@
     pruneEmptyRecordCardFields,
     toast: showToast
   };
+  // Cod de 6 cifre în 6 casete: input[data-bp-otp="plain"] (doar cod) sau "recovery" (cod sau cod de recuperare, cu comutator).
+  // Fără JS rămâne câmpul simplu. Etichete (opțional): data-bp-otp-label, data-bp-otp-recovery-label, data-bp-otp-code-label.
+  const initOtpInputs = () => {
+    const LEN = 6;
+    document.querySelectorAll('input[data-bp-otp]:not([data-bp-otp-ready])').forEach((plain) => {
+      const form = plain.form;
+      const field = plain.closest('.bp-field');
+      if (!form || !field) return;
+      plain.dataset.bpOtpReady = '1';
+      const allowRecovery = plain.dataset.bpOtp === 'recovery';
+      const wrap = document.createElement('div');
+      wrap.className = 'bp-otp';
+      wrap.setAttribute('role', 'group');
+      wrap.setAttribute('aria-label', plain.dataset.bpOtpLabel || 'Cod de ' + LEN + ' cifre');
+      const boxes = [];
+      for (let i = 0; i < LEN; i += 1) {
+        const box = document.createElement('input');
+        box.className = 'bp-input bp-otp__digit';
+        box.type = 'text';
+        box.inputMode = 'numeric';
+        box.maxLength = LEN; // nu 1: completarea automată (SMS, manager de parole) pune tot codul în prima casetă
+        box.autocomplete = i === 0 ? 'one-time-code' : 'off';
+        box.setAttribute('aria-label', 'Cifra ' + (i + 1));
+        wrap.appendChild(box);
+        boxes.push(box);
+      }
+      const label = field.querySelector('label');
+      if (label) label.hidden = true; // grupul de casete are propria etichetă (aria-label)
+      plain.hidden = true;
+      plain.required = false;
+      field.appendChild(wrap);
+
+      const sync = () => { plain.value = boxes.map((box) => box.value).join(''); };
+      const fill = (digits, from) => {
+        digits.split('').slice(0, LEN - from).forEach((digit, k) => { boxes[from + k].value = digit; });
+        sync();
+        boxes[Math.min(from + digits.length, LEN - 1)].focus();
+        if (plain.value.length === LEN) form.requestSubmit();
+      };
+      boxes.forEach((box, i) => {
+        box.addEventListener('input', () => {
+          const digits = box.value.replace(/\D/g, '');
+          box.value = '';
+          if (digits) fill(digits, i); else sync();
+        });
+        box.addEventListener('keydown', (event) => {
+          if (event.key === 'Backspace' && !box.value && i > 0) { boxes[i - 1].value = ''; boxes[i - 1].focus(); sync(); event.preventDefault(); }
+          if (event.key === 'ArrowLeft' && i > 0) boxes[i - 1].focus();
+          if (event.key === 'ArrowRight' && i < LEN - 1) boxes[i + 1].focus();
+        });
+        box.addEventListener('paste', (event) => {
+          const digits = (event.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+          if (digits) { event.preventDefault(); fill(digits, 0); }
+        });
+        box.addEventListener('focus', () => box.select());
+      });
+      // Un cod se trimite o singură dată: auto-trimiterea la a 6-a cifră + Enter/autofill ar produce a doua cerere, fără sesiune.
+      let sent = false;
+      window.addEventListener('pageshow', () => { sent = false; });
+      form.addEventListener('submit', (event) => {
+        if (sent) { event.preventDefault(); return; }
+        if (!wrap.hidden && plain.value.length !== LEN) { event.preventDefault(); (boxes.find((box) => !box.value) || boxes[0]).focus(); return; }
+        sent = true;
+      });
+
+      if (allowRecovery) {
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'bp-button bp-button--ghost bp-button--sm bp-otp__switch';
+        const labels = [plain.dataset.bpOtpRecoveryLabel || 'Folosește un cod de recuperare', plain.dataset.bpOtpCodeLabel || 'Folosește codul din aplicație'];
+        toggle.textContent = labels[0];
+        toggle.addEventListener('click', () => {
+          const recovery = wrap.hidden;
+          wrap.hidden = !recovery;
+          plain.hidden = recovery;
+          plain.required = !recovery;
+          plain.value = '';
+          boxes.forEach((box) => { box.value = ''; });
+          toggle.textContent = labels[recovery ? 0 : 1];
+          (recovery ? boxes[0] : plain).focus();
+        });
+        field.appendChild(toggle);
+      }
+      boxes[0].focus();
+    });
+  };
+  initOtpInputs();
+
+  // Butoanele din câmp (arată parola, copiază) rămân dezactivate cât timp câmpul este gol. Cele care completează câmpul
+  // (ex: generare parolă) se marchează cu data-bp-keep-enabled. Valorile puse din JS nu emit evenimente, deci starea se
+  // reverifică și periodic (doar când pagina e vizibilă).
+  const syncInputActionButtons = () => {
+    document.querySelectorAll('.bp-input-action').forEach((wrap) => {
+      const input = wrap.querySelector('.bp-input');
+      if (!input) return;
+      const empty = input.value === '';
+      wrap.querySelectorAll('.bp-input-action__button:not([data-bp-keep-enabled])').forEach((button) => {
+        if (empty && !button.disabled) {
+          button.disabled = true;
+          button.dataset.bpEmptyDisabled = '1';
+        } else if (!empty && button.dataset.bpEmptyDisabled) {
+          button.disabled = false;
+          delete button.dataset.bpEmptyDisabled;
+        }
+      });
+    });
+  };
+  document.addEventListener('input', syncInputActionButtons);
+  document.addEventListener('change', syncInputActionButtons);
+  new MutationObserver(() => window.requestAnimationFrame(syncInputActionButtons)).observe(document.body, { childList: true, subtree: true });
+  window.setInterval(() => { if (!document.hidden) syncInputActionButtons(); }, 800);
+  syncInputActionButtons();
+
   window.dispatchEvent(new CustomEvent('bp:ready', { detail: { version: document.documentElement.dataset.bpVersion || '' } }));
 })();

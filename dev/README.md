@@ -5,6 +5,10 @@ Fundația vizuală comună pentru aplicațiile Business PRO.
 Proiectul este construit mobile-first și poate fi dezvoltat independent înainte ca
 aplicațiile existente să înceapă migrarea.
 
+## Regula „doar design system”
+
+Platformele PHP nu au CSS propriu; stilurile care lipsesc se creează aici. Detalii, verificări și procedură: [GOVERNANCE.md](GOVERNANCE.md).
+
 ## Pornire locală
 
 Deschide `index.html` direct în browser sau pornește un server static:
@@ -28,7 +32,7 @@ assets/css/business-pro.css Entrypoint modular pentru dezvoltare
 assets/css/gallery.css      Stiluri folosite doar de documentație
 assets/js/business-pro.js   Comportamente accesibile opționale și API-ul de notificări
 assets/js/gallery.js        Interacțiunile galeriei
-assets/vendor/fontawesome/  Font Awesome Free 7.2.0 self-hosted
+assets/css/icons.css       pictograme Tabler (măști CSS), generat din tools/icon-map.json
 tools/generate-css-bundle.js Generează CSS-ul concatenat pentru aplicații
 tools/audit-ds.js           Audit local pentru securitate/calitate DS
 tools/audit-consumers.js    Audit de governance pentru platformele consumatoare
@@ -47,7 +51,7 @@ index.html                  Galerie și pagină de documentație
 - Stilurile platform-specific nu intră în DS; componentele noi trebuie modelate ca tipare reutilizabile `bp-*`.
 - Stările nu sunt comunicate exclusiv prin culoare.
 - Ținta tactilă standard este de minimum 44 × 44 px.
-- Iconurile standard folosesc Font Awesome Free, predominant stilul `Solid`.
+- Iconurile folosesc exclusiv `bp-outline-icon` (forme Tabler outline, măști CSS din `icons.css`); Font Awesome nu mai există.
 - `Brands` este încărcat pentru integrările care afișează mărci externe.
 
 ## Audit înainte de publicare
@@ -154,11 +158,11 @@ de secțiunea următoare.
 Începând cu `20260709-8`, butoanele sunt mapate pe familia Apple iOS/iPadOS 27
 `Buttons`:
 
-- `bp-button` = bordered;
-- `bp-button--primary` = bordered prominent;
-- `bp-button--ghost` = borderless;
-- `bp-button--danger` = destructive prominent;
-- `bp-icon-button` = symbol/toolbar control.
+- `bp-button` = acțiune principală (plin, brand; negru la hover);
+- `bp-button--secondary` = contur, devine ca principalul la hover;
+- `bp-button--ghost` = fără fundal, text brand;
+- `bp-button--danger` = distructiv plin (negru la hover); `bp-button--danger-ghost` = distructiv fără fundal;
+- `bp-icon-button` = cerc plin doar cu pictogramă (culori: `--danger`, `--success`, `--info`; compact: `--sm`).
 
 Pentru ajustări globale se folosesc tokenurile `--bp-button-*`, nu stiluri locale
 în platforme.

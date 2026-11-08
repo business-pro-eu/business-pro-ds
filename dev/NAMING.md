@@ -82,7 +82,7 @@ Variabilele PHP/JS de domeniu (`$lead`, `driver`, `beneficiary`) sunt corecte
 - Temele pentru biblioteci vendor păstrează selectorii bibliotecii
   (`.flatpickr-*`, `.ql-*`, `.tagify*`) — sunt API-ul acelor biblioteci.
 - Culori de brand din lumea reală: `.bp-brand-whatsapp`.
-- Markere de temă/platformă pe `<body>` (`bp-theme-dark`, `bp-contracts`) sunt
+- Markere de temă/platformă pe `<body>` (`bp-theme-dark`) sunt
   emise de aplicații ca hook-uri; DS-ul nu le stilizează.
 
 ## Aplicare automată

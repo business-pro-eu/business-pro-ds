@@ -102,7 +102,7 @@ function checkNamingGovernance(file, source) {
     if (BARE_STATE.test(selector)) fail(`Stare fără prefix is-/has- în ${rel(file)}: ${selector.trim().slice(0, 70)}`);
     for (const cls of selector.matchAll(/\.([a-zA-Z][a-zA-Z0-9_-]*)/g)) {
       if (!/^(bp-|is-|has-|ds-)/.test(cls[1])) fail(`Selector fără namespace DS în ${rel(file)}: .${cls[1]}`);
-      if (APP_WORD.test(cls[1]) && !/^bp-brand-/.test(cls[1])) fail(`Nume de aplicație/platformă în selector DS ${rel(file)}: .${cls[1]}`);
+      if (APP_WORD.test(cls[1]) && !/^bp-(brand-|outline-icon--)/.test(cls[1])) fail(`Nume de aplicație/platformă în selector DS ${rel(file)}: .${cls[1]}`);
     }
   }
   for (const tok of stripped.matchAll(/--bp-[a-z0-9-]+/g)) {
@@ -115,7 +115,7 @@ for (const file of files.filter((item) => item.endsWith('.css'))) {
   const open = (source.match(/{/g) || []).length;
   const close = (source.match(/}/g) || []).length;
   if (open !== close) fail(`CSS cu acolade dezechilibrate: ${rel(file)} (${open}/${close})`);
-  if (hasHardcodedEffect(source)) {
+  if (!rel(file).startsWith('assets/vendor/') && hasHardcodedEffect(source)) {
     fail(`CSS conține shadow/backdrop-filter cu valori hard-codate (folosește token-uri --bp-*): ${rel(file)}`);
   }
   if (!rel(file).startsWith('assets/vendor/') && !rel(file).endsWith('.min.css')) {

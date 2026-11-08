@@ -123,10 +123,8 @@
     --bp-color-glass-surface: var(--bp-color-surface);
     --bp-color-glass-surface-subtle: var(--bp-color-surface-subtle);
     --bp-color-glass-tint: transparent;
-    --bp-color-glass-tint-strong: transparent;
     --bp-color-glass-border: var(--bp-color-border);
     --bp-color-glass-border-strong: var(--bp-color-border-strong);
-    --bp-color-glass-shadow: transparent;
     --bp-color-glass-highlight: transparent;
     --bp-color-glass-overlay: var(--bp-color-overlay);
     --bp-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Inter, ui-sans-serif, sans-serif;
@@ -172,7 +170,7 @@
     --bp-control-height-sm: 2.25rem;
     --bp-control-height-md: 2.75rem;
     --bp-control-height-lg: 3.25rem;
-    --bp-content-max: 100%;
+    --bp-content-max: 80rem; /* 1280px: aplicatiile raman fluide sub aceasta latime, peste ea continutul se opreste si ramane centrat */
     --bp-reading-max: 46rem;
     --bp-header-height: 3.5rem;
     --bp-bottom-nav-height: 4.25rem;
@@ -181,6 +179,7 @@
     --bp-transition-normal: 220ms ease;
     --bp-z-header: 50;
     --bp-z-overlay: 100;
+    --bp-z-modal: var(--bp-z-overlay);
     --bp-z-toast: 120;
 
     /* Public component customization API */
@@ -203,6 +202,12 @@
     --bp-menu-radius: var(--bp-radius-xl);
     --bp-menu-padding: var(--bp-space-1);
     --bp-menu-item-height: 2.5rem;
+    --bp-menu-visible-rows: 10;
+    --bp-menu-item-gap: 5px;
+    --bp-diagnostic-table-max-height: 32rem;
+    --bp-menu-padding-roomy: 10px;
+    --bp-list-stack-gap-roomy: 10px;
+    --bp-menu-visible-height: calc(var(--bp-menu-visible-rows) * var(--bp-menu-item-height) + (var(--bp-menu-visible-rows) - 1) * var(--bp-menu-item-gap));
     --bp-menu-item-padding-inline: var(--bp-space-3);
     --bp-menu-item-radius: var(--bp-radius-lg);
     --bp-menu-item-bg-hover: var(--bp-fill-tertiary);
@@ -218,7 +223,6 @@
     --bp-mobile-nav-gap: 0.125rem;
     /* Spațiu optic sub bară; safe-area iOS se adaugă separat. */
     --bp-mobile-nav-bottom-offset: var(--bp-space-3);
-    --bp-mobile-nav-item-bg-hover: var(--bp-fill-quaternary);
     --bp-mobile-nav-item-bg-active: var(--bp-color-brand-500);
     --bp-mobile-nav-item-text-active: #ffffff;
     --bp-input-height: var(--bp-control-height-md);
@@ -238,7 +242,6 @@
     --bp-toolbar-bg: var(--bp-color-surface);
     --bp-toolbar-border: var(--bp-color-glass-border);
     --bp-toolbar-radius: var(--bp-card-radius);
-    --bp-toolbar-shadow: none;
     --bp-search-bg: var(--bp-field-bg);
     --bp-search-bg-focus: var(--bp-field-bg-focus);
     --bp-search-border: var(--bp-field-border);
@@ -260,20 +263,15 @@
     --bp-segment-border-selected: var(--bp-separator);
     --bp-segment-text: var(--bp-color-text-muted);
     --bp-segment-text-selected: var(--bp-color-text-strong);
-    --bp-segment-shadow-selected: none;
     --bp-card-padding: var(--bp-space-4);
-    /* Generous surface corners keep cards in the same visual family as pills
-       without changing the radius of compact controls and form fields. */
-    --bp-card-radius: 1.5rem;
+    --bp-card-radius: 1rem;
     --bp-card-bg: var(--bp-color-surface);
     --bp-card-border: var(--bp-color-border);
-    --bp-card-shadow: none;
     --bp-card-hover-border: var(--bp-color-border-strong);
-    --bp-card-hover-shadow: none;
     --bp-list-row-bg: var(--bp-color-surface);
     --bp-list-row-bg-hover: var(--bp-fill-quinary);
     --bp-list-row-border: var(--bp-color-border);
-    --bp-list-row-radius: var(--bp-radius-lg);
+    --bp-list-row-radius: 1rem;
     --bp-list-icon-bg: var(--bp-fill-tertiary);
     --bp-list-icon-color: var(--bp-color-brand-700);
     --bp-empty-bg: var(--bp-color-surface);
@@ -294,7 +292,6 @@
     --bp-table-card-label: var(--bp-color-text-muted);
     --bp-table-card-value: var(--bp-color-text);
     --bp-status-radius: var(--bp-radius-full);
-    --bp-status-border: var(--bp-color-border);
     --bp-status-bg: var(--bp-fill-tertiary);
     --bp-status-text: var(--bp-color-text-muted);
     --bp-status-success-bg: var(--bp-color-success-100);
@@ -307,7 +304,7 @@
     --bp-status-brand-text: var(--bp-color-brand-text);
     --bp-status-info-bg: var(--bp-color-info-100);
     --bp-status-info-text: var(--bp-color-info-700);
-    --bp-alert-radius: var(--bp-radius-lg);
+    --bp-alert-radius: var(--bp-card-radius);
     --bp-alert-bg: var(--bp-color-surface);
     --bp-alert-border: var(--bp-color-border);
     --bp-alert-text: var(--bp-color-text);
@@ -319,6 +316,12 @@
     --bp-alert-danger-border: var(--bp-color-danger-100);
     --bp-alert-info-bg: var(--bp-color-info-50);
     --bp-alert-info-border: var(--bp-color-info-100);
+    --bp-alert-solid-text: #fff;
+    --bp-alert-warning-solid-text: #1c1c1e;
+    --bp-alert-success-solid: var(--bp-color-success-600);
+    --bp-alert-warning-solid: var(--bp-color-warning-600);
+    --bp-alert-danger-solid: var(--bp-color-danger-600);
+    --bp-alert-info-solid: var(--bp-color-info-600);
     --bp-toast-bg: rgb(28 28 30 / 0.92);
     --bp-toast-text: var(--bp-color-on-dark);
     --bp-progress-bg: var(--bp-fill-secondary);
@@ -330,19 +333,11 @@
     --bp-modal-radius: var(--bp-radius-xl);
     --bp-modal-bg: var(--bp-color-glass-surface);
     --bp-modal-border: var(--bp-color-glass-border-strong);
-    --bp-modal-shadow: none;
     --bp-modal-overlay: var(--bp-color-glass-overlay);
-    --bp-modal-header-border: var(--bp-color-border);
     --bp-modal-section-border: var(--bp-color-border);
-    --bp-modal-backdrop-blur: 0px;
     --bp-sheet-radius: var(--bp-radius-xl);
-    --bp-confirm-icon-bg: var(--bp-status-danger-bg);
-    --bp-confirm-icon-text: var(--bp-status-danger-text);
     --bp-dashboard-gap: var(--bp-space-6);
-    --bp-dashboard-section-bg: var(--bp-card-bg);
     --bp-dashboard-section-border: var(--bp-card-border);
-    --bp-dashboard-section-radius: var(--bp-card-radius);
-    --bp-dashboard-section-shadow: none;
     --bp-kpi-label-text: var(--bp-color-text-muted);
     --bp-kpi-value-text: var(--bp-color-text-strong);
     --bp-kpi-trend-text: var(--bp-status-success-text);
@@ -365,7 +360,6 @@
     --bp-flow-card-bg: var(--bp-card-bg);
     --bp-flow-card-border: var(--bp-card-border);
     --bp-flow-card-radius: var(--bp-card-radius);
-    --bp-flow-card-shadow: none;
     --bp-calendar-cell-bg: var(--bp-fill-quinary);
     --bp-calendar-cell-text: var(--bp-color-text);
     --bp-calendar-cell-radius: var(--bp-radius-md);
@@ -383,82 +377,11 @@
     --bp-slideshow-control-text: var(--bp-color-on-dark);
     --bp-rating-muted: var(--bp-color-border-strong);
     --bp-rating-active: var(--bp-color-warning-600);
-    --bp-slider-track-bg: var(--bp-fill-secondary);
     --bp-slider-fill-bg: var(--bp-color-brand-500);
-    --bp-slider-thumb-bg: var(--bp-color-control-knob);
-    --bp-slider-thumb-size: 1.75rem;
-    --bp-slider-track-height: 0.375rem;
-    --bp-page-control-bg: var(--bp-fill-tertiary);
-    --bp-page-control-dot-bg: var(--bp-label-tertiary);
-    --bp-page-control-dot-active-bg: var(--bp-color-text-strong);
-    --bp-page-control-dot-size: 0.375rem;
-    --bp-page-control-dot-active-width: 1rem;
-    --bp-action-sheet-bg: var(--bp-modal-bg);
-    --bp-action-sheet-border: var(--bp-modal-border);
-    --bp-action-sheet-radius: var(--bp-sheet-radius);
-    --bp-action-sheet-shadow: none;
-    --bp-action-sheet-item-height: 3rem;
-    --bp-activity-view-bg: var(--bp-action-sheet-bg);
-    --bp-activity-view-border: var(--bp-action-sheet-border);
-    --bp-activity-view-radius: var(--bp-action-sheet-radius);
-    --bp-date-picker-bg: var(--bp-card-bg);
-    --bp-date-picker-border: var(--bp-card-border);
-    --bp-date-picker-radius: var(--bp-card-radius);
-    --bp-color-well-size: 2rem;
-    --bp-color-well-radius: var(--bp-radius-full);
-    --bp-color-well-border: var(--bp-color-border);
-    --bp-color-picker-bg: var(--bp-card-bg);
-    --bp-color-picker-border: var(--bp-card-border);
-    --bp-color-picker-radius: var(--bp-card-radius);
-    --bp-sidebar-width: 18rem;
-    --bp-sidebar-bg: var(--bp-color-glass-surface-subtle);
-    --bp-sidebar-border: var(--bp-color-glass-border);
-    --bp-sidebar-item-bg-hover: var(--bp-menu-item-bg-hover);
-    --bp-sidebar-item-bg-selected: var(--bp-menu-item-bg-selected);
-    --bp-sidebar-item-text-selected: var(--bp-menu-item-text-selected);
-    --bp-inspector-width: 22rem;
-    --bp-inspector-bg: var(--bp-card-bg);
-    --bp-inspector-border: var(--bp-card-border);
-    --bp-inspector-radius: var(--bp-card-radius);
-    --bp-stepper-control-bg: var(--bp-button-bg);
-    --bp-stepper-control-bg-hover: var(--bp-button-bg-hover);
-    --bp-stepper-control-border: var(--bp-button-border);
-    --bp-stepper-control-text: var(--bp-button-text);
-    --bp-list-accessory-text: var(--bp-color-text-muted);
-    --bp-list-accessory-icon: var(--bp-label-tertiary);
-    --bp-list-accessory-danger: var(--bp-status-danger-text);
-    --bp-menu-shortcut-text: var(--bp-color-text-muted);
-    --bp-toolbar-title-text: var(--bp-color-text-strong);
-    --bp-toolbar-subtitle-text: var(--bp-color-text-muted);
-    --bp-alert-field-bg: var(--bp-field-bg);
-    --bp-alert-field-border: var(--bp-field-border);
-    --bp-avatar-bg: var(--bp-fill-tertiary);
-    --bp-avatar-text: var(--bp-color-text-strong);
-    --bp-avatar-size: 2.25rem;
-    --bp-thumbnail-bg: var(--bp-color-surface-subtle);
-    --bp-thumbnail-border: var(--bp-color-border);
-    --bp-thumbnail-radius: var(--bp-radius-lg);
-    --bp-keyboard-accessory-bg: var(--bp-color-glass-surface);
-    --bp-keyboard-accessory-border: var(--bp-color-glass-border);
-    --bp-wheel-picker-bg: var(--bp-card-bg);
-    --bp-wheel-picker-border: var(--bp-card-border);
-    --bp-wheel-picker-radius: var(--bp-card-radius);
-    --bp-wheel-picker-highlight: var(--bp-fill-tertiary);
-    --bp-opacity-meter-track: linear-gradient(90deg, transparent, var(--bp-color-value, var(--bp-color-brand-500)));
-    --bp-tabbar-search-bg: var(--bp-search-bg);
-    --bp-inspector-toolbar-bg: var(--bp-toolbar-bg);
-    --bp-inspector-toolbar-border: var(--bp-toolbar-border);
     --bp-toolbar-padding: var(--bp-space-3);
     --bp-focus-ring: var(--bp-shadow-focus);
     --bp-glass-blur: 0px;
     --bp-glass-saturation: 1;
-    --bp-glass-radius: var(--bp-radius-xl);
-    --bp-frost-surface: rgba(255, 255, 255, 0.5);
-    --bp-frost-surface-fallback: rgba(255, 255, 255, 0.88);
-    --bp-frost-border: rgba(255, 255, 255, 0.5);
-    --bp-frost-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    --bp-frost-blur: 5px;
-    --bp-frost-saturation: 1.2;
   }
 
   [data-bp-theme="dark"] {
@@ -563,10 +486,8 @@
     --bp-color-glass-surface: var(--bp-color-surface);
     --bp-color-glass-surface-subtle: var(--bp-color-surface-subtle);
     --bp-color-glass-tint: transparent;
-    --bp-color-glass-tint-strong: transparent;
     --bp-color-glass-border: var(--bp-color-border);
     --bp-color-glass-border-strong: var(--bp-color-border-strong);
-    --bp-color-glass-shadow: transparent;
     --bp-color-glass-highlight: transparent;
     --bp-color-glass-overlay: var(--bp-color-overlay);
     --bp-menu-bg: var(--bp-color-glass-surface);
@@ -574,7 +495,6 @@
     --bp-mobile-nav-bg: var(--bp-color-glass-surface);
     --bp-mobile-nav-border: var(--bp-color-glass-border);
     --bp-mobile-nav-shadow: none;
-    --bp-mobile-nav-item-bg-hover: var(--bp-fill-quaternary);
     --bp-mobile-nav-item-bg-active: var(--bp-color-brand-500);
     --bp-mobile-nav-item-text-active: #ffffff;
     --bp-shadow-xs: none;
@@ -583,12 +503,6 @@
     --bp-shadow-glass: none;
     --bp-shadow-glass-subtle: none;
     --bp-shadow-control-knob: none;
-    --bp-frost-surface: rgba(28, 28, 30, 0.6);
-    --bp-frost-surface-fallback: rgba(28, 28, 30, 0.92);
-    --bp-frost-border: rgba(255, 255, 255, 0.16);
-    --bp-frost-shadow: 0 4px 30px rgba(0, 0, 0, 0.32);
-    --bp-frost-blur: 5px;
-    --bp-frost-saturation: 1.2;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -692,10 +606,8 @@
       --bp-color-glass-surface: var(--bp-color-surface);
       --bp-color-glass-surface-subtle: var(--bp-color-surface-subtle);
       --bp-color-glass-tint: transparent;
-      --bp-color-glass-tint-strong: transparent;
       --bp-color-glass-border: var(--bp-color-border);
       --bp-color-glass-border-strong: var(--bp-color-border-strong);
-      --bp-color-glass-shadow: transparent;
       --bp-color-glass-highlight: transparent;
       --bp-color-glass-overlay: var(--bp-color-overlay);
       --bp-menu-bg: var(--bp-color-glass-surface);
@@ -703,7 +615,6 @@
       --bp-mobile-nav-bg: var(--bp-color-glass-surface);
       --bp-mobile-nav-border: var(--bp-color-glass-border);
       --bp-mobile-nav-shadow: none;
-      --bp-mobile-nav-item-bg-hover: var(--bp-fill-quaternary);
       --bp-mobile-nav-item-bg-active: var(--bp-color-brand-500);
       --bp-mobile-nav-item-text-active: #ffffff;
       --bp-shadow-xs: none;
@@ -712,11 +623,12 @@
       --bp-shadow-glass: none;
       --bp-shadow-glass-subtle: none;
       --bp-shadow-control-knob: none;
-      --bp-frost-surface: rgba(28, 28, 30, 0.6);
-      --bp-frost-surface-fallback: rgba(28, 28, 30, 0.92);
-      --bp-frost-border: rgba(255, 255, 255, 0.16);
-      --bp-frost-shadow: 0 4px 30px rgba(0, 0, 0, 0.32);
-      --bp-frost-blur: 5px;
-      --bp-frost-saturation: 1.2;
     }
   }
+
+/* Culori ale mărcilor externe afișate în aplicații (platformele site-urilor). Nu sunt culorile Business PRO. */
+:root {
+    --bp-brand-astro: #bc52ee;
+    --bp-brand-wordpress: #21759b;
+    --bp-brand-shopify: #5e8e3e; /* nuanță închisă a verdelui Shopify (#95bf47): contrast cu pictograma albă */
+}

@@ -19,6 +19,11 @@ const publicFiles = [
   'assets/css/documents.css',
   'assets/css/advanced.css',
   'assets/css/gallery.css',
+  'assets/vendor/fontawesome/css/fontawesome.min.css',
+  'assets/vendor/fontawesome/css/solid.min.css',
+  'assets/vendor/fontawesome/css/brands.min.css',
+  'assets/vendor/fontawesome/webfonts/fa-solid-900.woff2',
+  'assets/vendor/fontawesome/webfonts/fa-brands-400.woff2',
   'assets/js/theme.js',
   'assets/js/business-pro.js',
   'assets/js/gallery.js',
@@ -26,11 +31,6 @@ const publicFiles = [
   'assets/brand/logo-darkmode.svg',
   'assets/brand/logo-lightmode-mobile.svg',
   'assets/brand/logo-darkmode-mobile.svg',
-  'assets/vendor/fontawesome/css/fontawesome.min.css',
-  'assets/vendor/fontawesome/css/solid.min.css',
-  'assets/vendor/fontawesome/css/brands.min.css',
-  'assets/vendor/fontawesome/webfonts/fa-solid-900.woff2',
-  'assets/vendor/fontawesome/webfonts/fa-brands-400.woff2',
 ];
 
 function sha256(buffer) {

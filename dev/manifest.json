@@ -1,29 +1,29 @@
 {
   "name": "Business PRO Design System",
   "environment": "dev",
-  "version": "20261012-5",
-  "generatedAt": "2026-10-12T15:16:20.144Z",
+  "version": "20261108-1",
+  "generatedAt": "2026-11-08T11:18:24.281Z",
   "entrypoints": {
-    "css": "assets/css/business-pro.bundle.css?v=20261012-5",
-    "cssModules": "assets/css/business-pro.css?v=20261012-5",
-    "js": "assets/js/business-pro.js?v=20261012-5",
-    "theme": "assets/js/theme.js?v=20261012-5"
+    "css": "assets/css/business-pro.bundle.css?v=20261108-1",
+    "cssModules": "assets/css/business-pro.css?v=20261108-1",
+    "js": "assets/js/business-pro.js?v=20261108-1",
+    "theme": "assets/js/theme.js?v=20261108-1"
   },
   "files": [
     {
       "path": "index.html",
-      "bytes": 46865,
-      "sha256": "a067255076a36938973b4514ba180ed6cfbf298b44c3882ad8e62f0887982427"
+      "bytes": 41021,
+      "sha256": "805295dfde37c6225524fd65aae106bb5d4608e73032714dba0beb6cbd302daf"
     },
     {
       "path": "assets/css/business-pro.bundle.css",
-      "bytes": 376599,
-      "sha256": "84b0c6a534daee2a89be4ab4ffb35d8c4cea246a5c6731625c389829630db56e"
+      "bytes": 324064,
+      "sha256": "30166ecf36447f1fff26eb4590bf5c8a433a86d9d2b9c61607488dab3a607c97"
     },
     {
       "path": "assets/css/business-pro.css",
       "bytes": 718,
-      "sha256": "99995ed2310169c6d165954fd011794ba3d8fde1842be9f115b759382177d7fd"
+      "sha256": "c69dc2b68153cf93ce31f1bf777726a055283b3d7ae60cbb370c4869f6fcc26a"
     },
     {
       "path": "assets/css/business-pro-brands.css",
@@ -32,68 +32,33 @@
     },
     {
       "path": "assets/css/tokens.css",
-      "bytes": 31688,
-      "sha256": "27a0465a4a636ea02d92b2a9941c1921e464499710a1030ecea1e9ced89a1b6a"
+      "bytes": 27323,
+      "sha256": "dee77abb9609a01f86d22dc11e550142352d00c70f068359a10a4a4318f000a3"
     },
     {
       "path": "assets/css/foundation.css",
-      "bytes": 6597,
-      "sha256": "3acec02c0b77cf8b13a60e382b54fc0c385099e1a93d6b27e7a4bab567a3c65d"
+      "bytes": 6461,
+      "sha256": "077d94c5f9edf397377275cbef5b602119dbb0bc07402a13ae5e33c42b9253e6"
     },
     {
       "path": "assets/css/components.css",
-      "bytes": 171811,
-      "sha256": "85b0404fc8c2aa8be1c67bf7d3b5d4d2d883ae110eba94bfe0976aad8be7980d"
+      "bytes": 126591,
+      "sha256": "bac59ab5500e712ce6e0019e5ac5b4025641c0433c82f57201b0fb3032ecb114"
     },
     {
       "path": "assets/css/documents.css",
-      "bytes": 16084,
-      "sha256": "77a346e718e0ff0908092362af0ff2de1b7b66fe4abf74d8ebe26d1d5419b741"
+      "bytes": 587,
+      "sha256": "cd0078410814ab9a66cd8ccbcfbb0f47dd0519ad22686448791827e4fbf48482"
     },
     {
       "path": "assets/css/advanced.css",
-      "bytes": 149926,
-      "sha256": "c79daa743bf0d9be68a27c43ad75b5f4e30f2163aadc357be3c24b81153bbbf6"
+      "bytes": 162609,
+      "sha256": "6b5bf5fe234e83663bc53c542611c0cec03c8c9da49566972e0b9ff9e3f9803b"
     },
     {
       "path": "assets/css/gallery.css",
       "bytes": 3498,
       "sha256": "4c04ad641e6bed47ac7a5df62bd51b5cba461dc9a8ba237619181c1541808cd7"
-    },
-    {
-      "path": "assets/js/theme.js",
-      "bytes": 2324,
-      "sha256": "38f077e3e85809251c775b09a6403c920c04d3a4b16acbd0a09fd55138ea1c04"
-    },
-    {
-      "path": "assets/js/business-pro.js",
-      "bytes": 56399,
-      "sha256": "672ce69ac49fb8d18a008dc0efc1102cf24922ca9e5aacf99317321b9e9decaf"
-    },
-    {
-      "path": "assets/js/gallery.js",
-      "bytes": 6368,
-      "sha256": "b625d6371e9c9edabe1d0ca43e9ed8cd53c440d02931f426430fe50df6b26b32"
-    },
-    {
-      "path": "assets/brand/logo-lightmode.svg",
-      "bytes": 6554,
-      "sha256": "1b13267f4013f0b51c31caa1ff8e2ffc55f7eb2db70b20d95f199f3ed4e7a2c9"
-    },
-    {
-      "path": "assets/brand/logo-darkmode.svg",
-      "bytes": 6632,
-      "sha256": "bc3eafa1cd60b638749543ee839a7d88572d991db2738fc4164b51724faa88ce"
-    },
-    {
-      "path": "assets/brand/logo-lightmode-mobile.svg",
-      "bytes": 3916,
-      "sha256": "c7508fc89ea5d01cad8b5e23a8a5088db1c8b944cff1c9218a87e7beffdb81a8"
-    },
-    {
-      "path": "assets/brand/logo-darkmode-mobile.svg",
-      "bytes": 3949,
-      "sha256": "88f280bb30d6da503ac21cf44ab1ebfd776fc0b1c5959612d3a13b8cd4ad5859"
     },
     {
       "path": "assets/vendor/fontawesome/css/fontawesome.min.css",
@@ -119,6 +84,41 @@
       "path": "assets/vendor/fontawesome/webfonts/fa-brands-400.woff2",
       "bytes": 110088,
       "sha256": "70c632ba73c7ad942141bb2f56994b8eddf0a284c01aab9f21e0cd10021530c4"
+    },
+    {
+      "path": "assets/js/theme.js",
+      "bytes": 2483,
+      "sha256": "4aac4be34a3333e05fad9aa633500241632e1e391d47d3f12667850f7466fe03"
+    },
+    {
+      "path": "assets/js/business-pro.js",
+      "bytes": 69363,
+      "sha256": "0b3c8144b925c3bca4998950f3cd04d386ae9b79071d4ea416f8d21df6c8c7a6"
+    },
+    {
+      "path": "assets/js/gallery.js",
+      "bytes": 6386,
+      "sha256": "97708d277755bbe275f6c5dccaa53a3405ccb3c632827eeb5a495b5e4b062729"
+    },
+    {
+      "path": "assets/brand/logo-lightmode.svg",
+      "bytes": 6554,
+      "sha256": "1b13267f4013f0b51c31caa1ff8e2ffc55f7eb2db70b20d95f199f3ed4e7a2c9"
+    },
+    {
+      "path": "assets/brand/logo-darkmode.svg",
+      "bytes": 6632,
+      "sha256": "bc3eafa1cd60b638749543ee839a7d88572d991db2738fc4164b51724faa88ce"
+    },
+    {
+      "path": "assets/brand/logo-lightmode-mobile.svg",
+      "bytes": 3916,
+      "sha256": "c7508fc89ea5d01cad8b5e23a8a5088db1c8b944cff1c9218a87e7beffdb81a8"
+    },
+    {
+      "path": "assets/brand/logo-darkmode-mobile.svg",
+      "bytes": 3949,
+      "sha256": "88f280bb30d6da503ac21cf44ab1ebfd776fc0b1c5959612d3a13b8cd4ad5859"
     }
   ]
 }

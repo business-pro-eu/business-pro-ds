@@ -50,10 +50,6 @@ Aplicațiile aleg explicit versiunea folosită.
 - `/dev/`: `Cache-Control: no-cache`
 - `/vX.Y.Z/`: `Cache-Control: public, max-age=31536000, immutable`
 
-## Font Awesome Brands
+## Pictograme
 
-Nucleul încarcă doar Font Awesome Solid. Pentru iconuri de brand:
-
-```html
-<link rel="stylesheet" href="https://ds.business-pro.eu/v1.0.0/assets/css/business-pro-brands.css">
-```
+Pictogramele sunt măști CSS din `assets/css/icons.css` (forme Tabler Icons, MIT), incluse în bundle; nu există fonturi de pictograme. Detalii: `ICONS.md`.

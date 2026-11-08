@@ -1,0 +1,17 @@
+name: DS governance
+on: [push, pull_request]
+jobs:
+  ds-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ds
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Platformele lipsesc în CI-ul DS; verificările de consumatori rulează în CI-ul fiecărei platforme.
+      - run: |
+          node ds/dev/tools/score-ds.js | tail -1
+          node ds/dev/tools/audit-ds.js | tail -1
+          node ds/dev/tools/audit-inventory.js

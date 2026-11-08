@@ -6,8 +6,11 @@
 
   function storedTheme() {
     try {
-      const value = localStorage.getItem(preferenceStorageKey);
-      return value === 'dark' || value === 'light' ? value : null;
+      const pref = localStorage.getItem(preferenceStorageKey);
+      if (pref === 'dark' || pref === 'light') return pref;
+      if (pref === 'system') return null;
+      const legacy = localStorage.getItem(storageKey);
+      return legacy === 'dark' || legacy === 'light' ? legacy : null;
     } catch (error) {
       return null;
     }

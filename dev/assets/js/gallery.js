@@ -46,8 +46,8 @@
     const theme = root.dataset.bpTheme === 'dark' ? 'dark' : 'light';
     const icon = themeButton?.querySelector('.bp-icon');
     if (icon) {
-      icon.classList.toggle('fa-sun', theme === 'dark');
-      icon.classList.toggle('fa-moon', theme !== 'dark');
+      icon.classList.toggle('fa-solid fa-sun', theme === 'dark');
+      icon.classList.toggle('fa-solid fa-moon', theme !== 'dark');
     }
     themeButton?.setAttribute('aria-label', theme === 'dark' ? 'Activează tema luminoasă' : 'Activează tema întunecată');
   }

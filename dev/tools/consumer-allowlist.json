@@ -1,0 +1,70 @@
+{
+  "_readme": "Excepții de la audit-consumers. Fiecare intrare are 'pattern' (regex pe calea relativă la rădăcina repo-ului) și 'reason'. Fără motiv documentat, o excepție nu se acceptă. Nu se adaugă excepții pentru comoditate: dacă un stil lipsește, se creează în DS.",
+  "styleBlocks": [
+    {
+      "pattern": "^php/fleet/public/(index|app|join|sign)\\.php$",
+      "reason": "<style id=\"bp-brand-theme\">: doar token-uri --bp-* per tenant, calculate la rulare."
+    },
+    {
+      "pattern": "^php/fleet/src/DocumentEngine\\.php$",
+      "reason": "HTML pentru PDF (dompdf): nu poate încărca DS-ul."
+    }
+  ],
+  "inlineStyle": [
+    {
+      "pattern": "^php/fleet/src/CompanyStamp\\.php$",
+      "reason": "Imaginea ștampilei din HTML-ul pentru PDF (dompdf): nu poate încărca DS-ul, stilul e inline."
+    },
+    {
+      "pattern": "^php/fleet/src/DocumentEngine\\.php$",
+      "reason": "HTML pentru PDF (dompdf): nu poate încărca DS-ul, stilul e inline."
+    },
+    {
+      "pattern": "src/Mailer\\.php$",
+      "reason": "Email HTML: clienții de mail cer CSS inline."
+    },
+    {
+      "pattern": "src/DiagReport\\.php$",
+      "reason": "E-mailul raportului de diagnostic: clienții de mail cer CSS inline."
+    },
+    {
+      "pattern": "src/ExtensionStopNotifier\\.php$",
+      "reason": "Email HTML."
+    },
+    {
+      "pattern": "^php/crm/src/(EmailTemplate|EmailHtml|Unsubscribe)\\.php$",
+      "reason": "Corpuri de e-mail: CSS inline obligatoriu."
+    },
+    {
+      "pattern": "^php/pusculita/src/EmailTemplate\\.php$",
+      "reason": "Corpuri de e-mail: CSS inline obligatoriu."
+    },
+    {
+      "pattern": "^php/bookings/src/EmailTemplate\\.php$",
+      "reason": "Corpuri de e-mail: CSS inline obligatoriu."
+    },
+    {
+      "pattern": "^php/pusculita/src/lib/tfpdf/",
+      "reason": "Bibliotecă terță pentru PDF."
+    },
+    {
+      "pattern": "^php/profit/src/ContractPdf\\.php$",
+      "reason": "HTML pentru PDF (Dompdf): nu poate încărca DS-ul, stilurile sunt inline."
+    }
+  ],
+  "runtimeStyle": [
+    {
+      "pattern": "^php/(crm|fleet|domain-tools|pusculita)/public/assets/[a-z-]+\\.js$",
+      "props": [],
+      "reason": "Nicio proprietate directă: poziționarea se face prin custom properties --bp-* (sunt permise oriunde)."
+    }
+  ],
+  "styleLinks": [],
+  "unknownClasses": [],
+  "thirdParty": [
+    {
+      "pattern": "^php/profit/src/lib/dompdf/",
+      "reason": "Dompdf (copiat din fleet): bibliotecă terță pentru PDF, nu este cod de aplicație."
+    }
+  ]
+}
