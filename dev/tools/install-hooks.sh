@@ -22,7 +22,7 @@ install() { # $1 = dir repo, $2 = argument pentru ds-governance.sh, $3 = calea c
   echo "hook-uri instalate în $1"
 }
 
-for p in crm domain-tools fleet idp profit pusculita; do
+for p in bookings crm domain-tools fleet idp profit pusculita; do
   install "$root/php/$p" "php/$p" "../../ds/dev/tools"
 done
 install "$root/ds" "" "dev/tools"
