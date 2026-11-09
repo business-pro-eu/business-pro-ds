@@ -12,6 +12,11 @@ cat <<EOF
 gov="\$(git rev-parse --show-toplevel)/$2/ds-governance.sh"
 if [ ! -f "\$gov" ]; then echo "DS hook: nu găsesc \$gov (repo-ul DS trebuie clonat la ../../ds față de platformă)." >&2; exit 1; fi
 bash "\$gov" $1 || { echo "DS hook: încălcare a regulii „doar design system”. Creează stilul în DS, nu local." >&2; exit 1; }
+# Copiile din modules/ nu se editează în platformă (se schimbă modulul): blochează doar copiile editate sau lipsă.
+mods="\$(git rev-parse --show-toplevel)/../../modules/tools/modules.php"
+if [ -n "$1" ] && [ -f "\$mods" ]; then
+  php "\$mods" check "\$(basename "\$(git rev-parse --show-toplevel)")" --edits-only --quiet || { echo "Modules hook: o copie din modules/ a fost editată în platformă. Schimbă modulul și rulează: php modules/tools/modules.php update" >&2; exit 1; }
+fi
 EOF
 }
 
