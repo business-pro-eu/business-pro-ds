@@ -710,7 +710,7 @@ Adăugate când Pușculița, Domain Tools și CRM au renunțat la CSS-ul local. 
 | `bp-form-actions` | `bp-form-actions--wrap` | Row of form buttons: full width; an item with __push (and the ones after it) sits at the end. |
 | `bp-form-grid` | `bp-form-grid--collapse-hidden` | Pattern extras din platformă (vezi advanced.css) |
 | `bp-header-metric` | `bp-header-metric__icon`, `bp-header-metric__unit`, `bp-header-metric__value` | Header metric: a compact pill with an icon, a value and a unit; warning/danger states flag a low allowance. |
-| `bp-header-profile` | `bp-header-profile__logout` | Pattern extras din platformă (vezi advanced.css) |
+| `bp-header-profile` | `bp-header-profile--link`, `bp-header-profile__logout` | Header account control; `--link` = whole control is clickable (opens the profile), cursor pointer. |
 | `bp-hide-empty` | `bp-hide-empty` | Pattern extras din platformă (vezi advanced.css) |
 | `bp-icon-button` | `bp-icon-button--brand-astro`, `bp-icon-button--brand-shopify`, `bp-icon-button--brand-wordpress` | Pattern extras din platformă (vezi advanced.css) |
 | `bp-kpi` | `bp-kpi__icon`, `bp-kpi__icon--brand`, `bp-kpi__icon--danger`, `bp-kpi__icon--info`, `bp-kpi__icon--success`, `bp-kpi__note` | Pattern extras din platformă (vezi advanced.css) |
