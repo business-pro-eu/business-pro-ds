@@ -1790,7 +1790,8 @@
     width: max-content;
     max-width: min(22rem, calc(100vw - 2rem));
     white-space: normal;
-    transform: translateX(-50%);
+    /* --bp-tooltip-shift: deplasare (px) calculată din JS la deschidere, ca bula să rămână în ecran (business-pro.js). */
+    transform: translateX(calc(-50% + var(--bp-tooltip-shift, 0px)));
   }
 
   .bp-tooltip__line {

@@ -1630,5 +1630,32 @@
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') { flush(); } });
   })();
 
+  // Tooltip-urile (.bp-tooltip) se centrează pe element; lângă marginea ecranului bula ar ieși din fereastră. La deschidere (hover/focus) și la
+  // redimensionare se măsoară bula și se setează --bp-tooltip-shift (px) cu care CSS o aduce înapoi în ecran.
+  (function () {
+    const margin = 8;
+    const clamp = (tip) => {
+      const bubble = tip.querySelector(':scope > .bp-tooltip__bubble');
+      if (!bubble) { return; }
+      bubble.style.setProperty('--bp-tooltip-shift', '0px');
+      const rect = bubble.getBoundingClientRect();
+      if (!rect.width) { return; }
+      const width = document.documentElement.clientWidth;
+      let shift = 0;
+      if (rect.left < margin) { shift = margin - rect.left; }
+      else if (rect.right > width - margin) { shift = (width - margin) - rect.right; }
+      bubble.style.setProperty('--bp-tooltip-shift', Math.round(shift) + 'px');
+    };
+    const open = (event) => {
+      const tip = event.target instanceof Element ? event.target.closest('.bp-tooltip') : null;
+      if (tip) { window.requestAnimationFrame(() => clamp(tip)); }
+    };
+    document.addEventListener('mouseover', open);
+    document.addEventListener('focusin', open);
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('.bp-tooltip:hover, .bp-tooltip:focus-within').forEach(clamp);
+    });
+  })();
+
   window.dispatchEvent(new CustomEvent('bp:ready', { detail: { version: document.documentElement.dataset.bpVersion || '' } }));
 })();

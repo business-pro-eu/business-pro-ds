@@ -1,29 +1,29 @@
 {
   "name": "Business PRO Design System",
   "environment": "dev",
-  "version": "20261108-58",
-  "generatedAt": "2026-11-08T20:03:55.597Z",
+  "version": "20261109-1",
+  "generatedAt": "2026-11-09T16:41:52.903Z",
   "entrypoints": {
-    "css": "assets/css/business-pro.bundle.css?v=20261108-58",
-    "cssModules": "assets/css/business-pro.css?v=20261108-58",
-    "js": "assets/js/business-pro.js?v=20261108-58",
-    "theme": "assets/js/theme.js?v=20261108-58"
+    "css": "assets/css/business-pro.bundle.css?v=20261109-1",
+    "cssModules": "assets/css/business-pro.css?v=20261109-1",
+    "js": "assets/js/business-pro.js?v=20261109-1",
+    "theme": "assets/js/theme.js?v=20261109-1"
   },
   "files": [
     {
       "path": "index.html",
-      "bytes": 41026,
-      "sha256": "65b7a3022ab225dc6d0c13bbac399e4f7fcaaa58da25613d31a6ae6f4738e242"
+      "bytes": 41021,
+      "sha256": "ae388ed52a3097f4a777b713019b9422e08278d662e001ea576dfb6e8fc09547"
     },
     {
       "path": "assets/css/business-pro.bundle.css",
-      "bytes": 348993,
-      "sha256": "1f2f1a96426d3d17cce05cfa01ea16aadbf848a448b58ff4b9a2907b6c74b8d6"
+      "bytes": 349158,
+      "sha256": "ef94720543ac889631d924325aa06f3c54dc71eb63e894303db02faac5e28871"
     },
     {
       "path": "assets/css/business-pro.css",
-      "bytes": 723,
-      "sha256": "1db7ac6fbd8975bfbc3f2531192433244209f9d5cb2e0afd2315cd5fe6f0f282"
+      "bytes": 718,
+      "sha256": "38687c5c668ace645a976b3f57eac100fe896981a9821430bc38d84d017e5215"
     },
     {
       "path": "assets/css/business-pro-brands.css",
@@ -42,8 +42,8 @@
     },
     {
       "path": "assets/css/components.css",
-      "bytes": 126893,
-      "sha256": "af016299cac4526fcedc23e53c47b1b5d3998acab2a7ded77c534bc6a249f724"
+      "bytes": 127059,
+      "sha256": "795a8623982426407673911a6cab7d31d5e449d1da0196274763300fee3a1138"
     },
     {
       "path": "assets/css/documents.css",
@@ -92,8 +92,8 @@
     },
     {
       "path": "assets/js/business-pro.js",
-      "bytes": 76317,
-      "sha256": "24c1815da5d6524b3000d48b19d98669a8324721803a3907c194b758c632b112"
+      "bytes": 77674,
+      "sha256": "e18c450999068197e59a9f59204bc7c6aa1ab80c7eb1319b20b0cf6244fd7bae"
     },
     {
       "path": "assets/js/gallery.js",
