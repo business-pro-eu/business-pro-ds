@@ -48,6 +48,10 @@
       "reason": "Corpuri de e-mail: CSS inline obligatoriu."
     },
     {
+      "pattern": "^php/fleet/src/EmailTemplate\\.php$",
+      "reason": "Corpuri de e-mail: CSS inline obligatoriu."
+    },
+    {
       "pattern": "^php/pusculita/src/lib/tfpdf/",
       "reason": "Bibliotecă terță pentru PDF."
     },
