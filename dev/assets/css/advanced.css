@@ -2181,3 +2181,7 @@ button.bp-day-cal__cell.bp-day-kind--edge:hover, button.bp-day-cal__cell.bp-day-
 .bp-scan__status { margin: 0; font-size: var(--bp-font-size-sm); color: var(--bp-color-text-muted); }
 .bp-scan__status.is-warning { color: var(--bp-status-warning-text); }
 .bp-scan__meta { margin: 0; font-size: var(--bp-font-size-xs); color: var(--bp-color-text-muted); }
+
+/* ── Câmp completat dintr-un document (citire automată): accent până la prima modificare a persoanei ───── */
+.bp-field.is-from-document > :is(.bp-input, .bp-select, .bp-input-with-icon .bp-input, .bp-combobox .bp-input) { border-color: color-mix(in srgb, var(--bp-color-brand-500) 70%, var(--bp-color-border)); }
+.bp-field.is-from-document > .bp-label::after { content: " · " attr(data-extracted); margin-left: var(--bp-space-1); font-size: var(--bp-font-size-xs); font-weight: 600; color: var(--bp-color-brand-700); }

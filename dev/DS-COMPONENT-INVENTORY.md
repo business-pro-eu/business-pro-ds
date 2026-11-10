@@ -710,6 +710,7 @@ Adăugate când Pușculița, Domain Tools și CRM au renunțat la CSS-ul local. 
 | `bp-form-actions` | `bp-form-actions--wrap` | Row of form buttons: full width; an item with __push (and the ones after it) sits at the end. |
 | `bp-form-grid` | `bp-form-grid--collapse-hidden` | Pattern extras din platformă (vezi advanced.css) |
 | `bp-header-metric` | `bp-header-metric__icon`, `bp-header-metric__unit`, `bp-header-metric__value` | Header metric: a compact pill with an icon, a value and a unit; warning/danger states flag a low allowance. |
+| `bp-field` | `is-from-document` | State: the field was filled from a document by the automatic reading; the field gets a brand-coloured border and its label a "from document" note (text in `data-extracted`) until the person edits it. |
 | `bp-scan` | `bp-scan__canvas`, `bp-scan__handle`, `bp-scan__meta`, `bp-scan__panels`, `bp-scan__result`, `bp-scan__shape`, `bp-scan__stage`, `bp-scan__status`, `bp-scan__svg`, `bp-scan__toolbar` | Document scan at upload: the photo on a canvas with 4 draggable corner handles (position in % through `--bp-x` / `--bp-y`), the document outline in SVG, the straightened result beside it, a status line (`is-warning` when the detection is unsure). |
 | `bp-header-profile` | `bp-header-profile--link`, `bp-header-profile__logout` | Header account control; `--link` = whole control is clickable (opens the profile), cursor pointer. |
 | `bp-hide-empty` | `bp-hide-empty` | Pattern extras din platformă (vezi advanced.css) |
